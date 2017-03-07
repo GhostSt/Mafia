@@ -1,0 +1,171 @@
+/**
+ * Stylesheets
+ */
+
+.hide {
+    display: block;
+}
+.container {
+    width: 100%;
+    position: relative;
+}
+
+.container .left_column {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    box-shadow: 4px 0px 2px #CCC;
+    background: #FFF;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+.container .left_column > div {
+    margin: 20px 20px 20px 20px;
+    padding: 0px;
+}
+.container .left_column .menu ul {
+}
+.container .left_column .menu ul li {
+    font-size: 14px;
+}
+.container .left_column .menu ul li.item a {
+    color: #C43923;
+}
+.container .left_column .menu ul li.item:hover a {
+    background-color: #0098E1;
+    color: #FFF;
+}
+.container .left_column ul li:first-child{
+    font-size: 20px;
+}
+.container .right_column {
+    position: absolute;
+    right: 0px;
+}
+.container .left_column > div h4 {
+    font-size: 18px;
+}
+.container .left_column > div.settings {
+
+}
+.container .left_column > div.settings input {
+    text-align: right;
+    width: 35px;
+}
+
+.container .right_column table.list {
+    text-align: center;
+}
+.container .right_column table.list thead input{
+    width: 50px;
+}
+.container .right_column table.list thead input.email,
+.container .right_column table.list thead select {
+    width: 100px;
+}
+.container .right_column table.list thead td .date_created {
+    width: 150px;
+}
+.container .right_column table.list thead td .date_created input {
+    width: 100px;
+}
+.container .right_column table.list td {
+    vertical-align: middle;
+}
+.container .right_column table.list thead td span {
+    font-weight: bold;
+}
+.container .right_column table.list tr.pending td {
+    background: #E7E743;
+}
+.container .right_column table.list tr.declined td {
+    background: #F66;
+}
+.container .right_column table.list tr.approved td {
+    background: #6F6;
+}
+.container .right_column table.list td select {
+    width: 150px;
+}
+.container .right_column .panel .panel-heading {
+    clear: both;
+}
+.container .right_column .panel .panel-heading label {
+    font-size: 14px;
+    margin-top: 7px;
+}
+.container .right_column .panel .panel-heading .panel-button-group {
+    float: right;
+}
+.container .right_column .panel .panel-body .tab-pane {
+    padding-top: 10px;
+}
+.container .right_column .panel .panel-body .input-group {
+    margin: 10px 5px 10px 0px;
+}
+.container .right_column .panel .panel-body .input-group span {
+    font-weight: bold;
+}
+.container .right_column .panel .panel-body .customer_information {
+    margin: 0px;
+}
+.container .right_column .panel .panel-body div.input-group {
+    width: 100%;
+    max-width: 680px;
+}
+.container .right_column .panel .panel-body div.input-group > span {
+    width: 30%;
+    min-width: 100px;
+    vertical-align: middle;
+}
+.container .right_column .panel .panel-body div > input{
+}
+.container .right_column .panel .panel-body div > select{
+}
+.container .right_column .panel .panel-body div > textarea{
+    height: 100px;
+}
+.container .right_column .panel .panel-body .products input.order_product_id {
+    width: 0px;
+    display: none;
+}
+.container .right_column .panel .panel-body .products table tfoot.totals tr td:first-child {
+    text-align: right;
+    font-weight: bold;
+}
+.container .right_column .panel .panel-body .products table tfoot.totals tr td:last-child {
+    text-align: center;
+}
+.dropdown ul li a {
+    cursor: pointer;
+}
+.dropdown ul li a:hover {
+    background: #aad5f9;
+}
+.container .right_column #order_history table.list {
+    border: solid 1px #666;
+    width: 100%;
+}
+.container .right_column #order_history table.list tr td{
+    padding: 5px 10px 5px 10px;
+    border-bottom: solid 1px #666;
+    cursor: pointer;
+}
+.container .right_column #order_history table.list tr:hover td{
+    background: #EEE;
+}
+.container .right_column #order_history table.list tr:last-child td{
+    border-bottom: none;
+}
+.container .right_column #order_history table.list tr td:first-child{
+    text-align: center;
+    vertical-align: middle;
+    border-right: solid 1px #666;
+}
+.container .right_column #order_history table.list tr td:last-child{
+    text-align: left;
+}
+.container .right_column #order_history div.input-group{
+    margin-left: 0px;
+}

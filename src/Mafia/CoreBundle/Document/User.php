@@ -113,9 +113,9 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @var array
+     * @var Collection
      *
-     * @ODM\Field(type="string")
+     * @ODM\Field(type="collection")
      */
     protected $roles;
     /**

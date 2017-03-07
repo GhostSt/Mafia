@@ -1,0 +1,44 @@
+{# src/Shop/AdminBundle/Resources/views/Security/login.html.twig #}
+
+{% extends 'MafiaCoreBundle::layout.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets '@MafiaCoreBundle/Resources/public/css/security.css' output="css/compiled/security.css" %}
+        {{ parent() }}
+        <link href="{{ asset_url }}" rel="stylesheet"  media="screen" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div class="security container">
+        <div class="inner_container">
+            <div>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.message }}
+                    </div>
+                {% endif %}
+
+                <form action="{{ path('_login_check') }}" method="POST">
+                    <div class="input-group">
+                        <span class="input-group-addon">Login</span>
+                        <input type="text" class="form-control" name="_username" placeholder="Username" value="{{ last_username }}" />
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">Password</span>
+                        <input type="password" class="form-control" name="_password" placeholder="password" />
+                    </div>
+                    
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="input-group-btn">
+                        <input type="submit" class="form-control" name="ok" value="Войти" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

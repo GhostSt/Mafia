@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        {% block head %}
+            <meta charset="UTF-8" />
+            <title>{% block title %}ТриКатушки{% endblock %}</title>
+            <base href="/" />
+            <link rel="icon" type="image/x-icon" href="{{ asset('template/image/favicon.ico') }}" />
+
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="keywords" content="ТриКатушки, Ткани оптом,Швейная фурнитура оптом,Швейное Оборудование,Парогенераторы " />  
+            <meta name="description" content="Ткани оптом. Интернет магазин рукоделия. Швейная фурнитура оптом.Швейное Оборудование ">
+            <meta name="author" content="diditskiy.victor@gmail.ru">
+
+            {% block stylesheets %}
+                {% stylesheets 
+                    "template/css/order_call.css"
+                    "template/css/style.css"
+                    "template/css/styled.css"
+                    "template/css/form.css"
+                    output="template/css/compiled/template_stylesheet.css" %}
+                    <link href="{{ asset_url }}" rel="stylesheet" screen="media" />
+                {% endstylesheets %}
+            {% endblock %}
+            {% block javascripts %}
+                {% javascripts 
+                    "template/js/jquery.js"
+                    "template/js/scripts.js"
+                    "template/js/jsaddcart.js"
+                    "template/js/order_call.js"
+                    "template/js/cloud-zoom.1.0.2.js"
+                    "template/js/jquery.prettyPhoto.js"
+                    "template/js/jquery.poshytip.min.js"
+                    "template/js/quick_search.js"
+                    "template/js/jquery.total-storage.min.js"
+                    "template/js/jquery.colorbox-min.js"
+                    "template/js/jquery.cycle.js"
+                    "template/js/scrollable/jquery.scrollable.js"
+                    output="template/js/compiled/template_scripts.js" %}
+                    <script src="{{ asset_url }}" type="text/javascript"></script>
+                {% endjavascripts %}
+            {% endblock %}
+        {% endblock %}
+    </head>
+    <body style="margin:0px; padding:0px;">
+        {% block body %}
+            <div id="bg">
+               <div class="container">
+                    {% block header %} 
+                        {{ render(controller("ShopCoreBundle:Common/Header:index")) }}
+                    {% endblock %}
+                    
+                    <div class="center">
+                        <div class="content_layout">
+                            <div class="content">
+                                {{ wo_render_breadcrumbs() }}
+
+                                {% block content %}
+                                    <div class="column_left">
+                                        {% block column_left %}
+                                            {{ render(controller('ShopCoreBundle:Common/ColumnLeft:index', { 'originalRequest': app.request}))}}
+                                        {% endblock %}
+                                    </div>
+
+                                    <div class="column_right">
+                                        <h1 id="hh1">{% block h1 %}{% endblock %}</h1>
+
+                                        <div class="alert_container">
+                                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                                <div class="alert alert-success">
+                                                    {{ flashMessage }}
+                                                </div>
+                                            {% endfor %}
+
+                                            {% for flashMessage in app.session.flashbag.get('notice') %}
+                                                <div class="alert alert-danger">
+                                                    {{ flashMessage }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <div>
+                                            {% block column_right %}
+                                            {% endblock %}
+                                        </div>
+                                    </div>
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% block footer %}
+                    {{ render(controller("ShopCoreBundle:Common/Footer:index")) }}
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </body>
+</html>
