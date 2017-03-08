@@ -28,7 +28,10 @@
         "twig/twig": "^1.0||^2.0",
         "alcaeus/mongo-php-adapter": "^1.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "symfony/assetic-bundle": "~2"
+        "symfony/assetic-bundle": "~2",
+        "sonata-project/admin-bundle": "3.*",
+        "sonata-project/doctrine-mongodb-admin-bundle": "dev-master",
+        "knplabs/knp-menu-bundle": "2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

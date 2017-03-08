@@ -106,11 +106,9 @@ class User extends BaseUser
     protected $passwordRequestedAt;
 
     /**
-     * @var array
-     *
-     * @ODM\Field(type="string")
+     * @var Collection
      */
-    protected $groups;
+    protected $groups = [];
 
     /**
      * @var Collection

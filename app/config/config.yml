@@ -103,3 +103,10 @@ fos_user:
     from_email:
         address: "do-not-reply@prime-mafia.ru"
         sender_name: "Prime mafia"
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
