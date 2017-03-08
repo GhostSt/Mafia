@@ -73,11 +73,11 @@ doctrine_mongodb:
         default:
             auto_mapping: false
             mappings:
-                MafiaCoreBundle:
+                GhostStCoreBundle:
                     mapping: true
                     type: annotation
                     dir: Document
-                    prefix: Mafia\CoreBundle\Document
+                    prefix: GhostSt\CoreBundle\Document
                     alias: ~
                     is_bundle: true
 
@@ -99,7 +99,7 @@ assetic:
 fos_user:
     db_driver: mongodb # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: Mafia\CoreBundle\Document\User
+    user_class: GhostSt\CoreBundle\Document\User
     from_email:
         address: "do-not-reply@prime-mafia.ru"
         sender_name: "Prime mafia"

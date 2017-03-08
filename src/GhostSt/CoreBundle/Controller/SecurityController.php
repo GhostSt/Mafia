@@ -1,8 +1,8 @@
 <?php
 
-// src/Mafia/CoreBundle/Controller/SecurityController.php
+// src/GhostSt/CoreBundle/Controller/SecurityController.php
 
-namespace Mafia\CoreBundle\Controller;
+namespace GhostSt\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class SecurityController extends Controller
 {
     /** 
-     * @Route("admin/login",  name="MafiaCoreBundle_admin_login")
+     * @Route("admin/login",  name="GhostStCoreBundle_admin_login")
      *
      * @param Request $request
      *
@@ -32,7 +32,7 @@ class SecurityController extends Controller
             $error = "";
         }
         
-        return $this->render('MafiaCoreBundle:Security:login.html.twig', array(
+        return $this->render('GhostStCoreBundle:Security:login.html.twig', array(
             'last_username' => $session->get(Security::LAST_USERNAME),
             'error'         => $error
         ));

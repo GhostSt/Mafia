@@ -1,5 +1,5 @@
 mafia_core:
-    resource: "@MafiaCoreBundle/Resources/config/routing.yml"
+    resource: "@GhostStCoreBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user_security:

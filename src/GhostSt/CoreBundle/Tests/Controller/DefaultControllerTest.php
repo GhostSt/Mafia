@@ -1,6 +1,6 @@
 <?php
 
-namespace Mafia\CoreBundle\Tests\Controller;
+namespace GhostSt\CoreBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mafia\CoreBundle;
+namespace GhostSt\CoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class MafiaCoreBundle extends Bundle
+class GhostStCoreBundle extends Bundle
 {
     public function getParent()
     {

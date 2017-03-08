@@ -6,7 +6,7 @@
  * Time: 22:42
  */
 
-namespace Mafia\CoreBundle\Document;
+namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -14,7 +14,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * Class User
- * @package Mafia\CoreBundle\Entity
+ * @package GhostSt\CoreBundle\Entity
  *
  * @ODM\Document(collection="user")
  */

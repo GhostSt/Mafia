@@ -1,6 +1,6 @@
 <?php
 
-namespace Mafia\CoreBundle\DependencyInjection;
+namespace GhostSt\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

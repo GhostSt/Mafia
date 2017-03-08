@@ -1,8 +1,0 @@
-mafia_core_homepage:
-    path:     /
-    defaults: { _controller: MafiaCoreBundle:Default:index }
-
-MafiaCoreBundle:
-  resource: "@MafiaCoreBundle/Controller/"
-  type: annotation
-  prefix: /

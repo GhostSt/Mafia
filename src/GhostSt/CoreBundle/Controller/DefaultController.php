@@ -1,9 +1,9 @@
 <?php
 
-namespace Mafia\CoreBundle\Controller;
+namespace GhostSt\CoreBundle\Controller;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Mafia\CoreBundle\Document\User;
+use GhostSt\CoreBundle\Document\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -19,9 +19,9 @@ class DefaultController extends Controller
         $dm->persist($user);
         $dm->flush();
         */
-        $users = $dm->getRepository('MafiaCoreBundle:User')->findAll();
+        $users = $dm->getRepository('GhostStCoreBundle:User')->findAll();
         var_dump($users);
 
-        return $this->render('MafiaCoreBundle:Default:index.html.twig');
+        return $this->render('GhostStCoreBundle:Default:index.html.twig');
     }
 }

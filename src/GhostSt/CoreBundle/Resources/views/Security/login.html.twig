@@ -1,11 +1,11 @@
 {# src/Shop/AdminBundle/Resources/views/Security/login.html.twig #}
 
-{% extends 'MafiaCoreBundle::layout.html.twig' %}
+{% extends 'GhostStCoreBundle::layout.html.twig' %}
 
 {% block title %}Login{% endblock %}
 
 {% block stylesheets %}
-    {% stylesheets '@MafiaCoreBundle/Resources/public/css/security.css' output="css/compiled/security.css" %}
+    {% stylesheets '@GhostStCoreBundle/Resources/public/css/security.css' output="css/compiled/security.css" %}
         {{ parent() }}
         <link href="{{ asset_url }}" rel="stylesheet"  media="screen" />
     {% endstylesheets %}
