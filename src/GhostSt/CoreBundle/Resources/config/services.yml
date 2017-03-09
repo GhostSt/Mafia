@@ -1,4 +1,9 @@
 services:
-#    mafia_core.example:
-#        class: GhostSt\CoreBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+# Admin
+  ghostst_core.admin.user:
+    class: GhostSt\CoreBundle\Admin\UserAdmin
+    arguments: [~, GhostSt\CoreBundle\Document\User, ~]
+    tags:
+      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игроки }
+
+# Services

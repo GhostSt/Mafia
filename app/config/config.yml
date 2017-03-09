@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    translator: ~
+    translator: { fallbacks: ["ru"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -110,3 +110,15 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+
+sonata_admin:
+    title: "Панель управления"
+    dashboard:
+        groups:
+            sale:
+                on_top: true
+                label: "Игроки"
+                label_catalogue: ~
+                icon: '<i class="fa fa-user"></i>'
+                items:
+                    - ghostst_core.admin.user

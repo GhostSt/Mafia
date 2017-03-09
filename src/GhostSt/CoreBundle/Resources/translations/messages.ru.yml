@@ -1,0 +1,8 @@
+admin:
+  user:
+    list:
+      username: "Игрок"
+      actions:
+        edit: "Действия"
+    form:
+      username: "Ник игрока"
