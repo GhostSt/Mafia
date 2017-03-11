@@ -161,4 +161,14 @@ class User extends BaseUser
     {
         $this->id = $id;
     }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean $enabled
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
 }
