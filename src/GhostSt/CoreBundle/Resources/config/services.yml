@@ -6,4 +6,17 @@ services:
     tags:
       - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игроки }
 
+  ghostst_core.admin.game:
+    class: GhostSt\CoreBundle\Admin\GameAdmin
+    arguments: [~, GhostSt\CoreBundle\Document\Game, GhostStCoreBundle:Admin/Game]
+    tags:
+      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игры }
 # Services
+
+# Form types
+  ghostst_core.form.type.player:
+    class: GhostSt\CoreBundle\Form\Type\PlayerType
+    arguments:
+    tags:
+     - { name: form.type }
+

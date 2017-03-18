@@ -1,0 +1,195 @@
+{# src/GhostSt/CoreBundle/views/Admin/Game/form.html.twig #}
+
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets output="css/compiled/admin_style.css"
+    '@GhostStCoreBundle/Resources/public/css/stylesheet.css'
+    '@GhostStCoreBundle/Resources/public/css/switch.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" screen="media">
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block checkbox_widget %}
+    testtesttest
+    <div class="checkbox_widget">
+        {% set type = type|default('number') %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label>{{ 'view.admin.game.form.title'|trans }}</label>
+
+            <div class="btn-group panel-button-group">
+                <button class="btn btn-default">{{ 'view.admin.game.form.save'|trans }}</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            {{ form_start(form, {'method': 'POST'}) }}
+
+            <div class="row result">
+                <div class="col-md-3">
+                    <span>{{ form_label(form.result) }}</span>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        {{ form_errors(form.result) }}
+                    </div>
+                    <div class="row">
+                        <label class="switch btn">
+                            {{ form_widget(form.result) }}
+                            <span class="switch-label" data-on="Победа мирных" data-off="Победа мафии"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <span>{{ form_label(form.date) }}</span>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        {{ form_errors(form.date) }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{ form_widget(form.date.year) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_widget(form.date.month) }}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form_widget(form.date.day) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>{{ form_label(form.bestMove) }}</label>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {{ form_errors(form.bestMove) }}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form_label(form.bestMove.position) }}
+                            </div>
+                            <div class="col-md-1">
+                                {{ form_widget(form.bestMove.position) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_label(form.bestMove.guess) }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(form.bestMove.guess) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>{{ form_label(form.players) }}</label>
+                    </div>
+                    <div class="panel-body">
+                        {% for player in form.players %}
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{ form_label(player.position) }}
+                                </div>
+                                <div class="col-md-1">
+                                    {{ form_widget(player.position) }}
+                                </div>
+                                <div class="col-md-2">
+                                    {{ form_widget(player.user) }}
+                                </div>
+                                <div class="col-md-2">
+                                    {{ form_widget(player.role) }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row days">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <label>{{ form_label(form.days) }}</label>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row head">
+                            <div class="col-md-10">
+                                <label>{{ 'view.admin.game.form.days.list-title'|trans }}</label>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-user"
+                                              title="{{ 'view.admin.game.form.days.icon.sheriff'|trans }}"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-king"
+                                              title="{{ 'view.admin.game.form.days.icon.don'|trans }}"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-screenshot"
+                                              title="{{ 'view.admin.game.form.days.icon.killed'|trans }}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for day in form.days %}
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        {% for person in day.voting %}
+                                            <div class="col-md-1">
+                                                <div>{{ form_widget(person.position) }}</div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="row">
+                                        {% for person in day.voting %}
+                                            <div class="col-md-1">
+                                                <div>{{ form_widget(person.vote) }}</div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="row night-activity">
+                                        <div class="col-md-4">
+                                            {{ form_widget(day.checkSheriff) }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form_widget(day.checkDon) }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{ form_widget(day.killed) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

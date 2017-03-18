@@ -42,6 +42,8 @@ class Game
      * true equals civilian win, false equals mafia wins
      *
      * @var boolean
+     *
+     * @ODM\Field(type="boolean")
      */
     protected $result;
     /**
@@ -50,6 +52,12 @@ class Game
      * @ODM\EmbedOne(targetDocument="GameBestMove")
      */
     protected $bestMove;
+    /**
+     * @var \DateTime
+     *
+     * @ODM\Field(type="date")
+     */
+    protected $date;
 
     public function __construct()
     {
@@ -146,5 +154,49 @@ class Game
     public function getBestMove()
     {
         return $this->bestMove;
+    }
+
+    /**
+     * Set result
+     *
+     * @param boolean $result
+     * @return $this
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+        return $this;
+    }
+
+    /**
+     * Get result
+     *
+     * @return boolean $result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return $this
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime $date
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

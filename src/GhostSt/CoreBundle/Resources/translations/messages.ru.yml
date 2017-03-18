@@ -6,3 +6,16 @@ admin:
         edit: "Действия"
     form:
       username: "Ник игрока"
+  game:
+    list:
+      date: "Дата проведения"
+      result: "Результат"
+      actions:
+        edit: "Действия"
+
+
+view:
+  admin:
+    crud:
+      label_type_yes: "Победа мирных"
+      label_type_no: "Победа мафии"

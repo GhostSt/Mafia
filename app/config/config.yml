@@ -115,10 +115,17 @@ sonata_admin:
     title: "Панель управления"
     dashboard:
         groups:
-            sale:
+            office:
                 on_top: true
                 label: "Игроки"
                 label_catalogue: ~
                 icon: '<i class="fa fa-user"></i>'
                 items:
                     - ghostst_core.admin.user
+            games:
+                on_top: true
+                label: "Игры"
+                label_catalogue: ~
+                icon: '<i class="fa fa-queen"></i>'
+                items:
+                    - ghostst_core.admin.game
