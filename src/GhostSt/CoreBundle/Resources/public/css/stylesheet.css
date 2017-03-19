@@ -8,20 +8,45 @@
 
 .sonata-ba-content {
 }
+
 .sonata-ba-content form > div.row {
     margin: 0px 0px 20px;
     background: #FFF;
 }
 
-.sonata-ba-content form > div.row.result  div.row {
+.sonata-ba-content form > div.row.result div.row {
     padding: 0px 15px 0px 15px;
+}
+
+.sonata-ba-content form div.days div.title {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .sonata-ba-content form div.days div.col-md-1,
 .sonata-ba-content form div.days div.col-md-4 {
- padding: 0px 5px 0px 0px;
+    padding: 0px 5px 0px 0px;
 }
 
 .sonata-ba-content form div.days div.head div {
     text-align: center;
+}
+
+.sonata-ba-content form div.button-add {
+    margin-top: 20px;
+}
+
+.sonata-ba-content form div.days div.voting div.vote-box {
+    margin: 7px;
+}
+
+.sonata-ba-content form div.button-add span.glyphicon {
+    font-size: 14px;
+    color: #0380ff;
+    cursor: pointer;
+}
+
+.sonata-ba-content form div.button-remove span.glyphicon {
+    font-size: 14px;
+    cursor: pointer;
 }

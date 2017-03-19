@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class GameController extends CRUDController
 {
-    public function createAction()
+    public function create1Action()
     {
         $game = new Game();
 

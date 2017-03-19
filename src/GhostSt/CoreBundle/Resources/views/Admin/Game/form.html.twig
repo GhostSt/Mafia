@@ -12,6 +12,15 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+    "@GhostStCoreBundle/Resources/public/js/game_form.js"
+    output="js/compiled/order_form.js" %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 
 {% block checkbox_widget %}
     testtesttest
@@ -24,10 +33,10 @@
 {% block content %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <label>{{ 'view.admin.game.form.title'|trans }}</label>
+            <label>{{ 'views.admin.game.form.title'|trans }}</label>
 
             <div class="btn-group panel-button-group">
-                <button class="btn btn-default">{{ 'view.admin.game.form.save'|trans }}</button>
+                <button class="btn btn-default">{{ 'views.admin.game.form.save'|trans }}</button>
             </div>
         </div>
         <div class="panel-body">
@@ -44,7 +53,8 @@
                     <div class="row">
                         <label class="switch btn">
                             {{ form_widget(form.result) }}
-                            <span class="switch-label" data-on="Победа мирных" data-off="Победа мафии"></span>
+                            <span class="switch-label" data-on="{{ 'views.admin.game.result.civilian'|trans }}"
+                                  data-off="{{ 'views.admin.game.result.mafia'|trans }}"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
@@ -100,12 +110,16 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row players">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <label>{{ form_label(form.players) }}</label>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" data-prototype="
+                        {% filter escape %}
+                            {{ include('GhostStCoreBundle:Admin/Game:game_player_prototype.html.twig', { 'form': form.players.vars.prototype }) }}
+                        {% endfilter %}
+                    " data-length="{{ form.players|length }}">
                         {% for player in form.players %}
                             <div class="row">
                                 <div class="col-md-3">
@@ -122,6 +136,12 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <div class="row button-add">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-plus"
+                                      title="{{ 'views.admin.game.form.players.button-add'|trans }}"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,60 +151,88 @@
                     <div class="panel-heading">
                         <label>{{ form_label(form.days) }}</label>
                     </div>
-                    <div class="panel-body">
-                        <div class="row head">
-                            <div class="col-md-10">
-                                <label>{{ 'view.admin.game.form.days.list-title'|trans }}</label>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="row">
-                                    <div class="col-md-4">
+                    <div class="panel-body" data-prototype="
+                        {% filter escape %}
+                            {{ include('GhostStCoreBundle:Admin/Game:game_day_prototype.html.twig', { 'form': form.days.vars.prototype }) }}
+                        {% endfilter %}
+                    " data-length="{{ form.days|length }}">
+                        {% for day_index,day in form.days %}
+                            <div class="row">
+                                <div class="head title">
+                                    <div class="col-md-12">
+                                        <h5>{{ 'views.admin.game.days.title'|trans({"{day}": day_index + 1}) }}</h5>
+                                    </div>
+                                </div>
+                                <div class="head">
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            {% for key,person in day.voting %}
+                                                <div class="col-md-1 button-remove">
+                                                    <span data-index="{{ key }}"
+                                                          class="glyphicon glyphicon-remove"></span>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
                                         <span class="glyphicon glyphicon-user"
-                                              title="{{ 'view.admin.game.form.days.icon.sheriff'|trans }}"></span>
-                                    </div>
-                                    <div class="col-md-4">
+                                              title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
+                                            </div>
+                                            <div class="col-md-4">
                                         <span class="glyphicon glyphicon-king"
-                                              title="{{ 'view.admin.game.form.days.icon.don'|trans }}"></span>
-                                    </div>
-                                    <div class="col-md-4">
+                                              title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
+                                            </div>
+                                            <div class="col-md-4">
                                         <span class="glyphicon glyphicon-screenshot"
-                                              title="{{ 'view.admin.game.form.days.icon.killed'|trans }}"></span>
+                                              title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="voting">
+                                    <div class="col-md-9">
+                                        <div class="row position">
+                                            {% for key,person in day.voting %}
+                                                <div class="col-md-1 index-{{ key }}">
+                                                    <div>{{ form_widget(person.position) }}</div>
+                                                </div>
+                                            {% endfor %}
+                                            <div class="col-md-1 button-add vote-box">
+                                            <span class="glyphicon glyphicon-plus"
+                                                  title="{{ 'views.admin.game.days.voting.button-add'|trans }}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row vote">
+                                            {% for key,person in day.voting %}
+                                                <div class="col-md-1 index-{{ key }}">
+                                                    <div>{{ form_widget(person.vote) }}</div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="row night-activity">
+                                            <div class="col-md-4">
+                                                {{ form_widget(day.checkSheriff) }}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{ form_widget(day.checkDon) }}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{ form_widget(day.killed) }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            {% for day in form.days %}
-                                <div class="col-md-10">
-                                    <div class="row">
-                                        {% for person in day.voting %}
-                                            <div class="col-md-1">
-                                                <div>{{ form_widget(person.position) }}</div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="row">
-                                        {% for person in day.voting %}
-                                            <div class="col-md-1">
-                                                <div>{{ form_widget(person.vote) }}</div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="row night-activity">
-                                        <div class="col-md-4">
-                                            {{ form_widget(day.checkSheriff) }}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{ form_widget(day.checkDon) }}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{ form_widget(day.killed) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                        {% endfor %}
+                        <div class="row button-add">
+                            <div class="col-md-12">
+                                <span class="glyphicon glyphicon-plus"
+                                      title="{{ 'views.admin.game.form.days.button-add'|trans }}"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
