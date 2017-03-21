@@ -5,6 +5,8 @@
 namespace GhostSt\CoreBundle\Controller\Admin;
 
 use GhostSt\CoreBundle\Document\Game;
+use GhostSt\CoreBundle\Document\GameDay;
+use GhostSt\CoreBundle\Form\Type\GameDayType;
 use GhostSt\CoreBundle\Form\Type\GameType;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +22,7 @@ class GameController extends CRUDController
         $form = $this->createForm(GameType::class, $game);
 
         return $this->render('GhostStCoreBundle:Admin/Game:form.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -32,7 +34,7 @@ class GameController extends CRUDController
         $odm = $this->get('doctrine_mongodb');
 
         $game = $odm->getRepository('GhostStCoreBundle:Game')
-            ->find($id);
+                    ->find($id);
 
         if (null === $game) {
             throw new HttpException(404, "Game not found");
@@ -40,8 +42,14 @@ class GameController extends CRUDController
 
         $form = $this->createForm(GameType::class, $game);
 
+        $tmpDocument = new Game();
+        $tmpDocument->addDay(new GameDay());
+        $tmpForm = $this->createForm(GameType::class);
+        $tmpForm->setData($tmpDocument);
+
         return $this->render('GhostStCoreBundle:Admin/Game:form.html.twig', [
-            'form' => $form->createView()
+            'form'    => $form->createView(),
+            'tmpForm' => $tmpForm->createView(),
         ]);
     }
 }

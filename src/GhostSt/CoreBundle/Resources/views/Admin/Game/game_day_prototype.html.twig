@@ -1,17 +1,20 @@
 {# src/GhostSt/CoreBundle/views/Admin/Game/game_day_prototype.html.twig #}
 
-<div class="row">
+<div class="row"
+     data-index="__name__"
+     data-length-warning="{{ 'views.admin.game.form.days.voting.length_warning'|trans }}"
+     data-length="0">
     <div class="head title">
         <div class="col-md-12">
-            <h5>{{ 'views.admin.game.days.title'|trans({"{day}": "__name__"}) }}</h5>
+            <h5>{{ 'views.admin.game.days.title'|trans({"{day}": "__name__"}) }}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-ban-circle remove" title="{{ 'views.admin.game.form.days.remove'|trans }}"></span></h5>
         </div>
     </div>
-    <div class="head">
-        <div class="col-md-10">
+    <div class="head buttons">
+        <div class="col-md-9 vote-remove-buttons">
             <div class="row">
             </div>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="row">
                 <div class="col-md-4">
                     <span class="glyphicon glyphicon-user" title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
@@ -32,7 +35,7 @@
                     <span class="glyphicon glyphicon-plus" title="{{ 'views.admin.game.days.voting.button-add'|trans }}"></span>
                 </div>
             </div>
-            <div class="row vote">
+            <div class="row vote" data-length="0">
             </div>
         </div>
         <div class="col-md-3">

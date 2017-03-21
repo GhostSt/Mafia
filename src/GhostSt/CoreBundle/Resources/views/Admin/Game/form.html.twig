@@ -53,8 +53,8 @@
                     <div class="row">
                         <label class="switch btn">
                             {{ form_widget(form.result) }}
-                            <span class="switch-label" data-on="{{ 'views.admin.game.result.civilian'|trans }}"
-                                  data-off="{{ 'views.admin.game.result.mafia'|trans }}"></span>
+                            <span class="switch-label" data-on="{{ 'views.admin.game.form.result.civilian'|trans }}"
+                                  data-off="{{ 'views.admin.game.form..result.mafia'|trans }}"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row best-move">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <label>{{ form_label(form.bestMove) }}</label>
@@ -102,7 +102,7 @@
                             <div class="col-md-4">
                                 {{ form_label(form.bestMove.guess) }}
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 guess">
                                 {{ form_widget(form.bestMove.guess) }}
                             </div>
                         </div>
@@ -119,11 +119,12 @@
                         {% filter escape %}
                             {{ include('GhostStCoreBundle:Admin/Game:game_player_prototype.html.twig', { 'form': form.players.vars.prototype }) }}
                         {% endfilter %}
-                    " data-length="{{ form.players|length }}">
+                    " data-length="{{ form.players|length }}"
+                         data-length-warning="{{ 'views.admin.game.form.players.length_warning'|trans }}">
                         {% for player in form.players %}
                             <div class="row">
                                 <div class="col-md-3">
-                                    {{ form_label(player.position) }}
+                                    <span class="glyphicon glyphicon-ban-circle remove"></span>&nbsp;&nbsp;&nbsp;{{ form_label(player.position) }}
                                 </div>
                                 <div class="col-md-1">
                                     {{ form_widget(player.position) }}
@@ -155,21 +156,28 @@
                         {% filter escape %}
                             {{ include('GhostStCoreBundle:Admin/Game:game_day_prototype.html.twig', { 'form': form.days.vars.prototype }) }}
                         {% endfilter %}
+                    " data-voting-prototype="
+                        {% filter escape %}
+                            {{  include('GhostStCoreBundle:Admin/Game:game_day_voting_prototype.html.twig', { 'form': tmpForm.days[0].voting.vars.prototype }) }}
+                        {% endfilter %}
                     " data-length="{{ form.days|length }}">
                         {% for day_index,day in form.days %}
-                            <div class="row">
+                            <div class="row"
+                                 data-index="{{ day_index }}"
+                                 data-length="{{ day.voting|length }}"
+                                 data-length-warning="{{ 'views.admin.game.form.days.voting.length_warning'|trans }}">
                                 <div class="head title">
                                     <div class="col-md-12">
-                                        <h5>{{ 'views.admin.game.days.title'|trans({"{day}": day_index + 1}) }}</h5>
+                                        <h5>{{ 'views.admin.game.form.days.title'|trans({"{day}": day_index + 1}) }}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-ban-circle remove" title="{{ 'views.admin.game.form.days.remove'|trans }}"></span></h5>
                                     </div>
                                 </div>
-                                <div class="head">
-                                    <div class="col-md-9">
+                                <div class="head buttons">
+                                    <div class="col-md-9 vote-remove-buttons">
                                         <div class="row">
                                             {% for key,person in day.voting %}
                                                 <div class="col-md-1 button-remove">
                                                     <span data-index="{{ key }}"
-                                                          class="glyphicon glyphicon-remove"></span>
+                                                          class="glyphicon glyphicon-remove remove"></span>
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -200,11 +208,11 @@
                                                 </div>
                                             {% endfor %}
                                             <div class="col-md-1 button-add vote-box">
-                                            <span class="glyphicon glyphicon-plus"
-                                                  title="{{ 'views.admin.game.days.voting.button-add'|trans }}"></span>
+                                                <span class="glyphicon glyphicon-plus"
+                                                      title="{{ 'views.admin.game.form.days.voting.button-add'|trans }}"></span>
                                             </div>
                                         </div>
-                                        <div class="row vote">
+                                        <div class="row vote" data-length="{{ day.voting|length }}">
                                             {% for key,person in day.voting %}
                                                 <div class="col-md-1 index-{{ key }}">
                                                     <div>{{ form_widget(person.vote) }}</div>

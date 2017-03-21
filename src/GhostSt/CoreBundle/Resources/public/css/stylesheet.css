@@ -6,6 +6,10 @@
     display: block;
 }
 
+.select2-container {
+    width: 100%;
+}
+
 .sonata-ba-content {
 }
 
@@ -14,13 +18,34 @@
     background: #FFF;
 }
 
+.sonata-ba-content form div.button-add {
+    margin-top: 20px;
+}
+
 .sonata-ba-content form > div.row.result div.row {
     padding: 0px 15px 0px 15px;
+}
+
+.sonata-ba-content form div.players span.remove {
+    cursor: pointer;
+}
+
+.sonata-ba-content form div.players div.panel-body > div.row:not(.button-add):nth-child(even) {
+    background: #E6E6E6;
+}
+
+.sonata-ba-content form div.players div.panel-body > div.row {
+    margin-top: 10px;
+    padding: 5px 0px 5px 0px;
 }
 
 .sonata-ba-content form div.days div.title {
     font-size: 20px;
     font-weight: bold;
+}
+.sonata-ba-content form div.days div.title span.remove {
+    color: red;
+    cursor: pointer;
 }
 
 .sonata-ba-content form div.days div.col-md-1,
@@ -32,8 +57,17 @@
     text-align: center;
 }
 
-.sonata-ba-content form div.button-add {
-    margin-top: 20px;
+.sonata-ba-content form div.days div.head.title h5 {
+    padding: 10px;
+}
+
+.sonata-ba-content form div.days div.panel-body > div.row {
+    margin-top: 10px;
+    padding: 5px 0px 5px 0px;
+}
+
+.sonata-ba-content form div.days div.panel-body > div.row:not(.button-add):nth-child(even) {
+    background: #E6E6E6;
 }
 
 .sonata-ba-content form div.days div.voting div.vote-box {
