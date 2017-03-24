@@ -19,3 +19,9 @@ view:
     crud:
       label_type_yes: "Победа мирных"
       label_type_no: "Победа мафии"
+
+validator:
+  constraints:
+    position:
+      is_numeric: 'Номер игрока `%position%` должен быть числовым'
+      range: 'Номер игрока `%position%` должен находится в диапазоне от 0 до 1'

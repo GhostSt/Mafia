@@ -20,3 +20,10 @@ services:
     tags:
      - { name: form.type }
 
+# Validators
+  ghostst_core.validator.constraint.position:
+    class: GhostSt\CoreBundle\Validator\Constraint\PositionValidator
+    arguments:
+      - "@translator"
+    tags:
+      - { name: validator.constraint_validator }
