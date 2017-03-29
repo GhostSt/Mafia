@@ -6,7 +6,7 @@
  * Time: 22:47
  */
 
-namespace GhostSt\CoreBundle\Validator\Constraint;
+namespace GhostSt\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
@@ -16,10 +16,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class Position extends Constraint
 {
-    /**
-     * @var string
-     */
-    public $message;
+    public $allowZero = true;
 
     public function validatedBy()
     {

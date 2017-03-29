@@ -6,10 +6,9 @@
  * Time: 22:48
  */
 
-namespace GhostSt\CoreBundle\Validator\Constraint;
+namespace GhostSt\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Translation\DataCollectorTranslator;
-use Symfony\Component\Translation\Translator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -25,21 +24,24 @@ class PositionValidator extends ConstraintValidator
         $this->translator = $translator;
     }
 
-    public function validate($position, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
-        if (!is_numeric($position)) {
+        if (!is_numeric($value)) {
             $this->context
-                ->buildViolation($this->translator->trans('validator.constraints.position.is_numeric', ['%position%' => $position ]))
+                ->buildViolation($this->translator->trans('validator.constraints.position.is_numeric', ['%position%' => $value ]))
                 ->addViolation();
         }
 
-        if ($position < 0
-            || $position > 10
+        $startLimit = $constraint->allowZero ? 0 : 1;
+
+        if ($value < $startLimit
+            || $value > 10
         ) {
             $this->context
-                ->buildViolation($this->translator->trans('validator.constraints.position.range', ['%position%' => $position ]))
+                ->buildViolation($this->translator->trans('validator.constraints.position.range', ['%position%' => $value ]))
 
                 ->addViolation();
         }
     }
+
 }

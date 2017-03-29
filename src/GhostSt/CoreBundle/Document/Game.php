@@ -30,12 +30,14 @@ class Game
      * @var ArrayCollection
      *
      * @ODM\EmbedMany(targetDocument="GamePlayer")
+     * @Assert\Valid()
      */
     protected $players;
     /**
      * @var ArrayCollection
      *
      * @ODM\EmbedMany(targetDocument="GameDay")
+     * @Assert\Valid()
      */
     protected $days;
     /**
@@ -50,6 +52,7 @@ class Game
      * @var GameBestMove
      *
      * @ODM\EmbedOne(targetDocument="GameBestMove")
+     * @Assert\Valid()
      */
     protected $bestMove;
     /**

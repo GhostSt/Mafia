@@ -2,6 +2,25 @@
 
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
+{% form_theme form _self %}
+
+{% block form_errors %}
+    {% if errors|length > 0 %}
+        <div class="alert-container">
+            <label>
+                <span class="glyphicon glyphicon-alert"></span>
+                <div class="alerts">
+                    <ul>
+                        {% for error in errors %}
+                            <li>{{ error.message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </label>
+        </div>
+    {% endif %}
+{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
 
@@ -22,15 +41,11 @@
     {% endjavascripts %}
 {% endblock %}
 
-{% block checkbox_widget %}
-    testtesttest
-    <div class="checkbox_widget">
-        {% set type = type|default('number') %}
-        {{ block('form_widget_simple') }}
-    </div>
+{% block sonata_head_title %}
+    {{ 'views.admin.game.form.title'|trans }}
 {% endblock %}
-
 {% block content %}
+    {{ form_start(form, {'method': 'POST'}) }}
     <div class="panel panel-default">
         <div class="panel-heading">
             <label>{{ 'views.admin.game.form.title'|trans }}</label>
@@ -40,7 +55,6 @@
             </div>
         </div>
         <div class="panel-body">
-            {{ form_start(form, {'method': 'POST'}) }}
 
             <div class="row result">
                 <div class="col-md-3">
@@ -48,15 +62,17 @@
                 </div>
                 <div class="col-md-9">
                     <div class="row">
-                        {{ form_errors(form.result) }}
-                    </div>
-                    <div class="row">
-                        <label class="switch btn">
-                            {{ form_widget(form.result) }}
-                            <span class="switch-label" data-on="{{ 'views.admin.game.form.result.civilian'|trans }}"
-                                  data-off="{{ 'views.admin.game.form..result.mafia'|trans }}"></span>
-                            <span class="switch-handle"></span>
-                        </label>
+                        <div class="col-md-9">
+                            <label class="switch btn">
+                                {{ form_widget(form.result) }}
+                                <span class="switch-label" data-on="{{ 'views.admin.game.form.result.civilian'|trans }}"
+                                      data-off="{{ 'views.admin.game.form..result.mafia'|trans }}"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            {{ form_errors(form.result) }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,17 +105,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            {{ form_errors(form.bestMove) }}
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-4">
+                                {{ form_errors(form.bestMove.position) }}
+                                &nbsp;
                                 {{ form_label(form.bestMove.position) }}
                             </div>
                             <div class="col-md-1">
                                 {{ form_widget(form.bestMove.position) }}
                             </div>
                             <div class="col-md-4">
+                                {{ form_errors(form.bestMove.guess) }}
+
                                 {{ form_label(form.bestMove.guess) }}
                             </div>
                             <div class="col-md-3 guess">
@@ -158,7 +174,7 @@
                         {% endfilter %}
                     " data-voting-prototype="
                         {% filter escape %}
-                            {{  include('GhostStCoreBundle:Admin/Game:game_day_voting_prototype.html.twig', { 'form': tmpForm.days[0].voting.vars.prototype }) }}
+                            {{ include('GhostStCoreBundle:Admin/Game:game_day_voting_prototype.html.twig', { 'form': tmpForm.days[0].voting.vars.prototype }) }}
                         {% endfilter %}
                     " data-length="{{ form.days|length }}">
                         {% for day_index,day in form.days %}
@@ -168,7 +184,10 @@
                                  data-length-warning="{{ 'views.admin.game.form.days.voting.length_warning'|trans }}">
                                 <div class="head title">
                                     <div class="col-md-12">
-                                        <h5>{{ 'views.admin.game.form.days.title'|trans({"{day}": day_index + 1}) }}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-ban-circle remove" title="{{ 'views.admin.game.form.days.remove'|trans }}"></span></h5>
+                                        <h5>{{ 'views.admin.game.form.days.title'|trans({"{day}": day_index + 1}) }}
+                                            &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-ban-circle remove"
+                                                                    title="{{ 'views.admin.game.form.days.remove'|trans }}"></span>
+                                        </h5>
                                     </div>
                                 </div>
                                 <div class="head buttons">
@@ -245,7 +264,7 @@
                     </div>
                 </div>
             </div>
-            {{ form_end(form) }}
         </div>
     </div>
+    {{ form_end(form) }}
 {% endblock %}

@@ -53,8 +53,8 @@ div.alert-container div.alerts ul li {
     margin-top: 20px;
 }
 
-.sonata-ba-content > div.row.result div.row {
-    padding: 0px 15px 0px 15px;
+.sonata-ba-content div.row.result {
+    padding: 0px 0px 15px 0px;
 }
 
 .sonata-ba-content div.players span.remove {

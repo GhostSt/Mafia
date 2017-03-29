@@ -8,9 +8,9 @@
 
 namespace GhostSt\CoreBundle\Document;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
+use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
  * Class GameBestMove
@@ -24,12 +24,16 @@ class GameBestMove
      * @var integer
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
      */
     protected $position;
     /**
      * @var array
      *
      * @ODM\Field(type="collection")
+     * @CustomAssert\BestMoveGuess
      */
     protected $guess = [];
 

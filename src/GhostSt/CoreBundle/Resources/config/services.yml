@@ -22,7 +22,14 @@ services:
 
 # Validators
   ghostst_core.validator.constraint.position:
-    class: GhostSt\CoreBundle\Validator\Constraint\PositionValidator
+    class: GhostSt\CoreBundle\Validator\Constraints\PositionValidator
+    arguments:
+      - "@translator"
+    tags:
+      - { name: validator.constraint_validator }
+
+  ghostst_core.validator.constraint.best_move_guess:
+    class: GhostSt\CoreBundle\Validator\Constraints\BestMoveGuessValidator
     arguments:
       - "@translator"
     tags:
