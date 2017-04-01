@@ -76,10 +76,11 @@ class GameAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
+            ->remove('create')
             ->remove('update');
 
         $collection
-            ->add('create1', 'create1')
+            ->add('create', 'create')
             ->add('update', $this->getRouterIdParameter() .'/update');
     }
 }

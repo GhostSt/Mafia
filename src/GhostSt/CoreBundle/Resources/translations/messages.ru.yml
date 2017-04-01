@@ -13,12 +13,14 @@ admin:
       actions:
         edit: "Действия"
 
-
-views:
+view:
   admin:
     crud:
       label_type_yes: "Победа мирных"
       label_type_no: "Победа мафии"
+
+views:
+  admin:
     game:
       form:
         title: "Игра"
@@ -71,7 +73,7 @@ validator:
   constraints:
     position:
       is_numeric: 'Номер игрока `%position%` должен быть числовым'
-      range: 'Номер игрока `%position%` должен находится в диапазоне от 0 до 1'
+      range: 'Выбран неверный номер `%position%`. Номер должен быть числом от %start_limit% до 10'
     best_move_guess:
       invalid: 'Установлено неверное значения для лучшего хода'
       count: 'Необходимо выбрать 3 номера'

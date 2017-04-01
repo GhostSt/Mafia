@@ -6,48 +6,67 @@
      data-length="0">
     <div class="head title">
         <div class="col-md-12">
-            <h5>{{ 'views.admin.game.days.title'|trans({"{day}": "__name__"}) }}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-ban-circle remove" title="{{ 'views.admin.game.form.days.remove'|trans }}"></span></h5>
-        </div>
-    </div>
-    <div class="head buttons">
-        <div class="col-md-9 vote-remove-buttons">
-            <div class="row">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-user" title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
-                </div>
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-king" title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
-                </div>
-                <div class="col-md-4">
-                    <span class="glyphicon glyphicon-screenshot" title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
-                </div>
-            </div>
+            <h5>{{ 'views.admin.game.form.days.title'|trans({"{day}": "__name__"}) }}&nbsp;&nbsp;&nbsp;<span
+                        class="glyphicon glyphicon-ban-circle remove"
+                        title="{{ 'views.admin.game.form.days.remove'|trans }}"></span></h5>
         </div>
     </div>
     <div class="voting">
         <div class="col-md-9">
+            <div class="row head buttons">
+            </div>
             <div class="row position">
                 <div class="col-md-1 button-add vote-box">
-                    <span class="glyphicon glyphicon-plus" title="{{ 'views.admin.game.days.voting.button-add'|trans }}"></span>
+                    <span class="glyphicon glyphicon-plus"
+                          title="{{ 'views.admin.game.form.days.voting-button-add'|trans }}"></span>
                 </div>
             </div>
             <div class="row vote" data-length="0">
             </div>
         </div>
         <div class="col-md-3">
-            <div class="row night-activity">
+            <div class="row icons">
+                <div class="col-md-2"></div>
                 <div class="col-md-4">
-                    {{ form_widget(form.checkSheriff) }}
+                    <span class="glyphicon glyphicon-bishop"
+                          title="{{ 'views.admin.game.form.days.icon.left'|trans }}"></span>
                 </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-screenshot"
+                          title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
+                </div>
+            </div>
+            <div class="row night-activity">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    {{ form_widget(form.left) }}
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    {{ form_widget(form.killed) }}
+                </div>
+            </div>
+            <div class="row icons">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-king"
+                          title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-user"
+                          title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
+                </div>
+            </div>
+            <div class="row night-activity">
+                <div class="col-md-2"></div>
                 <div class="col-md-4">
                     {{ form_widget(form.checkDon) }}
                 </div>
+                <div class="col-md-2"></div>
                 <div class="col-md-4">
-                    {{ form_widget(form.killed) }}
+                    {{ form_widget(form.checkSheriff) }}
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@
 
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
+{% trans_default_domain "messages" %}
+
 {% form_theme form _self %}
 
 {% block form_errors %}
@@ -129,6 +131,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <label>{{ form_label(form.players) }}</label>
+                        {{ form_errors(form.players) }}
                     </div>
                     <div class="panel-body" data-prototype="
                         {% filter escape %}
@@ -181,6 +184,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <label>{{ form_label(form.days) }}</label>
+                        {{ form_errors(form) }}
                     </div>
                     <div class="panel-body" data-prototype="
                         {% filter escape %}
@@ -198,15 +202,15 @@
                                  data-length-warning="{{ 'views.admin.game.form.days.voting.length_warning'|trans }}">
                                 <div class="head title">
                                     <div class="col-md-12">
-                                        <h5>{{ 'views.admin.game.form.days.title'|trans({"{day}": day_index + 1}) }}
+                                        <h5>{{ 'views.admin.game.form.days.title'|trans({"{day}": day_index}) }}
                                             &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-ban-circle remove"
                                                                     title="{{ 'views.admin.game.form.days.remove'|trans }}"></span>
                                         </h5>
                                     </div>
                                 </div>
-                                <div class="head buttons">
-                                    <div class="col-md-9 vote-remove-buttons">
-                                        <div class="row">
+                                <div class="voting">
+                                    <div class="col-md-9">
+                                        <div class="row head buttons">
                                             {% for key,person in day.voting %}
                                                 <div class="col-md-1 button-remove">
                                                     <span data-index="{{ key }}"
@@ -214,30 +218,6 @@
                                                 </div>
                                             {% endfor %}
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-bishop"
-                                                      title="{{ 'views.admin.game.form.days.icon.left'|trans }}"></span>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-user"
-                                                      title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-king"
-                                                      title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="glyphicon glyphicon-screenshot"
-                                                      title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="voting">
-                                    <div class="col-md-9">
                                         <div class="row position">
                                             {% for key,person in day.voting %}
                                                 <div class="col-md-1 index-{{ key }}">
@@ -258,18 +238,48 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
+                                        <div class="row icons">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-bishop"
+                                                      title="{{ 'views.admin.game.form.days.icon.left'|trans }}"></span>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-screenshot"
+                                                      title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
+                                            </div>
+                                        </div>
                                         <div class="row night-activity">
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">{{ form_errors(day.left) }}</div>
+                                            <div class="col-md-4">
                                                 {{ form_widget(day.left) }}
                                             </div>
-                                            <div class="col-md-3">
-                                                {{ form_widget(day.checkSheriff) }}
+                                            <div class="col-md-2">{{ form_errors(day.killed) }}</div>
+                                            <div class="col-md-4">
+                                                {{ form_widget(day.killed) }}
                                             </div>
-                                            <div class="col-md-3">
+                                        </div>
+                                        <div class="row icons">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-king"
+                                                      title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-4">
+                                                <span class="glyphicon glyphicon-user"
+                                                      title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row night-activity">
+                                            <div class="col-md-2">{{ form_errors(day.checkDon) }}</div>
+                                            <div class="col-md-4">
                                                 {{ form_widget(day.checkDon) }}
                                             </div>
-                                            <div class="col-md-3">
-                                                {{ form_widget(day.killed) }}
+                                            <div class="col-md-2">{{ form_errors(day.checkSheriff) }}</div>
+                                            <div class="col-md-4">
+                                                {{ form_widget(day.checkSheriff) }}
                                             </div>
                                         </div>
                                     </div>
@@ -287,5 +297,6 @@
             </div>
         </div>
     </div>
-    {{ form_end(form) }}
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false }) }}
 {% endblock %}

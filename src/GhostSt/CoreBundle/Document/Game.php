@@ -31,6 +31,9 @@ class Game
      * @var ArrayCollection
      *
      * @ODM\EmbedMany(targetDocument="GamePlayer")
+     * @Assert\NotBlank(
+     *     message="document.game.players.not_blank"
+     * )
      * @Assert\Valid()
      */
     protected $players;
@@ -38,6 +41,9 @@ class Game
      * @var ArrayCollection
      *
      * @ODM\EmbedMany(targetDocument="GameDay")
+     * @Assert\NotBlank(
+     *     message="document.game.days.not_blank"
+     * )
      * @Assert\Valid()
      */
     protected $days;

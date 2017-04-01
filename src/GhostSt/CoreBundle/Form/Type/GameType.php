@@ -30,7 +30,7 @@ class GameType extends AbstractType
                 'attr'     => [
                     'class' => 'switch-input',
                 ],
-                'required' => true,
+                'required' => false,
             ])
             ->add('date', DateType::class, [
                 'label'    => 'form.type.game.date',

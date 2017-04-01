@@ -38,7 +38,7 @@ class PositionValidator extends ConstraintValidator
             || $value > 10
         ) {
             $this->context
-                ->buildViolation($this->translator->trans('validator.constraints.position.range', ['%position%' => $value ]))
+                ->buildViolation($this->translator->trans('validator.constraints.position.range', ['%position%' => $value, '%start_limit%' => $startLimit ]))
                 ->addViolation();
         }
     }

@@ -116,6 +116,13 @@ div.page-title > div.panel-button-group {
 .sonata-ba-content div.days div.voting div.vote-box {
     margin: 7px;
 }
+.sonata-ba-content div.days div.voting div.icons {
+    font-size: 14px;
+    text-align: center;
+}
+.sonata-ba-content div.days div.voting div.alert-container {
+    padding-top: 5px;
+}
 
 .sonata-ba-content div.button-add span.glyphicon {
     font-size: 14px;

@@ -15,14 +15,35 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class GameController extends CRUDController
 {
-    public function create1Action()
+    public function createAction()
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        $odm = $this->get('doctrine_mongodb');
+
         $game = new Game();
 
-        $form = $this->createForm(GameType::class, $game);
+        $form        = $this->createForm(GameType::class, $game);
+        $tmpDocument = new Game();
+        $tmpDocument->addDay(new GameDay());
+        $tmpForm = $this->createForm(GameType::class);
+        $tmpForm->setData($tmpDocument);
+
+        if ($request->isMethod($request::METHOD_POST)) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $dm = $odm->getManager();
+                $dm->persist($game);
+                $dm->flush();
+
+                return $this->redirectToRoute('admin_ghostst_core_game_list');
+            }
+        }
 
         return $this->render('GhostStCoreBundle:Admin/Game:form.html.twig', [
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
+            'tmpForm' => $tmpForm->createView(),
         ]);
     }
 
@@ -31,8 +52,11 @@ class GameController extends CRUDController
      */
     public function updateAction($id)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
+
         $odm = $this->get('doctrine_mongodb');
 
+        /** @var Game $game */
         $game = $odm->getRepository('GhostStCoreBundle:Game')
                     ->find($id);
 
@@ -46,6 +70,18 @@ class GameController extends CRUDController
         $tmpDocument->addDay(new GameDay());
         $tmpForm = $this->createForm(GameType::class);
         $tmpForm->setData($tmpDocument);
+
+        if ($request->isMethod($request::METHOD_POST)) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $dm = $odm->getManager();
+                $dm->persist($game);
+                $dm->flush();
+
+                return $this->redirectToRoute('admin_ghostst_core_game_list');
+            }
+        }
 
         return $this->render('GhostStCoreBundle:Admin/Game:form.html.twig', [
             'form'    => $form->createView(),

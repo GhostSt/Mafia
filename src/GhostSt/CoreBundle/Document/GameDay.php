@@ -24,7 +24,7 @@ class GameDay
      * @var integer
      * @ODM\Field(type="integer")
      * @CustomAssert\Position(
-     *     allowZero=false
+     *     allowZero=true
      * )
      */
     protected $left;
@@ -33,7 +33,7 @@ class GameDay
      *
      * @ODM\Field(type="integer")
      * @CustomAssert\Position(
-     *     allowZero=false
+     *     allowZero=true
      * )
      */
     protected $killed;
@@ -42,7 +42,7 @@ class GameDay
      *
      * @ODM\Field(type="integer")
      * @CustomAssert\Position(
-     *     allowZero=false
+     *     allowZero=true
      * )
      */
     protected $checkDon;
@@ -51,7 +51,7 @@ class GameDay
      *
      * @ODM\Field(type="integer")
      * @CustomAssert\Position(
-     *     allowZero=false
+     *     allowZero=true
      * )
      */
     protected $checkSheriff;
