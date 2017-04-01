@@ -30,7 +30,7 @@ class GameBestMoveType extends AbstractType
                 'choices' => PositionHelper::getPositions(1, 10)
             ])
             ->add('guess', ChoiceType::class, [
-                'label' => 'form.type.game_day.guess',
+                'label' => 'form.type.game_best_move.guess',
                 'multiple' => true,
                 'choices' => PositionHelper::getPositions(1, 10)
             ]);

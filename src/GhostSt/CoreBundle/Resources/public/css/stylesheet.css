@@ -44,6 +44,18 @@ div.alert-container div.alerts ul li {
 .sonata-ba-content {
 }
 
+div.page-title{
+    clear: both;
+    height: 55px;
+}
+div.page-title > label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+div.page-title > div.panel-button-group {
+    float:right
+}
 .sonata-ba-content > div.row {
     margin: 0px 0px 20px;
     background: #FFF;

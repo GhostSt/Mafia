@@ -40,17 +40,17 @@ class GameType extends AbstractType
                 'required' => true,
             ])
             ->add('bestMove', GameBestMoveType::class, [
-                'label' => 'form.type.best_move',
+                'label' => 'form.type.game.best_move',
                 'required' => true,
             ])
             ->add('players', CollectionType::class, [
-                'label'        => 'admin.game.form.players',
+                'label'        => 'form.type.game.players',
                 'entry_type'   => PlayerType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,
             ])
             ->add('days', CollectionType::class, [
-                'label'        => 'admin.game.form.days',
+                'label'        => 'form.type.game.days',
                 'entry_type'   => GameDayType::class,
                 'allow_add'    => true,
                 'allow_delete' => true,

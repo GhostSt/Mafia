@@ -10,6 +10,7 @@ namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
+use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
  * Class GamePlayers
@@ -23,18 +24,23 @@ class GamePlayer
      * @var User
      *
      * @ODM\ReferenceOne(targetDocument="User", storeAs="id")
+     * @CustomAssert\Player
      */
     protected $user;
     /**
      * @var UserRole
      *
      * @ODM\ReferenceOne(targetDocument="UserRole", storeAs="id")
+     * @CustomAssert\Role
      */
     protected $role;
     /**
      * @var
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=true
+     * )
      */
     protected $position;
 

@@ -9,6 +9,7 @@
 namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
  * Class Vote
@@ -28,12 +29,18 @@ class Vote
      * @var integer
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
      */
     protected $position;
     /**
      * @var
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
      */
     protected $vote;
 }

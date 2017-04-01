@@ -14,12 +14,59 @@ admin:
         edit: "Действия"
 
 
-view:
+views:
   admin:
     crud:
       label_type_yes: "Победа мирных"
       label_type_no: "Победа мафии"
+    game:
+      form:
+        title: "Игра"
+        save: "Сохранить"
+        result:
+          civilian: "Мирных"
+          mafia: "Мафии"
+        date: "Дата проведения"
+        players:
+          length_warning: "В игре может принимать участие максимум 11 игрnоков, включая ведущего"
+          button-add: "Добавить игрока"
+        days:
+          title: "День {day}"
+          voting:
+            length_warning: "На голосование может быть выставлено максимум 10 игроков"
+          remove: "Удалить игровой день"
+          icon:
+            left: "Изгнан из города"
+            sheriff: "Проверка шерифа"
+            don: "Проверка дона"
+            killed: "Убит мафией"
+          voting-button-add: "Выставить на голосование"
+          button-add: "Добавить игровой день"
 
+form:
+  type:
+    game:
+      result: "Победа"
+      date: "Дата проведения"
+      best_move: "Лучший ход"
+      players: "Участники"
+      days: "Игровой процесс"
+    game_best_move:
+      position: "Номер игрока"
+      guess: "Лучший ход"
+    player:
+      position: "Номер игрока"
+      user: "Игрок"
+      role: "Роль"
+    game_day:
+      left: "Изгнан"
+      killed: "Убит"
+      check_don: "Проверен доном"
+      check_sheriff: "Проверен шерифом"
+      vote: "Голосование"
+    vote:
+      position: "Номер игрока"
+      vote: "Количество проголосовавших"
 validator:
   constraints:
     position:

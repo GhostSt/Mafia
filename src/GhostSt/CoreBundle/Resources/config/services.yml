@@ -48,3 +48,4 @@ services:
       - "@translator"
     tags:
       - { name: validator.constraint_validator }
+

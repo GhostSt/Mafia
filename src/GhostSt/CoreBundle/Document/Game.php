@@ -11,6 +11,7 @@ namespace GhostSt\CoreBundle\Document;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
+use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
  * Class Game

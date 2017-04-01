@@ -25,17 +25,21 @@ class GameDayType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('left', ChoiceType::class, [
+                'label' => 'form.type.game_day.left',
+                'choices' => PositionHelper::getPositions(1, 10)
+            ])
             ->add('killed', ChoiceType::class, [
                 'label' => 'form.type.game_day.killed',
-                'choices' => PositionHelper::getPositions(0, 10)
+                'choices' => PositionHelper::getPositions(1, 10)
             ])
             ->add('checkDon', ChoiceType::class, [
                 'label' => 'form.type.game_day.check_don',
-                'choices' => PositionHelper::getPositions(0, 10)
+                'choices' => PositionHelper::getPositions(1, 10)
             ])
             ->add('checkSheriff', ChoiceType::class, [
                 'label' => 'form.type.game_day.check_sheriff',
-                'choices' => PositionHelper::getPositions(0, 10)
+                'choices' => PositionHelper::getPositions(1, 10)
             ])
             ->add('voting', CollectionType::class, [
                 'label' => 'form.type.game_day.vote',

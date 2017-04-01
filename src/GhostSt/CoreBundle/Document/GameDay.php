@@ -10,6 +10,7 @@ namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
+use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
  * Class GameDay
@@ -21,20 +22,37 @@ class GameDay
 {
     /**
      * @var integer
+     * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
+     */
+    protected $left;
+    /**
+     * @var integer
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
      */
     protected $killed;
     /**
      * @var integer
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
      */
     protected $checkDon;
     /**
      * @var integer
      *
      * @ODM\Field(type="integer")
+     * @CustomAssert\Position(
+     *     allowZero=false
+     * )
      */
     protected $checkSheriff;
     /**
@@ -45,15 +63,19 @@ class GameDay
     protected $voting;
 
     /**
-     * Set killed
-     *
-     * @param integer $killed
-     * @return $this
+     * @return int
      */
-    public function setKilled($killed)
+    public function getLeft()
     {
-        $this->killed = $killed;
-        return $this;
+        return $this->left;
+    }
+
+    /**
+     * @param int $left
+     */
+    public function setLeft($left)
+    {
+        $this->left = $left;
     }
 
     /**
@@ -67,14 +89,16 @@ class GameDay
     }
 
     /**
-     * Set checkDon
+     * Set killed
      *
-     * @param integer $checkDon
+     * @param integer $killed
+     *
      * @return $this
      */
-    public function setCheckDon($checkDon)
+    public function setKilled($killed)
     {
-        $this->checkDon = $checkDon;
+        $this->killed = $killed;
+
         return $this;
     }
 
@@ -89,14 +113,16 @@ class GameDay
     }
 
     /**
-     * Set checkSheriff
+     * Set checkDon
      *
-     * @param integer $checkSheriff
+     * @param integer $checkDon
+     *
      * @return $this
      */
-    public function setCheckSheriff($checkSheriff)
+    public function setCheckDon($checkDon)
     {
-        $this->checkSheriff = $checkSheriff;
+        $this->checkDon = $checkDon;
+
         return $this;
     }
 
@@ -111,14 +137,16 @@ class GameDay
     }
 
     /**
-     * Set voting
+     * Set checkSheriff
      *
-     * @param array $voting
+     * @param integer $checkSheriff
+     *
      * @return $this
      */
-    public function setVoting($voting)
+    public function setCheckSheriff($checkSheriff)
     {
-        $this->voting = $voting;
+        $this->checkSheriff = $checkSheriff;
+
         return $this;
     }
 
@@ -130,5 +158,19 @@ class GameDay
     public function getVoting()
     {
         return $this->voting;
+    }
+
+    /**
+     * Set voting
+     *
+     * @param array $voting
+     *
+     * @return $this
+     */
+    public function setVoting($voting)
+    {
+        $this->voting = $voting;
+
+        return $this;
     }
 }

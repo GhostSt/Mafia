@@ -47,7 +47,7 @@
 {% block content %}
     {{ form_start(form, {'method': 'POST'}) }}
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading page-title">
             <label>{{ 'views.admin.game.form.title'|trans }}</label>
 
             <div class="btn-group panel-button-group">
@@ -55,7 +55,6 @@
             </div>
         </div>
         <div class="panel-body">
-
             <div class="row result">
                 <div class="col-md-3">
                     <span>{{ form_label(form.result) }}</span>
@@ -66,7 +65,7 @@
                             <label class="switch btn">
                                 {{ form_widget(form.result) }}
                                 <span class="switch-label" data-on="{{ 'views.admin.game.form.result.civilian'|trans }}"
-                                      data-off="{{ 'views.admin.game.form..result.mafia'|trans }}"></span>
+                                      data-off="{{ 'views.admin.game.form.result.mafia'|trans }}"></span>
                                 <span class="switch-handle"></span>
                             </label>
                         </div>
@@ -142,12 +141,27 @@
                                 <div class="col-md-3">
                                     <span class="glyphicon glyphicon-ban-circle remove"></span>&nbsp;&nbsp;&nbsp;{{ form_label(player.position) }}
                                 </div>
+                                {% if player.position.vars.errors|length %}
+                                    <div class="col-md-1">
+                                        {{ form_errors(player.position) }}
+                                    </div>
+                                {% endif %}
                                 <div class="col-md-1">
                                     {{ form_widget(player.position) }}
                                 </div>
+                                {% if player.user.vars.errors|length %}
+                                    <div class="col-md-1">
+                                        {{ form_errors(player.user) }}
+                                    </div>
+                                {% endif %}
                                 <div class="col-md-2">
                                     {{ form_widget(player.user) }}
                                 </div>
+                                {% if player.role.vars.errors|length %}
+                                    <div class="col-md-1">
+                                        {{ form_errors(player.role) }}
+                                    </div>
+                                {% endif %}
                                 <div class="col-md-2">
                                     {{ form_widget(player.role) }}
                                 </div>
@@ -203,17 +217,21 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                        <span class="glyphicon glyphicon-user"
-                                              title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
+                                            <div class="col-md-3">
+                                                <span class="glyphicon glyphicon-bishop"
+                                                      title="{{ 'views.admin.game.form.days.icon.left'|trans }}"></span>
                                             </div>
-                                            <div class="col-md-4">
-                                        <span class="glyphicon glyphicon-king"
-                                              title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
+                                            <div class="col-md-3">
+                                                <span class="glyphicon glyphicon-user"
+                                                      title="{{ 'views.admin.game.form.days.icon.sheriff'|trans }}"></span>
                                             </div>
-                                            <div class="col-md-4">
-                                        <span class="glyphicon glyphicon-screenshot"
-                                              title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
+                                            <div class="col-md-3">
+                                                <span class="glyphicon glyphicon-king"
+                                                      title="{{ 'views.admin.game.form.days.icon.don'|trans }}"></span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <span class="glyphicon glyphicon-screenshot"
+                                                      title="{{ 'views.admin.game.form.days.icon.killed'|trans }}"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -228,7 +246,7 @@
                                             {% endfor %}
                                             <div class="col-md-1 button-add vote-box">
                                                 <span class="glyphicon glyphicon-plus"
-                                                      title="{{ 'views.admin.game.form.days.voting.button-add'|trans }}"></span>
+                                                      title="{{ 'views.admin.game.form.days.voting-button-add'|trans }}"></span>
                                             </div>
                                         </div>
                                         <div class="row vote" data-length="{{ day.voting|length }}">
@@ -241,13 +259,16 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="row night-activity">
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
+                                                {{ form_widget(day.left) }}
+                                            </div>
+                                            <div class="col-md-3">
                                                 {{ form_widget(day.checkSheriff) }}
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 {{ form_widget(day.checkDon) }}
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 {{ form_widget(day.killed) }}
                                             </div>
                                         </div>
