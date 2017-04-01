@@ -50,6 +50,8 @@ class BestMoveGuessValidator extends ConstraintValidator
                 $this->context
                     ->buildViolation($this->translator->trans('validator.constraints.best_move_guess.invalid_value', ['%value%' => $item]))
                     ->addViolation();
+
+                break;
             }
         }
     }

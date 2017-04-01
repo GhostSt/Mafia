@@ -34,3 +34,17 @@ services:
       - "@translator"
     tags:
       - { name: validator.constraint_validator }
+
+  ghostst_core.validator.constraint.player:
+    class: GhostSt\CoreBundle\Validator\Constraints\PlayerValidator
+    arguments:
+      - "@translator"
+    tags:
+      - { name: validator.constraint_validator }
+
+  ghostst_core.validator.constraint.role:
+    class: GhostSt\CoreBundle\Validator\Constraints\RoleValidator
+    arguments:
+      - "@translator"
+    tags:
+      - { name: validator.constraint_validator }
