@@ -50,7 +50,7 @@ class GameController extends CRUDController
     /**
      * @param $id
      */
-    public function updateAction($id)
+    public function editAction($id = null)
     {
         $request = $this->get('request_stack')->getCurrentRequest();
 

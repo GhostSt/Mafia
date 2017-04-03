@@ -77,10 +77,10 @@ class GameAdmin extends AbstractAdmin
     {
         $collection
             ->remove('create')
-            ->remove('update');
+            ->remove('edit');
 
         $collection
             ->add('create', 'create')
-            ->add('update', $this->getRouterIdParameter() .'/update');
+            ->add('edit', $this->getRouterIdParameter() . '/edit');
     }
 }
