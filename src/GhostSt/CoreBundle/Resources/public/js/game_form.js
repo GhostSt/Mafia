@@ -138,7 +138,7 @@ function VotingHandler() {
         var voting_vote = $('#voting-prototype div.vote').html();
 
         $(this.targetSelector)
-            .find('div.head.buttons div.vote-remove-buttons > div.row')
+            .find('div.voting div.head.buttons')
             .append(voting_remove);
 
         $(this.targetSelector)
@@ -250,8 +250,6 @@ $(function () {
             var row_selector = $(this)
                 .parent()
                 .parent()
-                .parent()
-                .parent()
                 .parent();
 
             var positionSelector = row_selector
@@ -264,5 +262,5 @@ $(function () {
             votingHandler.remove(positionSelector);
             votingHandler.remove(voteSelector);
         }
-    }, 'div.days div.head.buttons > div.vote-remove-buttons span.remove');
+    }, 'div.days div.voting div.head.buttons span.remove');
 });
