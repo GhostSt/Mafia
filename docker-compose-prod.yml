@@ -1,0 +1,30 @@
+version: '2'
+services:
+  nginx:
+    image: ghostst/mafia-nginx
+    ports:
+      - "80:80"
+    extra_hosts:
+      - "prime-mafia.ru:127.0.0.1"
+    volumes_from:
+      - php
+    links:
+      - php
+
+  php:
+    image: ghostst/mafia-php
+    expose:
+      - 9000
+    volumes:
+      - /code
+    links:
+      - mongodb
+
+  mongodb:
+    image: ghostst/mafia-mongodb
+    volumes:
+      - mafia-mongodb:/data/db
+
+volumes:
+  mafia-mongodb:
+    external: true

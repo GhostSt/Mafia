@@ -1,0 +1,4 @@
+FROM nginx:latest
+MAINTAINER Victor Diditskiy <victor.diditskiy@yandex.ru>
+
+COPY ./docker/nginx/mafia.prod.conf /etc/nginx/conf.d/mafia.conf
