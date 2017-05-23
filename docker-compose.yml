@@ -14,19 +14,27 @@ services:
       - php
 
   php:
-    build: ./
+    build:
+      context: docker/php
     volumes:
       - /var/www/mafia/source:/code
     expose:
      - 9000
     links:
       - mongodb
+      - rabbitmq
 
   mongodb:
     build:
       context: docker/mongodb
     volumes:
       - mafia-mongodb:/data/db
+
+  rabbitmq:
+    build:
+      context: docker/rabbitmq
+    expose:
+      - 15672
 
 volumes:
   mafia-mongodb:

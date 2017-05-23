@@ -19,3 +19,8 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     mongodb_server: "mongodb://mongodb:27017"
+
+    amqp_host: rabbitmq
+    amqp_port: 5672
+    amqp_user: guest
+    amqp_password: guest

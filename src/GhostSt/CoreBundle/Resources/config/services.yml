@@ -49,3 +49,10 @@ services:
     tags:
       - { name: validator.constraint_validator }
 
+  ghostst_core.service.amqp_manager:
+    class: GhostSt\CoreBundle\Service\AMQPManager
+    arguments:
+      - "%amqp_host%"
+      - "%amqp_port%"
+      - "%amqp_user%"
+      - "%amqp_password%"
