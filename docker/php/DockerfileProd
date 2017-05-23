@@ -27,6 +27,6 @@ RUN wget https://getcomposer.org/installer \
     && php installer --install-dir=/usr/local/bin --filename=composer
 
 COPY ./docker/php/php.ini /usr/local/etc/php/
-COPY . /code
+COPY ./site /code
 
 WORKDIR /code

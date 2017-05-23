@@ -17,7 +17,7 @@ services:
     build:
       context: docker/php
     volumes:
-      - /var/www/mafia/source:/code
+      - /var/www/mafia/site:/code
     expose:
      - 9000
     links:
