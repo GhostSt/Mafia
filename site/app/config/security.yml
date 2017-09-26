@@ -2,15 +2,24 @@
 # http://symfony.com/doc/current/security.html
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
+        in_memory:
+            memory:
+                users:
+                    GhostSt:
+                        password: $2y$12$i.l7S2bDB1X4YEP7chvI.etnnZNbLm0a/6Vi.8e2drA0RYotK8EFy
+                        roles: 'ROLE_ADMIN'
+                    sasha_zd:
+                        password: $2y$12$BOsmRcxMv2w1AlFS.Te0..8q.uPxGtliZmG3thti8EQx7s1huZuBe
+                        roles: 'ROLE_ADMIN'
 
     firewalls:
         main:
@@ -18,7 +27,7 @@ security:
             form_login:
                 check_path: /admin/login_check
                 login_path: /admin/login
-                provider: fos_userbundle
+                provider: in_memory
                 default_target_path: /admin/dashboard
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
             logout:

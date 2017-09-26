@@ -3,7 +3,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "8081:80"
+      - "8083:80"
     extra_hosts:
       - "mafia.yalta:127.0.0.1"
     volumes:
