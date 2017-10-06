@@ -1,0 +1,4 @@
+parameters:
+    settings:
+        - "mafia_roles"
+        - "civilian_roles"

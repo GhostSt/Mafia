@@ -1,0 +1,12 @@
+services:
+  # Setting repository
+  ghostst_core.repository.tools.setting:
+    class: GhostSt\CoreBundle\Repository\Tools\SettingRepository
+    arguments:
+      - "@doctrine_mongodb"
+
+  # User rating repository
+  ghostst_core.repository.rating.user_rating:
+    class: GhostSt\CoreBundle\Repository\Rating\UserRatingRepository
+    arguments:
+      - "@doctrine_mongodb"

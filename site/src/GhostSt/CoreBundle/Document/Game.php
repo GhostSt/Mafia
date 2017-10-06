@@ -11,15 +11,13 @@ namespace GhostSt\CoreBundle\Document;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
-use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
- * Class Game
- * @package GhostSt\CoreBundle\Document
+ * Game
  *
  * @ODM\Document(collection="game")
  */
-class Game
+class Game implements GameInterface
 {
     /**
      * @var string
@@ -27,6 +25,7 @@ class Game
      * @ODM\Id
      */
     protected $id;
+
     /**
      * @var ArrayCollection
      *
@@ -37,6 +36,7 @@ class Game
      * @Assert\Valid()
      */
     protected $players;
+
     /**
      * @var ArrayCollection
      *
@@ -47,6 +47,7 @@ class Game
      * @Assert\Valid()
      */
     protected $days;
+
     /**
      * true equals civilian win, false equals mafia wins
      *
@@ -55,6 +56,7 @@ class Game
      * @ODM\Field(type="boolean")
      */
     protected $result;
+
     /**
      * @var GameBestMove
      *
@@ -62,6 +64,7 @@ class Game
      * @Assert\Valid()
      */
     protected $bestMove;
+
     /**
      * @var \DateTime
      *
@@ -73,7 +76,7 @@ class Game
     {
         $this->days = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -148,11 +151,13 @@ class Game
      * Set bestMove
      *
      * @param GameBestMove $bestMove
+     *
      * @return $this
      */
     public function setBestMove(GameBestMove $bestMove)
     {
         $this->bestMove = $bestMove;
+
         return $this;
     }
 
@@ -170,11 +175,13 @@ class Game
      * Set result
      *
      * @param boolean $result
+     *
      * @return $this
      */
     public function setResult($result)
     {
         $this->result = $result;
+
         return $this;
     }
 
@@ -192,11 +199,13 @@ class Game
      * Set date
      *
      * @param \DateTime $date
+     *
      * @return $this
      */
     public function setDate($date)
     {
         $this->date = $date;
+
         return $this;
     }
 

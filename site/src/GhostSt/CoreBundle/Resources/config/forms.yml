@@ -1,0 +1,7 @@
+services:
+  # Player type
+  ghostst_core.form.type.player:
+    class: GhostSt\CoreBundle\Form\Type\PlayerType
+    arguments:
+    tags:
+     - { name: form.type }

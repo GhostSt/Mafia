@@ -18,7 +18,7 @@ use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
  *
  * @ODM\EmbeddedDocument
  */
-class GamePlayer
+class GamePlayer implements GamePlayerInterface
 {
     /**
      * @var User
@@ -48,6 +48,7 @@ class GamePlayer
      * Set user
      *
      * @param User $user
+     *
      * @return $this
      */
     public function setUser(User $user)

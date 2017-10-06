@@ -1,7 +1,5 @@
 <?php
 
-// src/GhostSt/CoreBundle/Controller/Admin/GameController.php
-
 namespace GhostSt\CoreBundle\Controller\Admin;
 
 use GhostSt\CoreBundle\Document\Game;
@@ -22,9 +20,9 @@ class GameController extends CRUDController
      */
     public function createAction()
     {
-        $request = $this->get('request_stack')->getCurrentRequest();
-
-        $odm = $this->get('doctrine_mongodb');
+        $request       = $this->get('request_stack')->getCurrentRequest();
+        $odm           = $this->get('doctrine_mongodb');
+        $ratingService = $this->get('ghostst_core.service.rating.rating');
 
         $game = new Game();
 
@@ -40,19 +38,11 @@ class GameController extends CRUDController
             if ($form->isValid()) {
                 $dm = $odm->getManager();
                 $dm->persist($game);
-                $dm->flush();
+                //$dm->flush();
 
-                $AMQPManager = $this->get('ghostst_core.service.amqp_manager');
-                $AMQPManager
-                    ->getChannel()
-                    ->declareQueue('games')
-                    ->setMessage([
-                        'gameId' => $game->getId(),
-                    ])
-                    ->basicPublish()
-                    ->closeChannel()
-                    ->closeConnection();
-
+                $ratingService->createGameRating($game);
+                // TODO: remove stub
+                die('test');
                 return $this->redirectToRoute('admin_ghostst_core_game_list');
             }
         }

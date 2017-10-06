@@ -1,0 +1,14 @@
+services:
+  # User admin
+  ghostst_core.admin.user:
+    class: GhostSt\CoreBundle\Admin\UserAdmin
+    arguments: [~, GhostSt\CoreBundle\Document\User, ~]
+    tags:
+      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игроки }
+
+  # Game admin
+  ghostst_core.admin.game:
+    class: GhostSt\CoreBundle\Admin\GameAdmin
+    arguments: [~, GhostSt\CoreBundle\Document\Game, GhostStCoreBundle:Admin/Game]
+    tags:
+      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игры }

@@ -1,54 +1,65 @@
+imports:
+    - { resource: admins.yml }
+    - { resource: forms.yml }
+    - { resource: parameters.yml }
+    - { resource: repositories.yml }
+    - { resource: validators.yml }
+
 services:
-# Admin
-  ghostst_core.admin.user:
-    class: GhostSt\CoreBundle\Admin\UserAdmin
-    arguments: [~, GhostSt\CoreBundle\Document\User, ~]
-    tags:
-      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игроки }
-
-  ghostst_core.admin.game:
-    class: GhostSt\CoreBundle\Admin\GameAdmin
-    arguments: [~, GhostSt\CoreBundle\Document\Game, GhostStCoreBundle:Admin/Game]
-    tags:
-      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игры }
-# Services
-
-# Form types
-  ghostst_core.form.type.player:
-    class: GhostSt\CoreBundle\Form\Type\PlayerType
+  # Player role service
+  ghostst_core.service.role.player_role:
+    class: GhostSt\CoreBundle\Service\Role\PlayerRoleService
     arguments:
-    tags:
-     - { name: form.type }
+      - "@ghostst_core.service.tools.setting"
 
-# Validators
-  ghostst_core.validator.constraint.position:
-    class: GhostSt\CoreBundle\Validator\Constraints\PositionValidator
+  # Setting service
+  ghostst_core.service.tools.setting:
+    class: GhostSt\CoreBundle\Service\Tools\SettingService
     arguments:
-      - "@translator"
-    tags:
-      - { name: validator.constraint_validator }
+      - "@ghostst_core.repository.tools.setting"
 
-  ghostst_core.validator.constraint.best_move_guess:
-    class: GhostSt\CoreBundle\Validator\Constraints\BestMoveGuessValidator
+  # Rating calculator
+  ghostst_core.service.rating.calculator:
+    class: GhostSt\CoreBundle\Service\Rating\RatingCalculator
     arguments:
-      - "@translator"
-    tags:
-      - { name: validator.constraint_validator }
+      - "@ghostst_core.service.rating.strategy.aggregator"
 
-  ghostst_core.validator.constraint.player:
-    class: GhostSt\CoreBundle\Validator\Constraints\PlayerValidator
+  # Rating service
+  ghostst_core.service.rating.rating:
+    class: GhostSt\CoreBundle\Service\Rating\RatingService
     arguments:
-      - "@translator"
-    tags:
-      - { name: validator.constraint_validator }
+      - "@ghostst_core.service.rating.calculator"
+      - "@ghostst_core.repository.rating.user_rating"
 
-  ghostst_core.validator.constraint.role:
-    class: GhostSt\CoreBundle\Validator\Constraints\RoleValidator
+  # Aggregator strategy service
+  ghostst_core.service.rating.strategy.aggregator:
+    class: GhostSt\CoreBundle\Service\Rating\Strategy\AggregatorStrategy
+
+  # Civilian strategy service
+  ghostst_core.service.rating.strategy.civilian:
+    class: GhostSt\CoreBundle\Service\Rating\Strategy\CivilianStrategy
     arguments:
-      - "@translator"
+      - "@ghostst_core.service.role.player_role"
     tags:
-      - { name: validator.constraint_validator }
+      - { name: 'rating.strategy' }
 
+  # Civilian strategy service
+  ghostst_core.service.rating.strategy.mafia:
+    class: GhostSt\CoreBundle\Service\Rating\Strategy\MafiaStrategy
+    arguments:
+      - "@ghostst_core.service.role.player_role"
+    tags:
+      - { name: 'rating.strategy' }
+
+  # Civilian strategy service
+  ghostst_core.service.rating.strategy.best_move:
+    class: GhostSt\CoreBundle\Service\Rating\Strategy\BestMoveStrategy
+    arguments:
+      - "@ghostst_core.service.role.player_role"
+    tags:
+      - { name: 'rating.strategy' }
+
+  # AMQP manager
   ghostst_core.service.amqp_manager:
     class: GhostSt\CoreBundle\Service\AMQPManager
     arguments:

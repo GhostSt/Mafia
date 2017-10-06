@@ -13,8 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
- * Class GameBestMove
- * @package GhostSt\CoreBundle\Document
+ * Game best move
  *
  * @ODM\EmbeddedDocument
  */
@@ -24,15 +23,18 @@ class GameBestMove
      * @var integer
      *
      * @ODM\Field(type="integer")
+     *
      * @CustomAssert\Position(
      *     allowZero=false
      * )
      */
     protected $position;
+
     /**
      * @var array
      *
      * @ODM\Field(type="collection")
+     *
      * @CustomAssert\BestMoveGuess
      */
     protected $guess = [];
@@ -41,11 +43,13 @@ class GameBestMove
      * Set position
      *
      * @param integer $position
+     *
      * @return $this
      */
     public function setPosition($position)
     {
         $this->position = $position;
+
         return $this;
     }
 
@@ -63,11 +67,13 @@ class GameBestMove
      * Set guess
      *
      * @param array $guess
+     *
      * @return $this
      */
     public function setGuess($guess)
     {
         $this->guess = $guess;
+
         return $this;
     }
 

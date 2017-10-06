@@ -19,12 +19,16 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 class UserRole
 {
     /**
+     * Player role id
      * @var string
      *
      * @ODM\Id(strategy="AUTO")
      */
-    protected $id;
+    private $id;
+
     /**
+     * Parent role
+     *
      * @var UserRole
      *
      * @ODM\ReferenceOne(targetDocument="UserRole", storeAs="id")
