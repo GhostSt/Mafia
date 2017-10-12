@@ -48,9 +48,13 @@ class BestMoveStrategy implements StrategyInterface
 
         $mafiaPositions = [];
 
+        if ($game->getBestMove()->getPosition() !== $player->getPosition()) {
+            return [];
+        }
+
         foreach ($game->getPlayers() as $gamePlayer) {
             if ($this->roleService->isMafia($gamePlayer)) {
-                $mafiaPositions = $gamePlayer->getPosition();
+                $mafiaPositions[] = $gamePlayer->getPosition();
             }
         }
 

@@ -59,7 +59,10 @@ class PlayerRoleService implements PlayerRoleServiceInterface
      */
     public function isCivilian(GamePlayerInterface $player)
     {
-        $civilianRoles = $this->settingService->getByCode('civilian_roles');
+        $setting = $this->settingService
+            ->getByCode('mafia_roles');
+
+        $civilianRoles = $setting->getValue();
 
         if (!is_array($civilianRoles)) {
             return false;
@@ -83,7 +86,9 @@ class PlayerRoleService implements PlayerRoleServiceInterface
      */
     public function isMafia(GamePlayerInterface $player)
     {
-        $mafiaRoles = $this->settingService->getByCode('mafia_roles');
+        $setting = $this->settingService->getByCode('mafia_roles');
+
+        $mafiaRoles = $setting->getValue();
 
         if (!is_array($mafiaRoles)) {
             return false;

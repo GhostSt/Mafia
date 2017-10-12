@@ -84,7 +84,7 @@ class Setting implements SettingInterface
      */
     public function getValue()
     {
-        if (true || $this->serialized) {
+        if ($this->serialized) {
             return json_decode($this->value);
         }
 
@@ -98,7 +98,7 @@ class Setting implements SettingInterface
      */
     public function setValue($value)
     {
-        if (true || $this->serialized) {
+        if ($this->serialized) {
             $this->value = json_encode($value);
 
             return;

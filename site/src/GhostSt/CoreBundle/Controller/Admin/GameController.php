@@ -43,6 +43,7 @@ class GameController extends CRUDController
                 $ratingService->createGameRating($game);
                 // TODO: remove stub
                 die('test');
+
                 return $this->redirectToRoute('admin_ghostst_core_game_list');
             }
         }
@@ -62,7 +63,8 @@ class GameController extends CRUDController
      */
     public function editAction($id = null)
     {
-        $request = $this->get('request_stack')->getCurrentRequest();
+        $request       = $this->get('request_stack')->getCurrentRequest();
+        $ratingService = $this->get('ghostst_core.service.rating.rating');
 
         $odm = $this->get('doctrine_mongodb');
 
@@ -87,18 +89,11 @@ class GameController extends CRUDController
             if ($form->isValid()) {
                 $dm = $odm->getManager();
                 $dm->persist($game);
-                $dm->flush();
+                //$dm->flush();
 
-                $AMQPManager = $this->get('ghostst_core.service.amqp_manager');
-                $AMQPManager
-                    ->getChannel()
-                    ->declareQueue('games')
-                    ->setMessage([
-                        'gameId' => $game->getId(),
-                    ])
-                    ->basicPublish()
-                    ->closeChannel()
-                    ->closeConnection();
+                $ratingService->updateGameRating($game);
+                // TODO: remove stub
+                die('test');
 
                 return $this->redirectToRoute('admin_ghostst_core_game_list');
             }

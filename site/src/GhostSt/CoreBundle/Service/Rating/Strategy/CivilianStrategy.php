@@ -48,13 +48,11 @@ class CivilianStrategy implements StrategyInterface
             return [];
         }
 
-        $score = GameInterface::WIN_SCORE_BONUS;
-
         $rating = new UserRating(
             $player->getUser()->getId(),
             $game->getId(),
             UserRatingInterface::RATING_CODE_WIN_CIVILIAN,
-            $score
+            GameInterface::WIN_SCORE_BONUS
         );
 
         return [$rating];
