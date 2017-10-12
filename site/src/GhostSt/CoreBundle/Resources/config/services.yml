@@ -11,12 +11,14 @@ services:
     class: GhostSt\CoreBundle\Service\Role\PlayerRoleService
     arguments:
       - "@ghostst_core.service.tools.setting"
+      - "@ghostst_core.repository.game.player_role"
 
   # Setting service
   ghostst_core.service.tools.setting:
     class: GhostSt\CoreBundle\Service\Tools\SettingService
     arguments:
       - "@ghostst_core.repository.tools.setting"
+      - "%settings%"
 
   # Rating calculator
   ghostst_core.service.rating.calculator:

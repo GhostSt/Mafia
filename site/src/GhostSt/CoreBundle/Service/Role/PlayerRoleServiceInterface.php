@@ -1,16 +1,22 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Service\Role;
 
 use GhostSt\CoreBundle\Document\GamePlayerInterface;
+use GhostSt\CoreBundle\Document\UserRole;
 
 /**
  * Player role service interface
  */
 interface PlayerRoleServiceInterface
 {
+    /**
+     * Gets roles
+     *
+     * @return UserRole[]
+     */
+    public function all();
+
     /**
      * Check if player is civilian
      *

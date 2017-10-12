@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Repository\Tools;
 
 use GhostSt\CoreBundle\Document\Tools\SettingInterface;
@@ -12,13 +10,31 @@ use GhostSt\CoreBundle\Document\Tools\SettingInterface;
 interface SettingRepositoryInterface
 {
     /**
-     * Return setting
+     * Return setting by code
      *
      * @param $code
      *
      * @return null|SettingInterface
      */
-    public function get($code);
+    public function getByCode($code);
+
+    /**
+     * Return setting by id
+     *
+     * @param string $id
+     *
+     * @return null|SettingInterface
+     */
+    public function getById($id);
+
+    /**
+     * Finds unused settings
+     *
+     * @param array $settings
+     *
+     * @var SettingInterface[]
+     */
+    public function findUnusedSettings(array $settings);
 
     /**
      * Saves setting

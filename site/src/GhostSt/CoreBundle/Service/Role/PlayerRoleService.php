@@ -1,10 +1,10 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Service\Role;
 
 use GhostSt\CoreBundle\Document\GamePlayerInterface;
+use GhostSt\CoreBundle\Document\UserRole;
+use GhostSt\CoreBundle\Repository\Game\PlayerRoleRepositoryInterface;
 use GhostSt\CoreBundle\Service\Tools\SettingServiceInterface;
 
 /**
@@ -20,13 +20,34 @@ class PlayerRoleService implements PlayerRoleServiceInterface
     private $settingService;
 
     /**
-     * PlayerRoleService constructor.
+     * Player role repository
      *
-     * @param SettingServiceInterface $settingService
+     * @var PlayerRoleRepositoryInterface
      */
-    public function __construct(SettingServiceInterface $settingService)
-    {
+    private $repository;
+
+    /**
+     * Constructor
+     *
+     * @param SettingServiceInterface       $settingService
+     * @param PlayerRoleRepositoryInterface $playerRoleRepository
+     */
+    public function __construct(
+        SettingServiceInterface $settingService,
+        PlayerRoleRepositoryInterface $playerRoleRepository
+    ) {
         $this->settingService = $settingService;
+        $this->repository     = $playerRoleRepository;
+    }
+
+    /**
+     * Gets player roles
+     *
+     * @return UserRole[]
+     */
+    public function all()
+    {
+        return $this->repository->all();
     }
 
     /**
@@ -38,7 +59,7 @@ class PlayerRoleService implements PlayerRoleServiceInterface
      */
     public function isCivilian(GamePlayerInterface $player)
     {
-        $civilianRoles = $this->settingService->get('civilian_roles');
+        $civilianRoles = $this->settingService->getByCode('civilian_roles');
 
         if (!is_array($civilianRoles)) {
             return false;
@@ -48,7 +69,6 @@ class PlayerRoleService implements PlayerRoleServiceInterface
             if ($player->getRole()->getId() === $roleId) {
                 return true;
             }
-
         }
 
         return false;
@@ -63,7 +83,7 @@ class PlayerRoleService implements PlayerRoleServiceInterface
      */
     public function isMafia(GamePlayerInterface $player)
     {
-        $mafiaRoles = $this->settingService->get('mafia_roles');
+        $mafiaRoles = $this->settingService->getByCode('mafia_roles');
 
         if (!is_array($mafiaRoles)) {
             return false;
@@ -73,7 +93,6 @@ class PlayerRoleService implements PlayerRoleServiceInterface
             if ($player->getRole()->getId() === $roleId) {
                 return true;
             }
-
         }
 
         return false;

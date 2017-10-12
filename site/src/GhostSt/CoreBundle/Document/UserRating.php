@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;

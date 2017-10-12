@@ -31,7 +31,7 @@ class UserAdmin extends AbstractAdmin
                 'label' => 'admin.user.list.username',
             ])
             ->add('_action', 'actions', [
-                'label'   => 'admin.user.list.actions.edit',
+                'label'   => 'admin.actions',
                 'actions' => [
                     'edit' => [
                         'template' => 'SonataAdminBundle:CRUD:list__action_edit.html.twig',

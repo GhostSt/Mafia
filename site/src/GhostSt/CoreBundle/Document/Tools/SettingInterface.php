@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Document\Tools;
 
 /**
@@ -9,6 +7,10 @@ namespace GhostSt\CoreBundle\Document\Tools;
  */
 interface SettingInterface
 {
+    const SETTING_CIVILIAN_ROLES = 'civilian_roles';
+
+    const SETTING_MAFIA_ROLES    = 'mafia_roles';
+
     /**
      * Returns setting id
      *

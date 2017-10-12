@@ -1,0 +1,41 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% trans_default_domain "messages" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets output="css/compiled/admin_style.css"
+    '@GhostStCoreBundle/Resources/public/css/stylesheet.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}" screen="media">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <div class="panel panel-default">
+        <div class="panel-heading page-title">
+            <label>{{ 'views.admin.tools.setting.form.title'|trans }}</label>
+
+            <div class="btn-group panel-button-group">
+                <button class="btn btn-default">{{ 'views.admin.tools.setting.form.save'|trans }}</button>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>{{ 'views.admin.tools.setting.form.code'|trans }}</label>
+                        <input disabled class="form-control" value="{{ setting.code }}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'views.admin.tools.setting.form.value'|trans }}</label>
+                        {{ form_widget(form.value) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

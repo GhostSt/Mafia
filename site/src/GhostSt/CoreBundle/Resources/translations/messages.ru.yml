@@ -1,4 +1,5 @@
 admin:
+  actions: "Действия"
   user:
     list:
       username: "Игрок"
@@ -10,8 +11,13 @@ admin:
     list:
       date: "Дата проведения"
       result: "Результат"
-      actions:
-        edit: "Действия"
+  tools:
+    setting:
+      list:
+        code: "Код опции"
+      form:
+        code: "Код опции"
+        serialized: "Хранить данные в виде массива?"
 
 view:
   admin:
@@ -44,6 +50,13 @@ views:
             killed: "Убит мафией"
           voting-button-add: "Выставить на голосование"
           button-add: "Добавить игровой день"
+    tools:
+      setting:
+        form:
+          title: "Изменение значения опции"
+          code: "Код опции"
+          value: "Значение опции"
+          save: "Сохранить опцию"
 
 form:
   type:

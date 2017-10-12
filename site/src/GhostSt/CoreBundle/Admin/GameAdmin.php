@@ -64,7 +64,7 @@ class GameAdmin extends AbstractAdmin
                 'label_type_no'  => 'no1',
             ])
             ->add('_action', 'actions', [
-                'label'   => 'admin.game.list.actions.edit',
+                'label'   => 'admin.actions',
                 'actions' => [
                     'edit' => [
                         'template' => 'SonataAdminBundle:CRUD:list__action_edit.html.twig',

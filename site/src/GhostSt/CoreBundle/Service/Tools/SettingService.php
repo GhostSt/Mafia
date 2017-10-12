@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Service\Tools;
 
 use RuntimeException;
@@ -15,6 +13,13 @@ use GhostSt\CoreBundle\Repository\Tools\SettingRepositoryInterface;
 class SettingService implements SettingServiceInterface
 {
     /**
+     * Available settings
+     *
+     * @var array
+     */
+    private $settings;
+
+    /**
      * Setting repository
      *
      * @var SettingRepositoryInterface
@@ -25,10 +30,14 @@ class SettingService implements SettingServiceInterface
      * Constructor
      *
      * @param SettingRepositoryInterface $settingRepository
+     * @param array                      $settings
      */
-    public function __construct(SettingRepositoryInterface $settingRepository)
-    {
+    public function __construct(
+        SettingRepositoryInterface $settingRepository,
+        array $settings
+    ) {
         $this->settingRepository = $settingRepository;
+        $this->settings          = $settings;
     }
 
     /**
@@ -36,17 +45,40 @@ class SettingService implements SettingServiceInterface
      *
      * @param string $code
      *
-     * @return SettingInterface
-     *
-     * @throws RuntimeException
+     * @return null|SettingInterface
      */
-    public function get($code)
+    public function getByCode($code)
     {
-        try {
-            return $this->settingRepository->get($code);
-        } catch (NoResultException $exception) {
-            throw new RuntimeException('Setting not found', 500);
+        return $this->settingRepository->getByCode($code);
+    }
+
+    /**
+     * Gets setting by id
+     *
+     * @param string $id
+     *
+     * @return null|SettingInterface
+     */
+    public function getById($id)
+    {
+        return $this->settingRepository->getById($id);
+    }
+
+    /**
+     * Finds unused settings
+     *
+     * @return array
+     */
+    public function findUnusedSettings()
+    {
+        $usedSettings     = $this->settingRepository->findUnusedSettings($this->settings);
+        $usedSettingCodes = [];
+
+        foreach ($usedSettings as $setting) {
+            $usedSettingCodes[] = $setting->getCode();
         }
+
+        return array_diff($this->settings, $usedSettingCodes);
     }
 
     /**

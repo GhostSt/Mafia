@@ -12,22 +12,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use GhostSt\CoreBundle\Document\UserRating;
 use GhostSt\CoreBundle\Document\UserRatingInterface;
+use GhostSt\CoreBundle\Repository\AbstractRepository;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
-class UserRatingRepository implements UserRatingRepositoryInterface
+class UserRatingRepository extends AbstractRepository implements UserRatingRepositoryInterface
 {
-    /**
-     * Object manager
-     *
-     * @var ObjectManager
-     */
-    private $manager;
-
-    public function __construct(ManagerRegistry $managerRegistry)
-    {
-        $this->manager = $managerRegistry->getManager();
-    }
-
     /**
      * Return list of user ratings
      *
@@ -41,25 +30,25 @@ class UserRatingRepository implements UserRatingRepositoryInterface
     }
 
     /**
-     * Saves user rating
-     *
-     * @param UserRatingInterface $rating
-     */
-    public function save(UserRatingInterface $rating)
-    {
-        $this->manager->persist($rating);
-        $this->manager->flush($rating);
-    }
-
-    /**
      * Removes user rating
      *
      * @param UserRatingInterface $rating
      */
     public function remove(UserRatingInterface $rating)
     {
-        $this->manager->remove($rating);
-        $this->manager->flush($rating);
+        $this->getDocumentManager()->remove($rating);
+        $this->getDocumentManager()->flush($rating);
+    }
+
+    /**
+     * Saves user rating
+     *
+     * @param UserRatingInterface $rating
+     */
+    public function save(UserRatingInterface $rating)
+    {
+        $this->getDocumentManager()->persist($rating);
+        $this->getDocumentManager()->flush($rating);
     }
 
     /**
@@ -69,6 +58,6 @@ class UserRatingRepository implements UserRatingRepositoryInterface
      */
     private function getRepository()
     {
-        return $this->manager->getRepository(UserRating::class);
+        return $this->getDocumentManager()->getRepository(UserRating::class);
     }
 }

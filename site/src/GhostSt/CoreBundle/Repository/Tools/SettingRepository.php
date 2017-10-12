@@ -10,38 +10,60 @@ namespace GhostSt\CoreBundle\Repository\Tools;
 
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\NoResultException;
 use GhostSt\CoreBundle\Document\Tools\Setting;
 use GhostSt\CoreBundle\Document\Tools\SettingInterface;
+use GhostSt\CoreBundle\Repository\AbstractRepository;
 
 /**
  * Settings repository
  */
-class SettingRepository implements SettingRepositoryInterface
+class SettingRepository extends AbstractRepository implements SettingRepositoryInterface
 {
     /**
-     * Object manager
-     *
-     * @var ObjectManager
-     */
-    private $manager;
-
-    public function __construct(ManagerRegistry $managerRegistry)
-    {
-        $this->manager = $managerRegistry->getManager();
-    }
-
-    /**
-     * Return setting
+     * Return setting by code
      *
      * @param $code
      *
      * @return SettingInterface
      */
-    public function get($code)
+    public function getByCode($code)
     {
-        return $this->manager
+        return $this->getDocumentManager()
             ->getRepository(Setting::class)
             ->findOneBy(['code' => $code]);
+    }
+
+    /**
+     * Return setting by id
+     *
+     * @param string $id
+     *
+     * @return SettingInterface
+     */
+    public function getById($id)
+    {
+        return $this->getDocumentManager()
+                    ->getRepository(Setting::class)
+                    ->find($id);
+    }
+
+    /**
+     * Finds unused settings
+     *
+     * @param array $settings
+     *
+     * @return SettingInterface[]
+     */
+    public function findUnusedSettings(array $settings)
+    {
+        $qb = $this->getDocumentManager()
+            ->createQueryBuilder(Setting::class);
+
+        $qb->field('code')->in($settings);
+
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -51,7 +73,7 @@ class SettingRepository implements SettingRepositoryInterface
      */
     public function save(SettingInterface $setting)
     {
-        $this->manager->persist($setting);
-        $this->manager->flush($setting);
+        $this->getDocumentManager()->persist($setting);
+        $this->getDocumentManager()->flush($setting);
     }
 }

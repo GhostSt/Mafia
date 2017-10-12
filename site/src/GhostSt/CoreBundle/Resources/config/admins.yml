@@ -12,3 +12,14 @@ services:
     arguments: [~, GhostSt\CoreBundle\Document\Game, GhostStCoreBundle:Admin/Game]
     tags:
       - { name: sonata.admin, manager_type: doctrine_mongodb, label: Игры }
+
+  # Setting admin
+  ghostst_core.admin.tools.setting:
+    class: GhostSt\CoreBundle\Admin\Tools\SettingAdmin
+    arguments:
+      - ~
+      - GhostSt\CoreBundle\Document\Tools\Setting
+      - GhostStCoreBundle:Admin/Tools/Setting
+      - '@ghostst_core.service.tools.setting'
+    tags:
+      - { name: sonata.admin, manager_type: doctrine_mongodb, label: Опции }

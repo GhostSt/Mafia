@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 namespace GhostSt\CoreBundle\Document\Tools;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -86,6 +84,10 @@ class Setting implements SettingInterface
      */
     public function getValue()
     {
+        if (true || $this->serialized) {
+            return json_decode($this->value);
+        }
+
         return $this->value;
     }
 
@@ -96,6 +98,12 @@ class Setting implements SettingInterface
      */
     public function setValue($value)
     {
+        if (true || $this->serialized) {
+            $this->value = json_encode($value);
+
+            return;
+        }
+
         $this->value = $value;
     }
 
@@ -106,7 +114,7 @@ class Setting implements SettingInterface
      */
     public function isSerialized()
     {
-        return $this->serialized;
+        return (bool) $this->serialized;
     }
 
     /**
