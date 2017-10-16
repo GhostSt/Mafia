@@ -23,7 +23,7 @@ class CivilianStrategy implements StrategyInterface
     private $roleService;
 
     /**
-     * CivilianStrategy constructor.
+     * Constructor
      *
      * @param PlayerRoleServiceInterface $roleService
      */
@@ -40,7 +40,7 @@ class CivilianStrategy implements StrategyInterface
      *
      * @return UserRatingInterface[]
      */
-    public function createRatings(GameInterface $game, GamePlayerInterface $player)
+    public function createRatings(GameInterface $game, GamePlayerInterface $player): array
     {
         if ($game->getResult() !== GameInterface::WIN_CIVILIAN
             || !$this->roleService->isCivilian($player)

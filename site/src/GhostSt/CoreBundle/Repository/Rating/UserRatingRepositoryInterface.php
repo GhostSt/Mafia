@@ -6,6 +6,8 @@
  * Time: 20:56
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Repository\Rating;
 
 use GhostSt\CoreBundle\Document\UserRatingInterface;
@@ -22,19 +24,19 @@ interface UserRatingRepositoryInterface
      *
      * @return UserRatingInterface[]
      */
-    public function getList($gameId);
+    public function getList($gameId): array;
 
     /**
      * Saves user rating
      *
      * @param UserRatingInterface $rating
      */
-    public function save(UserRatingInterface $rating);
+    public function save(UserRatingInterface $rating): void;
 
     /**
      * Removes user rating
      *
      * @param UserRatingInterface $rating
      */
-    public function remove(UserRatingInterface $rating);
+    public function remove(UserRatingInterface $rating): void;
 }

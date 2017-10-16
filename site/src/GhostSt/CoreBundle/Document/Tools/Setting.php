@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document\Tools;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -14,11 +16,11 @@ class Setting implements SettingInterface
     /**
      * Id
      *
-     * @var int
+     * @var string
      *
      * @ODM\Id
      */
-    private $id;
+    private $id = '';
 
     /**
      * Code
@@ -27,7 +29,7 @@ class Setting implements SettingInterface
      *
      * @ODM\Field(type="string")
      */
-    private $code;
+    private $code = '';
 
     /**
      * Value
@@ -45,14 +47,14 @@ class Setting implements SettingInterface
      *
      * @ODM\Field(type="bool")
      */
-    private $serialized;
+    private $serialized = true;
 
     /**
      * Returns id
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -62,7 +64,7 @@ class Setting implements SettingInterface
      *
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -70,7 +72,7 @@ class Setting implements SettingInterface
     /**
      * Sets code
      *
-     * @param string $code
+     * @param string|array $code
      */
     public function setCode($code)
     {
@@ -80,7 +82,7 @@ class Setting implements SettingInterface
     /**
      * Returns value
      *
-     * @return string
+     * @return null|string|array
      */
     public function getValue()
     {
@@ -96,7 +98,7 @@ class Setting implements SettingInterface
      *
      * @param string $value
      */
-    public function setValue($value)
+    public function setValue(string $value): void
     {
         if ($this->serialized) {
             $this->value = json_encode($value);
@@ -112,7 +114,7 @@ class Setting implements SettingInterface
      *
      * @return bool
      */
-    public function isSerialized()
+    public function isSerialized(): bool
     {
         return (bool) $this->serialized;
     }
@@ -122,7 +124,7 @@ class Setting implements SettingInterface
      *
      * @param bool $serialized
      */
-    public function setSerialized($serialized)
+    public function setSerialized(bool $serialized): void
     {
         $this->serialized = $serialized;
     }

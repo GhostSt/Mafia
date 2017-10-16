@@ -6,20 +6,20 @@
  * Time: 23:58
  */
 
-namespace GhostSt\CoreBundle\Document;
+namespace GhostSt\CoreBundle\Document\Game;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * Class UserRole
- * @package GhostSt\CoreBundle\Document
+ * Player role
  *
  * @ODM\Document(collection="user_role")
  */
-class UserRole
+class PlayerRole implements PlayerRoleInterface
 {
     /**
      * Player role id
+     *
      * @var string
      *
      * @ODM\Id(strategy="AUTO")
@@ -29,73 +29,83 @@ class UserRole
     /**
      * Parent role
      *
-     * @var UserRole
+     * @var self
      *
-     * @ODM\ReferenceOne(targetDocument="UserRole", storeAs="id")
+     * @ODM\ReferenceOne(targetDocument="PlayerRole", storeAs="id")
      */
     protected $parent;
+
     /**
+     * Player role name
+     *
      * @var string
      *
      * @ODM\Field(type="string")
      */
     protected $name;
 
+    /**
+     * Convert object to string
+     */
     public function __toString()
     {
         return $this->name;
     }
 
     /**
-     * Get id
+     * Gets player role id
      *
      * @return string $id
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * Set parent
+     * Sets parent role
      *
-     * @param UserRole $parent
-     * @return $this
+     * @param PlayerRoleInterface $parent
+     *
+     * @return self
      */
-    public function setParent(UserRole $parent)
+    public function setParent(PlayerRoleInterface $parent): self
     {
         $this->parent = $parent;
+
         return $this;
     }
 
     /**
-     * Get parent
+     * Gets parent role
      *
-     * @return UserRole $parent
+     * @return PlayerRoleInterface
      */
-    public function getParent()
+    public function getParent(): PlayerRoleInterface
     {
         return $this->parent;
     }
 
     /**
-     * Set name
+     * Sets name
      *
      * @param string $name
-     * @return $this
+     *
+     * @return self
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
-     * Get name
+     * Gets name
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

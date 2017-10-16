@@ -1,32 +1,40 @@
 <?php
 
-// src/GhostSt/CoreBundle/Admin/UserAdmin.php
+declare(strict_types = 1);
 
 namespace GhostSt\CoreBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
+/**
+ * User admin
+ */
 class UserAdmin extends AbstractAdmin
 {
-    protected function configureFormFields(FormMapper $form_mapper)
+    /**
+     * Configures form fields
+     *
+     * @param FormMapper $formMapperMapper
+     */
+    protected function configureFormFields(FormMapper $formMapperMapper)
     {
-        $form_mapper
+        $formMapperMapper
             ->add('username', null, [
                 'label' => 'admin.user.form.username'
             ]);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagrid_mapper)
+    /**
+     * Configures list fields
+     *
+     * @param ListMapper $listMapperMapper
+     */
+    protected function configureListFields(ListMapper $listMapperMapper)
     {
-    }
-
-    protected function configureListFields(ListMapper $list_mapper)
-    {
-        $list_mapper
+        $listMapperMapper
             ->add('username', null, [
                 'label' => 'admin.user.list.username',
             ])
@@ -40,7 +48,23 @@ class UserAdmin extends AbstractAdmin
             ]);
     }
 
+    /**
+     * Configures routes
+     *
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
+        $collection->remove('delete');
+    }
+
+    /**
+     * Gets export fields
+     *
+     * @return array
+     */
+    public function getExportFields(): array
+    {
+        return array('id', 'username', 'email', 'enabled', 'created');
     }
 }

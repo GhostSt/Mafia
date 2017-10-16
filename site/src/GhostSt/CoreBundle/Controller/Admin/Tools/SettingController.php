@@ -12,9 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Setting controller
+ */
 class SettingController extends CRUDController
 {
     /**
+     * Views edit form and performs edit action
      * @param $id
      *
      * @return RedirectResponse|Response

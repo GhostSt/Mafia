@@ -6,6 +6,9 @@
  * Date: 22.05.17
  * Time: 13:13
  */
+
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service;
 
 use GhostSt\CoreBundle\Exception\AMQPException;
@@ -16,40 +19,63 @@ use PhpAmqpLib\Message\AMQPMessage;
 class AMQPManager
 {
     /**
+     * AMQP Connection
+     *
      * @var AMQPStreamConnection
      */
     protected $connection;
+
     /**
+     * Host
+     *
      * @var string
      */
     protected $host;
+
     /**
+     * Port
+     *
      * @var integer
      */
     protected $port;
+
     /**
+     * User
+     *
      * @var string
      */
     protected $user;
+
     /**
+     * Password
+     *
      * @var string
      */
     protected $password;
+
     /**
+     * Queue
+     *
      * @var string
      */
     protected $queue;
+
     /**
+     * Channel
+     *
      * @var AMQPChannel
      */
     protected $channel;
+
     /**
+     * Message
+     *
      * @var AMQPMessage
      */
     protected $message;
 
     /**
-     * AMQPManager constructor.
+     * Constructor
      *
      * @param $host
      * @param $port
@@ -65,12 +91,14 @@ class AMQPManager
     }
 
     /**
+     * Sets message
+     *
      * @param string $message
      * @param array  $properties
      *
-     * @return $this
+     * @return self
      */
-    public function setMessage($message, array $properties = [])
+    public function setMessage($message, array $properties = []): self
     {
         $this->message = new AMQPMessage(json_encode($message), $properties);
 
@@ -78,10 +106,13 @@ class AMQPManager
     }
 
     /**
-     * @return $this
+     * Gets channel from connection
+     *
+     * @return self
+     *
      * @throws AMQPException
      */
-    public function getChannel()
+    public function getChannel(): self
     {
         if (null === $this->connection) {
             throw new AMQPException('Connection hasn\'t been set!', 500);
@@ -92,12 +123,17 @@ class AMQPManager
         return $this;
     }
 
-    public function createConnection()
+    /**
+     * Create connection
+     */
+    public function createConnection(): void
     {
         $this->connection = new AMQPStreamConnection($this->host, $this->port, $this->user, $this->password);
     }
 
     /**
+     * Declares queue
+     *
      * @param mixed $queue
      *
      * @return $this
@@ -135,15 +171,18 @@ class AMQPManager
     }
 
     /**
+     * Sends message to queue
+     *
      * @param string $exchange
      * @param bool   $mandatory
      * @param bool   $immediate
      * @param null   $ticket
      *
-     * @return $this
+     * @return self
+     *
      * @throws AMQPException
      */
-    public function basicPublish($exchange = '', $mandatory = false, $immediate = false, $ticket = null)
+    public function basicPublish($exchange = '', $mandatory = false, $immediate = false, $ticket = null): self
     {
         if (null === $this->message) {
             throw new AMQPException('Message has\'t been set!', 500);
@@ -162,11 +201,13 @@ class AMQPManager
     }
 
     /**
-     * @throws AMQPException
+     * Closes channel
      *
-     * @return $this
+     * @return self
+     *
+     * @throws AMQPException
      */
-    public function closeChannel()
+    public function closeChannel(): self
     {
         if (null === $this->channel) {
             throw new AMQPException('Channel hasn\'t been set!', 500);
@@ -178,10 +219,13 @@ class AMQPManager
     }
 
     /**
-     * @return $this
+     * Closes connection
+     *
+     * @return self
+     *
      * @throws AMQPException
      */
-    public function closeConnection()
+    public function closeConnection(): self
     {
         if (null === $this->connection) {
             throw new AMQPException('Connection hasn\'t been set!', 500);

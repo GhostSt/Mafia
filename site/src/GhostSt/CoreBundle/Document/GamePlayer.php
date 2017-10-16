@@ -6,38 +6,51 @@
  * Time: 22:28
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Symfony\Component\Validator\Constraints as Assert;
+use GhostSt\CoreBundle\Document\Game\PlayerRole;
+use GhostSt\CoreBundle\Document\Game\PlayerRoleInterface;
 use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
- * Class GamePlayers
- * @package GhostSt\CoreBundle\Document
+ * Game player
  *
  * @ODM\EmbeddedDocument
  */
 class GamePlayer implements GamePlayerInterface
 {
     /**
+     * User
+     *
      * @var User
      *
      * @ODM\ReferenceOne(targetDocument="User", storeAs="id")
+     *
      * @CustomAssert\Player
      */
     protected $user;
+
     /**
-     * @var UserRole
+     * Player role
      *
-     * @ODM\ReferenceOne(targetDocument="UserRole", storeAs="id")
+     * @var PlayerRoleInterface
+     *
+     * @ODM\ReferenceOne(targetDocument="GhostStCoreBundle:Game\PlayerRole", storeAs="id")
+     *
      * @CustomAssert\Role
      */
     protected $role;
+
     /**
-     * @var
+     * Position
+     *
+     * @var int
      *
      * @ODM\Field(type="integer")
+     *
      * @CustomAssert\Position(
      *     allowZero=true
      * )
@@ -45,68 +58,73 @@ class GamePlayer implements GamePlayerInterface
     protected $position;
 
     /**
-     * Set user
+     * Sets user
      *
      * @param User $user
      *
-     * @return $this
+     * @return self
      */
-    public function setUser(User $user)
+    public function setUser(User $user): self
     {
         $this->user = $user;
+
         return $this;
     }
 
     /**
-     * Get user
+     * Gets user
      *
      * @return User $user
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * Set role
+     * Sets role
      *
-     * @param UserRole $role
-     * @return $this
+     * @param PlayerRoleInterface $role
+     *
+     * @return self
      */
-    public function setRole(UserRole $role)
+    public function setRole(PlayerRoleInterface $role): self
     {
         $this->role = $role;
+
         return $this;
     }
 
     /**
-     * Get role
+     * Gets role
      *
-     * @return UserRole $role
+     * @return PlayerRoleInterface $role
      */
-    public function getRole()
+    public function getRole(): PlayerRoleInterface
     {
         return $this->role;
     }
 
     /**
-     * Set position
+     * Sets position
      *
-     * @param integer $position
-     * @return $this
+     * @param int $position
+     *
+     * @return self
      */
-    public function setPosition($position)
+    public function setPosition(int $position): self
     {
         $this->position = $position;
+
         return $this;
     }
 
     /**
      * Get position
      *
-     * @return integer $position
+     * @return int $position
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }

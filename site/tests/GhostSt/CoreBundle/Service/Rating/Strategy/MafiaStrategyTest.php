@@ -6,13 +6,14 @@
  * Time: 21:58
  */
 
+declare(strict_types = 1);
+
 namespace Tests\GhostSt\CoreBundle\Service\Rating\Strategy;
 
 use GhostSt\CoreBundle\Document\GameInterface;
 use GhostSt\CoreBundle\Document\GamePlayerInterface;
 use GhostSt\CoreBundle\Document\User;
 use GhostSt\CoreBundle\Document\UserRatingInterface;
-use GhostSt\CoreBundle\Service\Rating\Strategy\CivilianStrategy;
 use GhostSt\CoreBundle\Service\Rating\Strategy\MafiaStrategy;
 use GhostSt\CoreBundle\Service\Role\PlayerRoleServiceInterface;
 use PHPUnit\Framework\TestCase;

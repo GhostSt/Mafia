@@ -6,12 +6,11 @@
  * Time: 20:20
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Repository\Tools;
 
-use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ORM\NoResultException;
+use Doctrine\ODM\MongoDB\Cursor;
 use GhostSt\CoreBundle\Document\Tools\Setting;
 use GhostSt\CoreBundle\Document\Tools\SettingInterface;
 use GhostSt\CoreBundle\Repository\AbstractRepository;
@@ -26,9 +25,9 @@ class SettingRepository extends AbstractRepository implements SettingRepositoryI
      *
      * @param $code
      *
-     * @return SettingInterface
+     * @return null|SettingInterface
      */
-    public function getByCode($code)
+    public function getByCode($code):? SettingInterface
     {
         return $this->getDocumentManager()
             ->getRepository(Setting::class)
@@ -40,9 +39,9 @@ class SettingRepository extends AbstractRepository implements SettingRepositoryI
      *
      * @param string $id
      *
-     * @return SettingInterface
+     * @return null|SettingInterface
      */
-    public function getById($id)
+    public function getById($id):? SettingInterface
     {
         return $this->getDocumentManager()
                     ->getRepository(Setting::class)
@@ -50,13 +49,13 @@ class SettingRepository extends AbstractRepository implements SettingRepositoryI
     }
 
     /**
-     * Finds unused settings
+     * Finds used settings
      *
      * @param array $settings
      *
-     * @return SettingInterface[]
+     * @return Cursor|SettingInterface[]
      */
-    public function findUnusedSettings(array $settings)
+    public function findUsedSettings(array $settings): Cursor
     {
         $qb = $this->getDocumentManager()
             ->createQueryBuilder(Setting::class);
@@ -71,7 +70,7 @@ class SettingRepository extends AbstractRepository implements SettingRepositoryI
      *
      * @param SettingInterface $setting
      */
-    public function save(SettingInterface $setting)
+    public function save(SettingInterface $setting): void
     {
         $this->getDocumentManager()->persist($setting);
         $this->getDocumentManager()->flush($setting);

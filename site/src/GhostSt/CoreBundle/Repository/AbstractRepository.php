@@ -3,7 +3,7 @@
 namespace GhostSt\CoreBundle\Repository;
 
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
-use Stubs\DocumentManager;
+use Doctrine\ODM\MongoDB\DocumentManager;
 
 /**
  * Abstract repository
@@ -32,7 +32,7 @@ abstract class AbstractRepository
      *
      * @return DocumentManager
      */
-    protected function getDocumentManager()
+    protected function getDocumentManager(): DocumentManager
     {
         return $this->documentManager;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -14,7 +16,7 @@ class UserRating implements UserRatingInterface
     /**
      * User rating id
      *
-     * @var int
+     * @var string
      *
      * @ODM\Id()
      */
@@ -23,7 +25,7 @@ class UserRating implements UserRatingInterface
     /**
      * User id
      *
-     * @var int
+     * @var string
      *
      * @ODM\Field(type="integer")
      */
@@ -32,7 +34,7 @@ class UserRating implements UserRatingInterface
     /**
      * Game id
      *
-     * @var int
+     * @var string
      *
      * @ODM\Field(type="integer")
      */
@@ -75,9 +77,9 @@ class UserRating implements UserRatingInterface
     /**
      * Returns user rating id
      *
-     * @return int
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -85,9 +87,9 @@ class UserRating implements UserRatingInterface
     /**
      * Returns user id
      *
-     * @return int
+     * @return string
      */
-    public function getUserId()
+    public function getUserId(): string
     {
         return $this->userId;
     }
@@ -95,9 +97,9 @@ class UserRating implements UserRatingInterface
     /**
      * Returns game id
      *
-     * @return int
+     * @return string
      */
-    public function getGameId()
+    public function getGameId(): string
     {
         return $this->gameId;
     }
@@ -107,7 +109,7 @@ class UserRating implements UserRatingInterface
      *
      * @return string
      */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -115,9 +117,9 @@ class UserRating implements UserRatingInterface
     /**
      * Returns score
      *
-     * @return double
+     * @return float
      */
-    public function getScore()
+    public function getScore(): float
     {
         return $this->score;
     }

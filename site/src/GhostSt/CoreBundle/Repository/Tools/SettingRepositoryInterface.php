@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Repository\Tools;
 
+use Doctrine\ODM\MongoDB\Cursor;
 use GhostSt\CoreBundle\Document\Tools\SettingInterface;
 
 /**
@@ -16,7 +19,7 @@ interface SettingRepositoryInterface
      *
      * @return null|SettingInterface
      */
-    public function getByCode($code);
+    public function getByCode($code):? SettingInterface;
 
     /**
      * Return setting by id
@@ -25,21 +28,21 @@ interface SettingRepositoryInterface
      *
      * @return null|SettingInterface
      */
-    public function getById($id);
+    public function getById($id):? SettingInterface;
 
     /**
-     * Finds unused settings
+     * Finds used settings
      *
      * @param array $settings
      *
-     * @var SettingInterface[]
+     * @return Cursor|SettingInterface[]
      */
-    public function findUnusedSettings(array $settings);
+    public function findUsedSettings(array $settings): Cursor;
 
     /**
      * Saves setting
      *
      * @param SettingInterface $setting
      */
-    public function save(SettingInterface $setting);
+    public function save(SettingInterface $setting): void;
 }

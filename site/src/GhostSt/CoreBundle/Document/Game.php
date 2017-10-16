@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * Author: Victor Diditskiy <victor.diditskiy@yandex.ru>
@@ -6,9 +7,13 @@
  * Time: 0:47
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,6 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Game implements GameInterface
 {
     /**
+     * Game identifier
+     *
      * @var string
      *
      * @ODM\Id
@@ -27,7 +34,9 @@ class Game implements GameInterface
     protected $id;
 
     /**
-     * @var ArrayCollection
+     * Game players
+     *
+     * @var Collection|GamePlayerInterface[]
      *
      * @ODM\EmbedMany(targetDocument="GamePlayer")
      * @Assert\NotBlank(
@@ -38,7 +47,9 @@ class Game implements GameInterface
     protected $players;
 
     /**
-     * @var ArrayCollection
+     * Game days
+     *
+     * @var Collection|GameDayInterface[]
      *
      * @ODM\EmbedMany(targetDocument="GameDay")
      * @Assert\NotBlank(
@@ -49,16 +60,18 @@ class Game implements GameInterface
     protected $days;
 
     /**
-     * true equals civilian win, false equals mafia wins
+     * Game result. True equals civilian win, false equals mafia wins
      *
      * @var boolean
      *
      * @ODM\Field(type="boolean")
      */
-    protected $result;
+    protected $result = false;
 
     /**
-     * @var GameBestMove
+     * Game best move
+     *
+     * @var GameBestMoveInterface
      *
      * @ODM\EmbedOne(targetDocument="GameBestMove")
      * @Assert\Valid()
@@ -66,95 +79,104 @@ class Game implements GameInterface
     protected $bestMove;
 
     /**
-     * @var \DateTime
+     * Created date
+     *
+     * @var DateTime
      *
      * @ODM\Field(type="date")
      */
     protected $date;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->days = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->players  = new ArrayCollection();
+        $this->days     = new ArrayCollection();
+        $this->bestMove = new GameBestMove();
+        $this->date     = new DateTime();
     }
 
     /**
-     * Get id
+     * Gets id
      *
      * @return string $id
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * Add day
+     * Adds game day
      *
-     * @param GameDay $day
+     * @param GameDayInterface $day
+     *
      */
-    public function addDay(GameDay $day)
+    public function addDay(GameDayInterface $day): void
     {
         $this->days[] = $day;
     }
 
     /**
-     * Remove day
+     * Removes game day
      *
-     * @param GameDay $day
+     * @param GameDayInterface $day
      */
-    public function removeDay(GameDay $day)
+    public function removeDay(GameDayInterface $day): void
     {
         $this->days->removeElement($day);
     }
 
     /**
-     * Get days
+     * Gets all game days
      *
-     * @return \Doctrine\Common\Collections\Collection $days
+     * @return Collection|GameDayInterface[] $days
      */
-    public function getDays()
+    public function getDays(): Collection
     {
         return $this->days;
     }
 
     /**
-     * Add player
+     * Adds game player
      *
-     * @param GamePlayer $player
+     * @param GamePlayerInterface $player
      */
-    public function addPlayer(GamePlayer $player)
+    public function addPlayer(GamePlayerInterface $player): void
     {
         $this->players[] = $player;
     }
 
     /**
-     * Remove player
+     * Removes game player
      *
-     * @param GamePlayer $player
+     * @param GamePlayerInterface $player
      */
-    public function removePlayer(GamePlayer $player)
+    public function removePlayer(GamePlayerInterface $player): void
     {
         $this->players->removeElement($player);
     }
 
     /**
-     * Get players
+     * Gets game players
      *
-     * @return \Doctrine\Common\Collections\Collection $players
+     * @return Collection|GamePlayerInterface[] $players
      */
-    public function getPlayers()
+    public function getPlayers(): Collection
     {
         return $this->players;
     }
 
     /**
-     * Set bestMove
+     * Sets game bestMove
      *
-     * @param GameBestMove $bestMove
+     * @param GameBestMoveInterface $bestMove
      *
-     * @return $this
+     * @return self
      */
-    public function setBestMove(GameBestMove $bestMove)
+    public function setBestMove(GameBestMoveInterface $bestMove): self
     {
         $this->bestMove = $bestMove;
 
@@ -162,23 +184,23 @@ class Game implements GameInterface
     }
 
     /**
-     * Get bestMove
+     * Gets game bestMove
      *
-     * @return GameBestMove $bestMove
+     * @return GameBestMoveInterface $bestMove
      */
-    public function getBestMove()
+    public function getBestMove(): GameBestMoveInterface
     {
         return $this->bestMove;
     }
 
     /**
-     * Set result
+     * Sets game result
      *
-     * @param boolean $result
+     * @param bool $result
      *
-     * @return $this
+     * @return self
      */
-    public function setResult($result)
+    public function setResult(bool $result): self
     {
         $this->result = $result;
 
@@ -186,23 +208,23 @@ class Game implements GameInterface
     }
 
     /**
-     * Get result
+     * Gets game result
      *
-     * @return boolean $result
+     * @return bool $result
      */
-    public function getResult()
+    public function getResult(): bool
     {
         return $this->result;
     }
 
     /**
-     * Set date
+     * Sets created date
      *
-     * @param \DateTime $date
+     * @param DateTime $date
      *
-     * @return $this
+     * @return self
      */
-    public function setDate($date)
+    public function setDate(DateTime $date): self
     {
         $this->date = $date;
 
@@ -210,11 +232,11 @@ class Game implements GameInterface
     }
 
     /**
-     * Get date
+     * Gets created date
      *
-     * @return \DateTime $date
+     * @return DateTime $date
      */
-    public function getDate()
+    public function getDate(): DateTime
     {
         return $this->date;
     }

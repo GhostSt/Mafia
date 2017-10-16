@@ -1,6 +1,6 @@
 <?php
 
-// src/GhostSt/CoreBundle/Controller/SecurityController.php
+declare(strict_types = 1);
 
 namespace GhostSt\CoreBundle\Controller;
 
@@ -10,16 +10,21 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Security controller
+ */
 class SecurityController extends Controller
 {
-    /** 
+    /**
+     * Views login form
+     *
      * @Route("admin/login",  name="GhostStCoreBundle_admin_login")
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function loginAction(Request $request) 
+    public function loginAction(Request $request): Response
     {
         $session = $request->getSession();
 

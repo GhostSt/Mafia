@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document\Tools;
 
 /**
@@ -14,28 +16,28 @@ interface SettingInterface
     /**
      * Returns setting id
      *
-     * @return int
+     * @return string
      */
-    public function getId();
+    public function getId(): string;
 
     /**
      * Returns setting code
      *
      * @return string
      */
-    public function getCode();
+    public function getCode(): string;
 
     /**
-     * Return setting value
+     * Returns setting value
      *
-     * @return string
+     * @return null|string|array
      */
     public function getValue();
 
     /**
-     * Check if setting value is json encoded string
+     * Checks if setting value is json encoded string
      *
      * @return bool
      */
-    public function isSerialized();
+    public function isSerialized(): bool;
 }

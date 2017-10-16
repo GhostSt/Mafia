@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service\Rating;
 
 use GhostSt\CoreBundle\Document\GameInterface;
@@ -43,7 +45,7 @@ class RatingService implements RatingServiceInterface
      *
      * @param GameInterface $game
      */
-    public function createGameRating(GameInterface $game)
+    public function createGameRating(GameInterface $game): void
     {
         $ratings = $this->calculator->calculate($game);
 
@@ -57,7 +59,7 @@ class RatingService implements RatingServiceInterface
      *
      * @param GameInterface $game
      */
-    public function updateGameRating(GameInterface $game)
+    public function updateGameRating(GameInterface $game): void
     {
         $this->removeRating($game);
 
@@ -69,7 +71,7 @@ class RatingService implements RatingServiceInterface
      *
      * @param GameInterface $game
      */
-    private function removeRating(GameInterface $game)
+    private function removeRating(GameInterface $game): void
     {
         $ratings = $this->ratingRepository->getList($game->getId());
 

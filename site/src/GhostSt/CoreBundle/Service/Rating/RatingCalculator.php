@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace GhostSt\CoreBundle\Service\Rating;
 
 use GhostSt\CoreBundle\Document\GameInterface;
-use GhostSt\CoreBundle\Document\GamePlayerInterface;
 use GhostSt\CoreBundle\Service\Rating\Strategy\StrategyInterface;
 
 /**
@@ -37,7 +36,7 @@ class RatingCalculator implements RatingCalculatorInterface
      *
      * @return array
      */
-    public function calculate(GameInterface $game)
+    public function calculate(GameInterface $game): array
     {
         $ratings = [];
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
 /**
@@ -14,14 +16,14 @@ interface GameBestMoveInterface
     /**
      * Get position
      *
-     * @return integer $position
+     * @return int $position
      */
-    public function getPosition();
+    public function getPosition(): int;
 
     /**
      * Get guess
      *
      * @return array $guess
      */
-    public function getGuess();
+    public function getGuess(): array;
 }

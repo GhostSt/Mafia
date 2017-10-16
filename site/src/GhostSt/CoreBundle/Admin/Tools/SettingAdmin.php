@@ -7,13 +7,14 @@
  * Time: 20:20
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Admin\Tools;
 
 use GhostSt\CoreBundle\Service\Tools\SettingServiceInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -33,16 +34,16 @@ class SettingAdmin extends AbstractAdmin
     /**
      * Setting admin
      *
-     * @param string $code
-     * @param string $class
-     * @param string $baseControllerName
-     * @param        $settingService
+     * @param string                  $code
+     * @param string                  $class
+     * @param string                  $baseControllerName
+     * @param SettingServiceInterface $settingService
      */
     public function __construct(
-        $code,
-        $class,
-        $baseControllerName,
-        $settingService
+        string $code,
+        string $class,
+        string $baseControllerName,
+        SettingServiceInterface $settingService
     ) {
         parent::__construct($code, $class, $baseControllerName);
 
@@ -52,11 +53,11 @@ class SettingAdmin extends AbstractAdmin
     /**
      * Configures form field
      *
-     * @param FormMapper $form
+     * @param FormMapper $formMapper
      */
-    protected function configureFormFields(FormMapper $form)
+    protected function configureFormFields(FormMapper $formMapper)
     {
-        $form
+        $formMapper
             ->add('code', ChoiceType::class, [
                 'label'       => 'admin.tools.setting.form.code',
                 'choices'     => $this->getSettings(),
@@ -65,22 +66,22 @@ class SettingAdmin extends AbstractAdmin
                 ],
             ]);
 
-        $form
+        $formMapper
             ->add('serialized', CheckboxType::class, [
-                'label'       => 'admin.tools.setting.form.serialized',
+                'label' => 'admin.tools.setting.form.serialized',
             ]);
     }
 
     /**
      * Configures list fields
      *
-     * @param ListMapper $list
+     * @param ListMapper $listMapper
      */
-    protected function configureListFields(ListMapper $list)
+    protected function configureListFields(ListMapper $listMapper)
     {
-        $list->add('code', null, ['label' => 'admin.tools.setting.list.code']);
+        $listMapper->add('code', null, ['label' => 'admin.tools.setting.list.code']);
 
-        $list
+        $listMapper
             ->add('_action', 'actions', [
                 'label'   => 'admin.actions',
                 'actions' => [
@@ -91,16 +92,12 @@ class SettingAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        //$collection->clearExcept(['create', 'edit', 'list']);
-    }
-
     /**
      * Returns list of unused settings
+     *
      * @return array
      */
-    private function getSettings()
+    private function getSettings(): array
     {
         $unusedSettings = $this->settingService->findUnusedSettings();
         $settings       = [];

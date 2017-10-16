@@ -6,6 +6,8 @@
  * Time: 21:58
  */
 
+declare(strict_types = 1);
+
 namespace Tests\GhostSt\CoreBundle\Service\Rating\Strategy;
 
 use GhostSt\CoreBundle\Document\GameInterface;

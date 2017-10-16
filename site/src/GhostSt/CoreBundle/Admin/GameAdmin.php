@@ -1,6 +1,6 @@
 <?php
 
-// src/GhostSt/CoreBundle/Admin/GameAdmin.php
+declare(strict_types = 1);
 
 namespace GhostSt\CoreBundle\Admin;
 
@@ -9,16 +9,23 @@ use GhostSt\CoreBundle\Form\Type\GameDayType;
 use GhostSt\CoreBundle\Form\Type\PlayerType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
+/**
+ * Game admin
+ */
 class GameAdmin extends AbstractAdmin
 {
-    protected function configureFormFields(FormMapper $form_mapper)
+    /**
+     * Configures form fields
+     *
+     * @param FormMapper $formMapperMapper
+     */
+    protected function configureFormFields(FormMapper $formMapperMapper)
     {
-        $form_mapper
+        $formMapperMapper
             ->add('result', null, [
 
             ])
@@ -42,18 +49,14 @@ class GameAdmin extends AbstractAdmin
             ]);
     }
 
-    public function getFormTheme()
+    /**
+     * Configures list fields
+     *
+     * @param ListMapper $listMapperMapper
+     */
+    protected function configureListFields(ListMapper $listMapperMapper)
     {
-        return ['GhostStCoreBundle:Admin/Game:form.html.twig'];
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagrid_mapper)
-    {
-    }
-
-    protected function configureListFields(ListMapper $list_mapper)
-    {
-        $list_mapper
+        $listMapperMapper
             ->add('date', null, [
                 'label' => 'admin.game.list.date',
             ])
@@ -73,6 +76,11 @@ class GameAdmin extends AbstractAdmin
             ]);
     }
 
+    /**
+     * Configures routes
+     *
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
@@ -82,5 +90,23 @@ class GameAdmin extends AbstractAdmin
         $collection
             ->add('create', 'create')
             ->add('edit', $this->getRouterIdParameter() . '/edit');
+    }
+
+    /**
+     * Gets form theme
+     */
+    public function getFormTheme(): array
+    {
+        return ['GhostStCoreBundle:Admin/Game:form.html.twig'];
+    }
+
+    /**
+     * Gets export fields
+     *
+     * @return array
+     */
+    public function getExportFields(): array
+    {
+        return array('id', 'result', 'date');
     }
 }

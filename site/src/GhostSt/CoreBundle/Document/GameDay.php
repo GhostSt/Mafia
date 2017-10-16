@@ -6,6 +6,8 @@
  * Time: 22:11
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -13,89 +15,110 @@ use Symfony\Component\Validator\Constraints as Assert;
 use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
- * Class GameDay
- * @package GhostSt\CoreBundle\Document
+ * Game day
  *
  * @ODM\EmbeddedDocument
  */
-class GameDay
+class GameDay implements GameDayInterface
 {
     /**
-     * @var integer
-     * @ODM\Field(type="integer")
-     * @CustomAssert\Position(
-     *     allowZero=true
-     * )
-     */
-    protected $left;
-    /**
-     * @var integer
+     * Player position that left city
+     *
+     * @var int
      *
      * @ODM\Field(type="integer")
      * @CustomAssert\Position(
      *     allowZero=true
      * )
      */
-    protected $killed;
+    private $left = 0;
+
     /**
-     * @var integer
+     * Player position that has been killed tonight
+     *
+     * @var int
      *
      * @ODM\Field(type="integer")
+     *
      * @CustomAssert\Position(
      *     allowZero=true
      * )
      */
-    protected $checkDon;
+    private $killed = 0;
+
     /**
-     * @var integer
+     * Player position who has been checked by don
+     *
+     * @var int
      *
      * @ODM\Field(type="integer")
+     *
      * @CustomAssert\Position(
      *     allowZero=true
      * )
      */
-    protected $checkSheriff;
+    private $checkDon = 0;
+
     /**
+     * Player position who has been checked by sheriff
+     *
+     * @var int
+     *
+     * @ODM\Field(type="integer")
+     *
+     * @CustomAssert\Position(
+     *     allowZero=true
+     * )
+     */
+    private $checkSheriff = 0;
+
+    /**
+     * Daily voting
+     *
      * @var array
      *
      * @ODM\Field(type="collection")
      */
-    protected $voting;
+    private $voting = [];
 
     /**
+     * Returns player position who left city today
+     *
      * @return int
      */
-    public function getLeft()
+    public function getLeft(): int
     {
         return $this->left;
     }
 
     /**
+     * Sets player position who left city today
+     *
      * @param int $left
      */
-    public function setLeft($left)
+    public function setLeft(int $left): void
     {
         $this->left = $left;
     }
 
     /**
-     * Get killed
+     * Returns player position who has been killed tonight
      *
-     * @return integer $killed
+     * @return int $killed
      */
-    public function getKilled()
+    public function getKilled(): int
     {
         return $this->killed;
     }
 
     /**
-     * Set killed
+     * Sets player position who has been killed tonight
      *
-     * @param integer $killed
+     * @param int $killed
      *
-     * @return $this
+     * @return self
      */
-    public function setKilled($killed)
+    public function setKilled(int $killed): self
     {
         $this->killed = $killed;
 
@@ -103,23 +126,23 @@ class GameDay
     }
 
     /**
-     * Get checkDon
+     * Return player position who has been checked by don tonight
      *
-     * @return integer $checkDon
+     * @return int $checkDon
      */
-    public function getCheckDon()
+    public function getCheckDon(): int
     {
         return $this->checkDon;
     }
 
     /**
-     * Set checkDon
+     * Sets player position who has been checked by don tonight
      *
-     * @param integer $checkDon
+     * @param int $checkDon
      *
-     * @return $this
+     * @return self
      */
-    public function setCheckDon($checkDon)
+    public function setCheckDon(int $checkDon): self
     {
         $this->checkDon = $checkDon;
 
@@ -127,23 +150,23 @@ class GameDay
     }
 
     /**
-     * Get checkSheriff
+     * Return player position who has been checked by sheriff tonight
      *
-     * @return integer $checkSheriff
+     * @return int $checkSheriff
      */
-    public function getCheckSheriff()
+    public function getCheckSheriff(): int
     {
         return $this->checkSheriff;
     }
 
     /**
-     * Set checkSheriff
+     * Sets player position who has been checked by sheriff tonight
      *
-     * @param integer $checkSheriff
+     * @param int $checkSheriff
      *
-     * @return $this
+     * @return self
      */
-    public function setCheckSheriff($checkSheriff)
+    public function setCheckSheriff(int $checkSheriff): self
     {
         $this->checkSheriff = $checkSheriff;
 
@@ -151,23 +174,23 @@ class GameDay
     }
 
     /**
-     * Get voting
+     * Returns daily voting
      *
      * @return array $voting
      */
-    public function getVoting()
+    public function getVoting(): array
     {
         return $this->voting;
     }
 
     /**
-     * Set voting
+     * Sets daily voting
      *
      * @param array $voting
      *
-     * @return $this
+     * @return self
      */
-    public function setVoting($voting)
+    public function setVoting(array $voting): self
     {
         $this->voting = $voting;
 

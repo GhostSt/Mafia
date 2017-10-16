@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service\Rating;
 
 use GhostSt\CoreBundle\Document\GameInterface;
@@ -14,12 +16,12 @@ interface RatingServiceInterface
      *
      * @param GameInterface $game
      */
-    public function createGameRating(GameInterface $game);
+    public function createGameRating(GameInterface $game): void;
 
     /**
      * Updates game rating that contains rating of every game player
      *
      * @param GameInterface $game
      */
-    public function updateGameRating(GameInterface $game);
+    public function updateGameRating(GameInterface $game): void;
 }

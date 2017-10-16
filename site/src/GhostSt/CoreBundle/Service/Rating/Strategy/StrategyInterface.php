@@ -19,5 +19,5 @@ interface StrategyInterface
      *
      * @return UserRatingInterface[]
      */
-    public function createRatings(GameInterface $game, GamePlayerInterface $player);
+    public function createRatings(GameInterface $game, GamePlayerInterface $player): array;
 }

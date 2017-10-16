@@ -6,6 +6,8 @@
  * Time: 20:24
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Form\Type;
 
 use GhostSt\CoreBundle\Document\GameDay;
@@ -14,15 +16,21 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\OptionsResolver\Exception\AccessException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Game day
+ */
 class GameDayType extends AbstractType
 {
     /**
+     * Initializes form
+     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('left', ChoiceType::class, [
@@ -50,9 +58,13 @@ class GameDayType extends AbstractType
     }
 
     /**
-     * @param OptionsResolver @resolver
+     * Configures form
+     *
+     * @param OptionsResolver $resolver
+     *
+     * @throws AccessException
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(array(
             'data_class' => GameDay::class

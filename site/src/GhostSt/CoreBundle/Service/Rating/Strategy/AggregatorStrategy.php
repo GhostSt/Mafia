@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service\Rating\Strategy;
 
 use GhostSt\CoreBundle\Document\GameInterface;
@@ -18,7 +20,12 @@ class AggregatorStrategy implements StrategyInterface
      */
     private $strategies;
 
-    public function addStrategy(StrategyInterface $strategy)
+    /**
+     * Adds strategy
+     *
+     * @param StrategyInterface $strategy
+     */
+    public function addStrategy(StrategyInterface $strategy): void
     {
         $this->strategies[] = $strategy;
     }
@@ -31,7 +38,7 @@ class AggregatorStrategy implements StrategyInterface
      *
      * @return UserRatingInterface[]
      */
-    public function createRatings(GameInterface $game, GamePlayerInterface $player)
+    public function createRatings(GameInterface $game, GamePlayerInterface $player): array
     {
         $ratings = [];
 

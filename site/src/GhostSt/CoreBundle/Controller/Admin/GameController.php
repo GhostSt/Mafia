@@ -1,19 +1,27 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Controller\Admin;
 
 use GhostSt\CoreBundle\Document\Game;
 use GhostSt\CoreBundle\Document\GameDay;
 use GhostSt\CoreBundle\Exception\AMQPException;
+use GhostSt\CoreBundle\Form\Type\GameDayType;
 use GhostSt\CoreBundle\Form\Type\GameType;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Game controller
+ */
 class GameController extends CRUDController
 {
     /**
+     * Views form and performs create action
+     *
      * @return RedirectResponse|Response
      *
      * @throws AMQPException
@@ -27,10 +35,8 @@ class GameController extends CRUDController
         $game = new Game();
 
         $form        = $this->createForm(GameType::class, $game);
-        $tmpDocument = new Game();
-        $tmpDocument->addDay(new GameDay());
-        $tmpForm = $this->createForm(GameType::class);
-        $tmpForm->setData($tmpDocument);
+
+        $dayForm = $this->createForm(GameDayType::class);
 
         if ($request->isMethod($request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -50,16 +56,18 @@ class GameController extends CRUDController
 
         return $this->render('GhostStCoreBundle:Admin/Game:form.html.twig', [
             'form'    => $form->createView(),
-            'tmpForm' => $tmpForm->createView(),
+            'dayForm' => $dayForm->createView(),
         ]);
     }
 
     /**
+     * Views form and performs update action
+     *
      * @param $id
      *
      * @return RedirectResponse|Response
-     * @throws AMQPException
-     * @throws HttpException
+     *
+     * @throws NotFoundHttpException
      */
     public function editAction($id = null)
     {
@@ -73,15 +81,12 @@ class GameController extends CRUDController
                     ->find($id);
 
         if (null === $game) {
-            throw new HttpException(404, "Game not found");
+            throw new NotFoundHttpException("Game not found");
         }
 
         $form = $this->createForm(GameType::class, $game);
 
-        $tmpDocument = new Game();
-        $tmpDocument->addDay(new GameDay());
-        $tmpForm = $this->createForm(GameType::class);
-        $tmpForm->setData($tmpDocument);
+        $dayForm = $this->createForm(GameDayType::class);
 
         if ($request->isMethod($request::METHOD_POST)) {
             $form->handleRequest($request);
@@ -89,11 +94,9 @@ class GameController extends CRUDController
             if ($form->isValid()) {
                 $dm = $odm->getManager();
                 $dm->persist($game);
-                //$dm->flush();
+                $dm->flush();
 
                 $ratingService->updateGameRating($game);
-                // TODO: remove stub
-                die('test');
 
                 return $this->redirectToRoute('admin_ghostst_core_game_list');
             }
@@ -101,7 +104,7 @@ class GameController extends CRUDController
 
         return $this->render('GhostStCoreBundle:Admin/Game:form.html.twig', [
             'form'    => $form->createView(),
-            'tmpForm' => $tmpForm->createView(),
+            'dayForm' => $dayForm->createView(),
         ]);
     }
 }

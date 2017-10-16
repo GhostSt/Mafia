@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -20,40 +23,40 @@ interface GameInterface
      *
      * @return string $id
      */
-    public function getId();
+    public function getId(): string;
 
     /**
-     * Gets days
+     * Gets dame days
      *
-     * @return Collection|GameDay[] $days
+     * @return Collection|GameDayInterface[] $days
      */
-    public function getDays();
+    public function getDays(): Collection;
 
     /**
-     * Gets players
+     * Gets game players
      *
-     * @return Collection|GamePlayer[] $players
+     * @return Collection|GamePlayerInterface[] $players
      */
-    public function getPlayers();
+    public function getPlayers(): Collection;
 
     /**
-     * Gets bestMove
+     * Gets game bestMove
      *
-     * @return GameBestMove $bestMove
+     * @return GameBestMoveInterface $bestMove
      */
-    public function getBestMove();
+    public function getBestMove(): GameBestMoveInterface;
 
     /**
-     * Gets result
+     * Gets game result
      *
      * @return boolean $result
      */
-    public function getResult();
+    public function getResult(): bool;
 
     /**
-     * Gets date
+     * Gets created date
      *
-     * @return \DateTime $date
+     * @return DateTime $date
      */
-    public function getDate();
+    public function getDate(): DateTime;
 }

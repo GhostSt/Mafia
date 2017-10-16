@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service\Tools;
 
 use GhostSt\CoreBundle\Document\Tools\SettingInterface;
@@ -14,9 +16,9 @@ interface SettingServiceInterface
      *
      * @param string $code
      *
-     * @return SettingInterface
+     * @return null|SettingInterface
      */
-    public function getByCode($code);
+    public function getByCode($code):? SettingInterface;
 
     /**
      * Gets setting by id
@@ -25,19 +27,19 @@ interface SettingServiceInterface
      *
      * @return SettingInterface
      */
-    public function getById($id);
+    public function getById($id):? SettingInterface;
 
     /**
      * Finds unused settings
      *
-     * @var SettingInterface[]
+     * @return  SettingInterface[]
      */
-    public function findUnusedSettings();
+    public function findUnusedSettings(): array;
 
     /**
      * Saves setting
      *
      * @param SettingInterface $setting
      */
-    public function save(SettingInterface $setting);
+    public function save(SettingInterface $setting): void;
 }

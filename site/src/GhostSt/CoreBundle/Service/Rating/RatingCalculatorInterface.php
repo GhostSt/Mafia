@@ -17,5 +17,5 @@ interface RatingCalculatorInterface
      *
      * @return UserRatingInterface[]
      */
-    public function calculate(GameInterface $game);
+    public function calculate(GameInterface $game): array;
 }

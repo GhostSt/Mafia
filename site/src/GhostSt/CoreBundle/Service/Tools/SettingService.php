@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service\Tools;
 
 use RuntimeException;
@@ -47,7 +49,7 @@ class SettingService implements SettingServiceInterface
      *
      * @return null|SettingInterface
      */
-    public function getByCode($code)
+    public function getByCode($code):? SettingInterface
     {
         return $this->settingRepository->getByCode($code);
     }
@@ -59,7 +61,7 @@ class SettingService implements SettingServiceInterface
      *
      * @return null|SettingInterface
      */
-    public function getById($id)
+    public function getById($id):? SettingInterface
     {
         return $this->settingRepository->getById($id);
     }
@@ -69,9 +71,9 @@ class SettingService implements SettingServiceInterface
      *
      * @return array
      */
-    public function findUnusedSettings()
+    public function findUnusedSettings(): array
     {
-        $usedSettings     = $this->settingRepository->findUnusedSettings($this->settings);
+        $usedSettings     = $this->settingRepository->findUsedSettings($this->settings);
         $usedSettingCodes = [];
 
         foreach ($usedSettings as $setting) {
@@ -86,7 +88,7 @@ class SettingService implements SettingServiceInterface
      *
      * @param SettingInterface $setting
      */
-    public function save(SettingInterface $setting)
+    public function save(SettingInterface $setting): void
     {
         $this->settingRepository->save($setting);
     }

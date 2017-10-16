@@ -11,11 +11,12 @@ class RoleHelper
 {
     /**
      * Gets roles view for collection type
+     *
      * @param array $roles
      *
      * @return array
      */
-    public static function getCollectionTypeViewForm(array $roles)
+    public static function getCollectionTypeViewForm(array $roles): array
     {
         $view = [];
 

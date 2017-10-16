@@ -24,7 +24,7 @@ class BestMoveStrategy implements StrategyInterface
     private $roleService;
 
     /**
-     * MafiaStrategy constructor.
+     * Constructor
      *
      * @param PlayerRoleServiceInterface $roleService
      */
@@ -41,7 +41,7 @@ class BestMoveStrategy implements StrategyInterface
      *
      * @return UserRatingInterface[]
      */
-    public function createRatings(GameInterface $game, GamePlayerInterface $player)
+    public function createRatings(GameInterface $game, GamePlayerInterface $player): array
     {
         $positiveGuesses = 0;
         $score           = 0;

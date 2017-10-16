@@ -6,15 +6,18 @@
  * Time: 20:54
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Repository\Rating;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 use GhostSt\CoreBundle\Document\UserRating;
 use GhostSt\CoreBundle\Document\UserRatingInterface;
 use GhostSt\CoreBundle\Repository\AbstractRepository;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 
+/**
+ * User rating repository
+ */
 class UserRatingRepository extends AbstractRepository implements UserRatingRepositoryInterface
 {
     /**
@@ -24,7 +27,7 @@ class UserRatingRepository extends AbstractRepository implements UserRatingRepos
      *
      * @return UserRatingInterface[]
      */
-    public function getList($gameId)
+    public function getList($gameId): array
     {
         return $this->getRepository()->findBy(['gameId' => $gameId]);
     }
@@ -34,7 +37,7 @@ class UserRatingRepository extends AbstractRepository implements UserRatingRepos
      *
      * @param UserRatingInterface $rating
      */
-    public function remove(UserRatingInterface $rating)
+    public function remove(UserRatingInterface $rating): void
     {
         $this->getDocumentManager()->remove($rating);
         $this->getDocumentManager()->flush($rating);
@@ -45,7 +48,7 @@ class UserRatingRepository extends AbstractRepository implements UserRatingRepos
      *
      * @param UserRatingInterface $rating
      */
-    public function save(UserRatingInterface $rating)
+    public function save(UserRatingInterface $rating): void
     {
         $this->getDocumentManager()->persist($rating);
         $this->getDocumentManager()->flush($rating);
@@ -56,7 +59,7 @@ class UserRatingRepository extends AbstractRepository implements UserRatingRepos
      *
      * @return ObjectRepository
      */
-    private function getRepository()
+    private function getRepository(): ObjectRepository
     {
         return $this->getDocumentManager()->getRepository(UserRating::class);
     }

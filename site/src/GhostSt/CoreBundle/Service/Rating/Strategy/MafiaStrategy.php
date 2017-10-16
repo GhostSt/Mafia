@@ -23,7 +23,7 @@ class MafiaStrategy implements StrategyInterface
     private $roleService;
 
     /**
-     * MafiaStrategy constructor.
+     * Constructor
      *
      * @param PlayerRoleServiceInterface $roleService
      */
@@ -40,7 +40,7 @@ class MafiaStrategy implements StrategyInterface
      *
      * @return UserRatingInterface[]
      */
-    public function createRatings(GameInterface $game, GamePlayerInterface $player)
+    public function createRatings(GameInterface $game, GamePlayerInterface $player): array
     {
         if ($game->getResult() !== GameInterface::WIN_MAFIA
             || !$this->roleService->isMafia($player)) {

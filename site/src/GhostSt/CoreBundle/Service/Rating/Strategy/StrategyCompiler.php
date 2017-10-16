@@ -16,7 +16,7 @@ class StrategyCompiler implements CompilerPassInterface
      *
      * @param ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $provider = $container->findDefinition('ghostst_core.service.rating.strategy.aggregator');
         $services = $container->findTaggedServiceIds('rating.strategy');

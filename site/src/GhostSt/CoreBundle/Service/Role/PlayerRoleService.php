@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Service\Role;
 
 use GhostSt\CoreBundle\Document\GamePlayerInterface;
-use GhostSt\CoreBundle\Document\UserRole;
+use GhostSt\CoreBundle\Document\Game\PlayerRoleInterface;
 use GhostSt\CoreBundle\Repository\Game\PlayerRoleRepositoryInterface;
 use GhostSt\CoreBundle\Service\Tools\SettingServiceInterface;
 
@@ -43,9 +45,9 @@ class PlayerRoleService implements PlayerRoleServiceInterface
     /**
      * Gets player roles
      *
-     * @return UserRole[]
+     * @return PlayerRoleInterface[]
      */
-    public function all()
+    public function all(): array
     {
         return $this->repository->all();
     }
@@ -57,7 +59,7 @@ class PlayerRoleService implements PlayerRoleServiceInterface
      *
      * @return bool
      */
-    public function isCivilian(GamePlayerInterface $player)
+    public function isCivilian(GamePlayerInterface $player): bool
     {
         $setting = $this->settingService
             ->getByCode('mafia_roles');
@@ -84,7 +86,7 @@ class PlayerRoleService implements PlayerRoleServiceInterface
      *
      * @return bool
      */
-    public function isMafia(GamePlayerInterface $player)
+    public function isMafia(GamePlayerInterface $player): bool
     {
         $setting = $this->settingService->getByCode('mafia_roles');
 

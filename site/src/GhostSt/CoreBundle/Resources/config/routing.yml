@@ -1,7 +1,3 @@
-GhostStCoreHomepage:
-    path:     /
-    defaults: { _controller: GhostStCoreBundle:Default:index }
-
 GhostStCoreBundle:
   resource: "@GhostStCoreBundle/Controller/"
   type: annotation

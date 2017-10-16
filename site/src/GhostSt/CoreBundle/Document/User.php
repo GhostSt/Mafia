@@ -6,27 +6,34 @@
  * Time: 22:42
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * Class User
- * @package GhostSt\CoreBundle\Entity
+ * User
  *
  * @ODM\Document(collection="user")
  */
 class User extends BaseUser
 {
     /**
-     * @var integer
+     * User identifier
+     *
+     * @var string
      *
      * @ODM\Id(strategy="AUTO")
      */
     protected $id;
+
     /**
+     * Username
+     *
      * @var string
      *
      * @ODM\Field(type="string")
@@ -34,6 +41,8 @@ class User extends BaseUser
     protected $username;
 
     /**
+     * Canonical username
+     *
      * @var string
      *
      * @ODM\Field(type="string")
@@ -41,6 +50,8 @@ class User extends BaseUser
     protected $usernameCanonical;
 
     /**
+     * Email
+     *
      * @var string
      *
      * @ODM\Field(type="string")
@@ -48,6 +59,8 @@ class User extends BaseUser
     protected $email;
 
     /**
+     * Canonical email
+     *
      * @var string
      *
      * @ODM\Field(type="string")
@@ -55,6 +68,8 @@ class User extends BaseUser
     protected $emailCanonical;
 
     /**
+     * Enabled
+     *
      * @var bool
      *
      * @ODM\Field(type="boolean")
@@ -87,7 +102,9 @@ class User extends BaseUser
     protected $plainPassword;
 
     /**
-     * @var \DateTime
+     * Last login date
+     *
+     * @var DateTime
      *
      * @ODM\Field(type="date")
      */
@@ -101,28 +118,38 @@ class User extends BaseUser
     protected $confirmationToken;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     protected $passwordRequestedAt;
 
     /**
+     * Groups
+     *
      * @var Collection
      */
     protected $groups = [];
 
     /**
+     * Roles
+     *
      * @var Collection
      *
      * @ODM\Field(type="collection")
      */
     protected $roles;
+
     /**
-     * @var \DateTime
+     * Created
+     *
+     * @var DateTime
      *
      * @ODM\Field(type="date")
      */
     protected $created;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
@@ -131,43 +158,41 @@ class User extends BaseUser
     }
 
     /**
-     * @return \DateTime
+     * Gets created date
+     *
+     * @return DateTime
      */
-    public function getCreated()
+    public function getCreated(): DateTime
     {
         return $this->created;
     }
 
     /**
-     * @param \DateTime $created
+     * Sets created date
+     *
+     * @param DateTime $created
      */
-    public function setCreated(\DateTime $created)
+    public function setCreated(DateTime $created): void
     {
         $this->created = $created;
     }
 
     /**
-     * @return int
+     * User identifier
+     *
+     * @return null|string
      */
-    public function getId()
+    public function getId():? string
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * Get enabled
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }

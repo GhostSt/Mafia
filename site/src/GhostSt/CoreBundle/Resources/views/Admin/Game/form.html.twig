@@ -192,7 +192,7 @@
                         {% endfilter %}
                     " data-voting-prototype="
                         {% filter escape %}
-                            {{ include('GhostStCoreBundle:Admin/Game:game_day_voting_prototype.html.twig', { 'form': tmpForm.days[0].voting.vars.prototype }) }}
+                            {{ include('GhostStCoreBundle:Admin/Game:game_day_voting_prototype.html.twig', { 'form': dayForm.voting.vars.prototype }) }}
                         {% endfilter %}
                     " data-length="{{ form.days|length }}">
                         {% for day_index,day in form.days %}

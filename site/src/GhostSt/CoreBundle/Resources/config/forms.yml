@@ -1,12 +1,4 @@
 services:
-  # Civilian roles type
-  ghostst_core.form.type.tools.setting.serialized_setting:
-    class: GhostSt\CoreBundle\Form\Type\Tools\Setting\SerializedSettingType
-    arguments:
-      - "@ghostst_core.service.role.player_role"
-    tags:
-      - { name: form.type }
-
   # Player type
   ghostst_core.form.type.player:
     class: GhostSt\CoreBundle\Form\Type\PlayerType

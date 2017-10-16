@@ -6,10 +6,11 @@
  * Time: 23:09
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
-use Symfony\Component\Validator\Constraints as Assert;
 use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
 
 /**
@@ -17,9 +18,11 @@ use GhostSt\CoreBundle\Validator\Constraints as CustomAssert;
  *
  * @ODM\EmbeddedDocument
  */
-class GameBestMove
+class GameBestMove implements GameBestMoveInterface
 {
     /**
+     * Player postion
+     *
      * @var integer
      *
      * @ODM\Field(type="integer")
@@ -28,9 +31,11 @@ class GameBestMove
      *     allowZero=false
      * )
      */
-    protected $position;
+    protected $position = 0;
 
     /**
+     * Guess. Its a three player positions
+     *
      * @var array
      *
      * @ODM\Field(type="collection")
@@ -40,13 +45,13 @@ class GameBestMove
     protected $guess = [];
 
     /**
-     * Set position
+     * Sets position
      *
-     * @param integer $position
+     * @param int $position
      *
-     * @return $this
+     * @return self
      */
-    public function setPosition($position)
+    public function setPosition(int $position): self
     {
         $this->position = $position;
 
@@ -54,23 +59,23 @@ class GameBestMove
     }
 
     /**
-     * Get position
+     * Gets position
      *
-     * @return integer $position
+     * @return int $position
      */
-    public function getPosition()
+    public function getPosition(): int
     {
         return $this->position;
     }
 
     /**
-     * Set guess
+     * Sets guess
      *
      * @param array $guess
      *
-     * @return $this
+     * @return self
      */
-    public function setGuess($guess)
+    public function setGuess(array $guess): self
     {
         $this->guess = $guess;
 
@@ -78,11 +83,11 @@ class GameBestMove
     }
 
     /**
-     * Get guess
+     * Gets guess
      *
      * @return array $guess
      */
-    public function getGuess()
+    public function getGuess(): array
     {
         return $this->guess;
     }

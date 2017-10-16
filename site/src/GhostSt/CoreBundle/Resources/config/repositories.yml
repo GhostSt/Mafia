@@ -1,7 +1,7 @@
 services:
   # Player role repository
   ghostst_core.repository.game.player_role:
-    class: GhostSt\CoreBundle\Repository\Game\PlayersRoleRepository
+    class: GhostSt\CoreBundle\Repository\Game\PlayerRoleRepository
     arguments:
       - "@doctrine_mongodb"
 

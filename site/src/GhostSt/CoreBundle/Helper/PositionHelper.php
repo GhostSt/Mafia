@@ -6,8 +6,13 @@
  * Time: 23:44
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Helper;
 
+/**
+ * Position helper
+ */
 class PositionHelper
 {
     /**
@@ -18,7 +23,7 @@ class PositionHelper
      *
      * @return array
      */
-    public static function getPositions($start, $end)
+    public static function getPositions($start, $end): array
     {
         $positions = [];
 

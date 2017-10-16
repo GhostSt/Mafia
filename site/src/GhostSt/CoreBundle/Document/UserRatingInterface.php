@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Document;
 
 /**
@@ -16,35 +18,35 @@ interface UserRatingInterface
     /**
      * Returns user rating id
      *
-     * @return int
+     * @return string
      */
-    public function getId();
+    public function getId(): string;
 
     /**
      * Returns user id
      *
-     * @return int
+     * @return string
      */
-    public function getUserId();
+    public function getUserId(): string;
 
     /**
      * Returns game id
      *
-     * @return int
+     * @return string
      */
-    public function getGameId();
+    public function getGameId(): string;
 
     /**
      * Returns code
      *
      * @return string
      */
-    public function getCode();
+    public function getCode(): string;
 
     /**
      * Returns score
      *
-     * @return double
+     * @return float
      */
-    public function getScore();
+    public function getScore(): float;
 }
