@@ -6,6 +6,7 @@ namespace GhostSt\CoreBundle\Document;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection;
+use GhostSt\CoreBundle\Document\Game\PlayerRoleInterface;
 
 /**
  * Game interface
@@ -33,6 +34,22 @@ interface GameInterface
     public function getDays(): Collection;
 
     /**
+     * Gets created date
+     *
+     * @return DateTime $date
+     */
+    public function getDate(): DateTime;
+
+    /**
+     * Gets player by user id
+     *
+     * @param string $userId
+     *
+     * @return null|GamePlayerInterface
+     */
+    public function getPlayerByUserId(string $userId):? GamePlayerInterface;
+
+    /**
      * Gets game players
      *
      * @return Collection|GamePlayerInterface[] $players
@@ -52,11 +69,4 @@ interface GameInterface
      * @return boolean $result
      */
     public function getResult(): bool;
-
-    /**
-     * Gets created date
-     *
-     * @return DateTime $date
-     */
-    public function getDate(): DateTime;
 }

@@ -49,4 +49,11 @@ interface UserRatingInterface
      * @return float
      */
     public function getScore(): float;
+
+    /**
+     * Checks if its a bonus rating
+     *
+     * @return bool
+     */
+    public function isBonusRating(): bool;
 }

@@ -123,4 +123,18 @@ class UserRating implements UserRatingInterface
     {
         return $this->score;
     }
+
+    /**
+     * Checks if its a bonus rating
+     *
+     * @return bool
+     */
+    public function isBonusRating(): bool
+    {
+        if ($this->code === UserRatingInterface::RATING_CODE_WIN_BEST_MOVE) {
+            return true;
+        }
+
+        return false;
+    }
 }
