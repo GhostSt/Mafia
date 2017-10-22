@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace GhostSt\CoreBundle\Service\Rating;
 
 use GhostSt\CoreBundle\Document\GameInterface;
+use GhostSt\CoreBundle\Document\UserRatingInterface;
 use GhostSt\CoreBundle\Repository\Rating\UserRatingRepositoryInterface;
 
 /**
@@ -52,6 +53,18 @@ class RatingService implements RatingServiceInterface
         foreach ($ratings as $rating) {
             $this->ratingRepository->save($rating);
         }
+    }
+
+    /**
+     * Gets list of ratings
+     *
+     * @param GameInterface $game
+     *
+     * @return UserRatingInterface[]
+     */
+    public function getGameRatings(GameInterface $game): array
+    {
+        return $this->ratingRepository->getRatingsByGameId($game->getId());
     }
 
     /**

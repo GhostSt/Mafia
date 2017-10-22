@@ -68,14 +68,20 @@ class RatingContainer
 
     /**
      * Constructor
+     *
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
+        $this->user = $user;
+
         $this->civilian = new RoleStatisticContainer();
         $this->mafia    = new RoleStatisticContainer();
     }
 
     /**
+     * Gets user
+     *
      * @return null|User
      */
     public function getUser():? User
@@ -84,14 +90,8 @@ class RatingContainer
     }
 
     /**
-     * @param User $user
-     */
-    public function setUser(User $user): void
-    {
-        $this->user = $user;
-    }
-
-    /**
+     * Gets list of game identifiers
+     *
      * @return array
      */
     public function getGames(): array
@@ -100,6 +100,8 @@ class RatingContainer
     }
 
     /**
+     * Gets quantity of games
+     *
      * @return int
      */
     public function getGamesQuantity(): int
@@ -108,6 +110,8 @@ class RatingContainer
     }
 
     /**
+     * Adds game identifier to list
+     *
      * @param string $game
      */
     public function addGame(string $game): void
@@ -120,6 +124,8 @@ class RatingContainer
     }
 
     /**
+     * Gets civilian statistic container
+     *
      * @return RoleStatisticContainer
      */
     public function getCivilian(): RoleStatisticContainer
@@ -128,6 +134,8 @@ class RatingContainer
     }
 
     /**
+     * Gets mafia statistic container
+     *
      * @return RoleStatisticContainer
      */
     public function getMafia(): RoleStatisticContainer
@@ -136,14 +144,17 @@ class RatingContainer
     }
 
     /**
+     * Gets wins quantity
+     *
      * @return int
      */
-    public function getWin(): int
+    public function getWins(): int
     {
         return $this->win;
     }
 
     /**
+     * Increases wins quantity
      */
     public function increaseWin(): void
     {
@@ -151,14 +162,18 @@ class RatingContainer
     }
 
     /**
+     * Gets loses quantity
+     *
      * @return int
      */
-    public function getLose(): int
+    public function getLoses(): int
     {
-        return $this->getGamesQuantity() - $this->getWin();
+        return $this->getGamesQuantity() - $this->getWins();
     }
 
     /**
+     * Gets bonus score
+     *
      * @return float
      */
     public function getBonus(): float
@@ -167,6 +182,8 @@ class RatingContainer
     }
 
     /**
+     * Increases bonus score
+     *
      * @param float $bonus
      */
     public function increaseBonus(float $bonus): void
@@ -175,6 +192,8 @@ class RatingContainer
     }
 
     /**
+     * Gets total score
+     *
      * @return float
      */
     public function getScore(): float
@@ -183,6 +202,8 @@ class RatingContainer
     }
 
     /**
+     * Increases total score
+     *
      * @param float $score
      */
     public function increaseScore(float $score): void
@@ -190,6 +211,11 @@ class RatingContainer
         $this->score += $score;
     }
 
+    /**
+     * Calculates player rating
+     *
+     * @return float
+     */
     public function calculateRating(): float
     {
         return $this->score / $this->getGamesQuantity();

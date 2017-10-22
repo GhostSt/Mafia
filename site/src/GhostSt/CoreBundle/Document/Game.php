@@ -240,4 +240,22 @@ class Game implements GameInterface
     {
         return $this->date;
     }
+
+    /**
+     * Gets player by user id
+     *
+     * @param string $userId
+     *
+     * @return GamePlayerInterface|null
+     */
+    public function getPlayerByUserId(string $userId):? GamePlayerInterface
+    {
+        foreach($this->getPlayers() as $player) {
+            if ($player->getUser()->getId() === $userId) {
+                return $player;
+            }
+        }
+
+        return null;
+    }
 }

@@ -22,15 +22,6 @@ interface RatingServiceInterface
     /**
      * Gets list of ratings
      *
-     * @param array $games
-     *
-     * @return UserRatingInterface[]
-     */
-    public function getRatingOfGames(array $games): array;
-
-    /**
-     * Gets list of ratings
-     *
      * @param GameInterface $game
      *
      * @return UserRatingInterface[]

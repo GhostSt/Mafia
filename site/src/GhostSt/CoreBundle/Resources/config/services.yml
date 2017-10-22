@@ -6,6 +6,18 @@ imports:
     - { resource: validators.yml }
 
 services:
+  # Game service
+  ghostst_core.service.game:
+    class: GhostSt\CoreBundle\Service\Game\GameService
+    arguments:
+      - "@ghostst_core.repository.game"
+
+  # Game result resolver
+  ghostst_core.service.game_game_result_resolver:
+    class: GhostSt\CoreBundle\Service\Game\GameResultResolver
+    arguments:
+      - "@ghostst_core.service.role.player_role"
+
   # Player role service
   ghostst_core.service.role.player_role:
     class: GhostSt\CoreBundle\Service\Role\PlayerRoleService

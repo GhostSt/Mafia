@@ -27,7 +27,6 @@ class HomepageController extends Controller
      */
     public function viewAction(): Response
     {
-        $
         die('test');
     }
 }

@@ -1,27 +1,24 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * Author: Victor Diditskiy <victor.diditskiy@yandex.ru>
- * Date: 17.10.17
- * Time: 0:22
+ * Date: 19.10.17
+ * Time: 19:56
  */
 
 declare(strict_types = 1);
 
-namespace GhostSt\CoreBundle\Service\Game;
-
-use GhostSt\CoreBundle\Document\GameInterface;
+namespace GhostSt\CoreBundle\Repository\Game;
 
 /**
- * Game service interface
+ * Game repository interface
  */
-interface GameServiceInterface
+interface GameRepositoryInterface
 {
     /**
      * Gets list of games
      *
-     * @return GameInterface[]
+     * @return array
      */
     public function getList(): array;
 }

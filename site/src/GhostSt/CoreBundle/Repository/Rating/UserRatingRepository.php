@@ -33,6 +33,18 @@ class UserRatingRepository extends AbstractRepository implements UserRatingRepos
     }
 
     /**
+     * Gets list of user ratings by game id
+     *
+     * @param $gameId
+     *
+     * @return UserRatingInterface[]
+     */
+    public function getRatingsByGameId($gameId): array
+    {
+        return $this->getRepository()->findBy(['gameId' => $gameId]);
+    }
+
+    /**
      * Removes user rating
      *
      * @param UserRatingInterface $rating

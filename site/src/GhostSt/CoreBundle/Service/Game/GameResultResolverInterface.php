@@ -14,7 +14,7 @@ use GhostSt\CoreBundle\Document\GameInterface;
 use GhostSt\CoreBundle\Document\GamePlayerInterface;
 
 /**
- * Game result resolver
+ * Game result resolver interface
  */
 interface GameResultResolverInterface
 {

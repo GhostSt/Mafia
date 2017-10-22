@@ -11,65 +11,56 @@ declare(strict_types = 1);
 
 namespace GhostSt\CoreBundle\Service\Statistic;
 
-use GhostSt\CoreBundle\Document\GameInterface;
-use GhostSt\CoreBundle\Document\User;
-use GhostSt\CoreBundle\Document\UserRatingInterface;
-use GhostSt\CoreBundle\Service\Game\GameResultResolverInterface;
 use GhostSt\CoreBundle\Service\Game\GameServiceInterface;
 use GhostSt\CoreBundle\Service\Rating\RatingServiceInterface;
-use GhostSt\CoreBundle\Service\Role\PlayerRoleServiceInterface;
-use GhostSt\CoreBundle\Service\User\UserServiceInterface;
 use GhostSt\CoreBundle\View\RatingContainer;
 
 /**
+ * General players statistic
  */
-class GeneralPlayersStatistic
+class GeneralPlayersStatistic implements GeneralPlayersStatisticInterface
 {
     /**
-     * @var GameResultResolverInterface
-     */
-    private $gameResultResolver;
-
-    /**
+     * Game service
+     *
      * @var GameServiceInterface
      */
     private $gameService;
 
     /**
-     * @var UserServiceInterface
-     */
-    private $userService;
-
-    /**
-     * @var PlayerRoleServiceInterface
-     */
-    private $playerRoleService;
-
-    /**
+     * Rating service
+     *
      * @var RatingServiceInterface
      */
     private $ratingService;
 
     /**
-     * @var RatingContainer[]
+     * Statistic calculator
+     *
+     * @var StatisticCalculatorInterface
      */
-    private $ratings = [];
+    private $statisticCalculator;
 
+    /**
+     * Constructor
+     *
+     * @param GameServiceInterface         $gameService
+     * @param RatingServiceInterface       $ratingService
+     * @param StatisticCalculatorInterface $statisticCalculator
+     */
     public function __construct(
-        GameResultResolverInterface $gameResultResolver,
         GameServiceInterface $gameService,
-        UserServiceInterface $userService,
         RatingServiceInterface $ratingService,
-        PlayerRoleServiceInterface $playerRoleService
+        StatisticCalculatorInterface $statisticCalculator
     ) {
-        $this->gameResultResolver = $gameResultResolver;
-        $this->gameService        = $gameService;
-        $this->userService        = $userService;
-        $this->ratingService      = $ratingService;
-        $this->playerRoleService  = $playerRoleService;
+        $this->gameService         = $gameService;
+        $this->ratingService       = $ratingService;
+        $this->statisticCalculator = $statisticCalculator;
     }
 
     /**
+     * Calculates statistic
+     *
      * @return array|RatingContainer[]
      */
     public function calculateStatistic(): array
@@ -81,58 +72,38 @@ class GeneralPlayersStatistic
             $ratings = $this->ratingService->getGameRatings($game);
 
             foreach ($game->getPlayers() as $player) {
-                $ratingContainer = new RatingContainer();
-                $ratingContainer->setUser($player->getUser());
-                $ratingContainer->addGame($game->getId());
+                $userId          = $player->getUser()->getId();
+                $ratingContainer = $ratingContainers[$userId] ?? null;
 
-                $ratingContainers[$player->getUser()->getId()] = $ratingContainer;
+                if (null === $ratingContainer) {
+                    $ratingContainer = new RatingContainer($player->getUser());
+                    $ratingContainer->addGame($game->getId());
 
-                if ($this->gameResultResolver->isPlayerWin($game, $player)) {
-                    $ratingContainer->increaseWin();
+                    $ratingContainers[$player->getUser()->getId()] = $ratingContainer;
                 }
 
-                if ($this->playerRoleService->isMafia($player)) {
-                    $ratingContainer->getMafia()->increaseGames();
+                $this->statisticCalculator->updateWinCounter($game, $player, $ratingContainer);
 
-                    if ($this->gameResultResolver->isMafiaWin($game)) {
-                        $ratingContainer->getMafia()->increaseWin();
-                    } else {
-                        $ratingContainer->getMafia()->increaseLost();
-                    }
-                }
+                $this->statisticCalculator->updateCivilianCounters(
+                    $game,
+                    $player,
+                    $ratingContainer->getCivilian()
+                );
 
-                if ($this->playerRoleService->isCivilian($player)) {
-                    $ratingContainer->getCivilian()->increaseGames();
-
-                    if ($this->gameResultResolver->isCivilianWin($game)) {
-                        $ratingContainer->getCivilian()->increaseWin();
-                    } else {
-                        $ratingContainer->getCivilian()->increaseLost();
-                    }
-                }
+                $this->statisticCalculator->updateMafiaCounters(
+                    $game,
+                    $player,
+                    $ratingContainer->getMafia()
+                );
             }
-
-            unset($ratingContainer);
 
             foreach ($ratings as $rating) {
                 $ratingContainer = $ratingContainers[$rating->getUserId()];
 
-                $ratingContainer->increaseScore($rating->getScore());
-
-                if ($rating->isBonusRating()) {
-                    $ratingContainer->increaseBonus($rating->getScore());
-                }
-
-                $player = $game->getPlayerByUserId($rating->getUserId());
-
-                if ($this->playerRoleService->isCivilian($player)) {
-                    $ratingContainer->getCivilian()->increaseScore($rating->getScore());
-                }
-
-                if ($this->playerRoleService->isMafia($player)) {
-                    $ratingContainer->getMafia()->increaseScore($rating->getScore());
-                }
+                $this->statisticCalculator->calculateScores($game, $rating, $ratingContainer);
             }
         }
+
+        return $ratingContainers;
     }
 }

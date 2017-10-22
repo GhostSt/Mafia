@@ -13,21 +13,27 @@ namespace GhostSt\CoreBundle\Service\Statistic;
 use GhostSt\CoreBundle\Document\GameInterface;
 use GhostSt\CoreBundle\Document\GamePlayer;
 use GhostSt\CoreBundle\Document\GamePlayerInterface;
+use GhostSt\CoreBundle\Document\UserRatingInterface;
 use GhostSt\CoreBundle\View\RatingContainer;
 use GhostSt\CoreBundle\View\RoleStatisticContainer;
 
+/**
+ * Statistic calculator interface
+ */
 interface StatisticCalculatorInterface
 {
     /**
-     * Updates win counter in rating container
+     * Calculates scores
      *
-     * @param GameInterface   $game
-     * @param GamePlayer      $player
-     * @param RatingContainer $ratingContainer
+     * @param GameInterface       $game
+     * @param UserRatingInterface $rating
+     * @param RatingContainer     $ratingContainer
+     *
+     * @return void
      */
-    public function updateWinCounter(
+    public function calculateScores(
         GameInterface $game,
-        GamePlayer $player,
+        UserRatingInterface $rating,
         RatingContainer $ratingContainer
     ): void;
 
@@ -55,5 +61,18 @@ interface StatisticCalculatorInterface
         GameInterface $game,
         GamePlayerInterface $player,
         RoleStatisticContainer $container
+    ): void;
+
+    /**
+     * Updates win counter in rating container
+     *
+     * @param GameInterface   $game
+     * @param GamePlayer      $player
+     * @param RatingContainer $ratingContainer
+     */
+    public function updateWinCounter(
+        GameInterface $game,
+        GamePlayer $player,
+        RatingContainer $ratingContainer
     ): void;
 }
