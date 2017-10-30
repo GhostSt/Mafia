@@ -31,7 +31,7 @@ class PlayerType extends AbstractType
         $builder
             ->add('position', ChoiceType::class, [
                 'label' => 'form.type.player.position',
-                'choices' => PositionHelper::getPositions(0, 10)
+                'choices' => PositionHelper::getPositions(1, 10)
             ])
             ->add('user', DocumentType::class, [
                 'label' => 'form.type.player.user',

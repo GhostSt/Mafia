@@ -9,7 +9,7 @@ function AbstractHandler() {
     this.targetSelector = '';
     this.itemsSelector = '';
     this.max_voting_members = 10;
-    this.max_players = 11;
+    this.max_players = 10;
 
     this.setPrototypeSelector = function (selector) {
         this.prototypeSelector = selector
