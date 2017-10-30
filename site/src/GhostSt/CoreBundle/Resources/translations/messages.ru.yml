@@ -57,6 +57,23 @@ views:
           code: "Код опции"
           value: "Значение опции"
           save: "Сохранить опцию"
+  front:
+    menu:
+      rating: 'Рейтинг'
+      statistic: 'Статистика'
+    statistic:
+      rating:
+        title: 'Рейтинг'
+        username: 'Игрок'
+        civilian: 'За мирных'
+        mafia: 'За мафию'
+        total: 'Всего'
+        bonus: 'Доп. баллы'
+        score: 'Всего очков'
+        rating: 'Рейтинг'
+        games: 'Игр'
+        wins: 'Побед'
+        loses: 'Поражений'
 
 form:
   type:

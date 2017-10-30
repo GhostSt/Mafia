@@ -48,4 +48,11 @@ interface UserRatingRepositoryInterface
      * @param UserRatingInterface $rating
      */
     public function remove(UserRatingInterface $rating): void;
+
+    /**
+     * Removes usr ratings by game id
+     *
+     * @param string $gameId
+     */
+    public function removeRatingsByGameId(string $gameId): void;
 }

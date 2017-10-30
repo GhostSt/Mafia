@@ -44,11 +44,9 @@ class GameController extends CRUDController
             if ($form->isValid()) {
                 $dm = $odm->getManager();
                 $dm->persist($game);
-                //$dm->flush();
+                $dm->flush();
 
                 $ratingService->createGameRating($game);
-                // TODO: remove stub
-                die('test');
 
                 return $this->redirectToRoute('admin_ghostst_core_game_list');
             }

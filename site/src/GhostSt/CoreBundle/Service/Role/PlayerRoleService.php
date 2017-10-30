@@ -62,7 +62,7 @@ class PlayerRoleService implements PlayerRoleServiceInterface
     public function isCivilian(GamePlayerInterface $player): bool
     {
         $setting = $this->settingService
-            ->getByCode('mafia_roles');
+            ->getByCode('civilian_roles');
 
         $civilianRoles = $setting->getValue();
 

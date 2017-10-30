@@ -22,7 +22,7 @@ RUN pecl install mongodb \
 RUN pecl install -o -f redis xdebug \
     && rm -rf /tmp/pear \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
-    && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" > /usr/local/etc/php/conf.d/ext-xdebug.ini
+    && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20160303/xdebug.so" > /usr/local/etc/php/conf.d/ext-xdebug.ini
 
 RUN wget http://getcomposer.org/installer \
     && php installer --install-dir=/usr/local/bin --filename=composer

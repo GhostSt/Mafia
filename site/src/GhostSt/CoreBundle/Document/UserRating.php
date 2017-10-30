@@ -27,7 +27,7 @@ class UserRating implements UserRatingInterface
      *
      * @var string
      *
-     * @ODM\Field(type="integer")
+     * @ODM\Field(type="string")
      */
     private $userId;
 
@@ -36,7 +36,7 @@ class UserRating implements UserRatingInterface
      *
      * @var string
      *
-     * @ODM\Field(type="integer")
+     * @ODM\Field(type="string")
      */
     private $gameId;
 

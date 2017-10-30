@@ -19,6 +19,7 @@ use GhostSt\CoreBundle\Service\Role\PlayerRoleServiceInterface;
 use GhostSt\CoreBundle\View\RatingContainer;
 use GhostSt\CoreBundle\View\RoleStatisticContainer;
 
+// TODO: covers by unit
 /**
  * Statistic calculator
  */
@@ -101,7 +102,7 @@ class StatisticCalculator implements StatisticCalculatorInterface
             if ($this->gameResultResolver->isCivilianWin($game)) {
                 $container->increaseWin();
             } else {
-                $container->increaseLost();
+                $container->increaseLose();
             }
         }
     }
@@ -124,7 +125,7 @@ class StatisticCalculator implements StatisticCalculatorInterface
             if ($this->gameResultResolver->isMafiaWin($game)) {
                 $container->increaseWin();
             } else {
-                $container->increaseLost();
+                $container->increaseLose();
             }
         }
     }
@@ -144,5 +145,6 @@ class StatisticCalculator implements StatisticCalculatorInterface
         if ($this->gameResultResolver->isPlayerWin($game, $player)) {
             $ratingContainer->increaseWin();
         }
+
     }
 }

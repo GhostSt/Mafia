@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace GhostSt\CoreBundle\Repository\Rating;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ODM\MongoDB\DocumentRepository;
 use GhostSt\CoreBundle\Document\UserRating;
 use GhostSt\CoreBundle\Document\UserRatingInterface;
 use GhostSt\CoreBundle\Repository\AbstractRepository;
@@ -69,10 +70,26 @@ class UserRatingRepository extends AbstractRepository implements UserRatingRepos
     /**
      * Return object repository
      *
-     * @return ObjectRepository
+     * @return DocumentRepository
      */
-    private function getRepository(): ObjectRepository
+    private function getRepository(): DocumentRepository
     {
         return $this->getDocumentManager()->getRepository(UserRating::class);
+    }
+
+    /**
+     * Removes usr ratings by game id
+     *
+     * @param string $gameId
+     */
+    public function removeRatingsByGameId(string $gameId): void
+    {
+        $qb = $this->getRepository()->createQueryBuilder();
+
+        $qb
+            ->remove()
+            ->field('gameId')->equals($gameId)
+            ->getQuery()
+            ->execute();
     }
 }

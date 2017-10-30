@@ -7,13 +7,13 @@ imports:
 
 services:
   # Game service
-  ghostst_core.service.game:
+  ghostst_core.service.game.game:
     class: GhostSt\CoreBundle\Service\Game\GameService
     arguments:
       - "@ghostst_core.repository.game"
 
   # Game result resolver
-  ghostst_core.service.game_game_result_resolver:
+  ghostst_core.service.game.game_result_resolver:
     class: GhostSt\CoreBundle\Service\Game\GameResultResolver
     arguments:
       - "@ghostst_core.service.role.player_role"
@@ -81,3 +81,18 @@ services:
       - "%amqp_port%"
       - "%amqp_user%"
       - "%amqp_password%"
+
+  # General player statistic
+  ghostst_core.service.statistic.general_player:
+      class: GhostSt\CoreBundle\Service\Statistic\GeneralPlayersStatistic
+      arguments:
+          - "@ghostst_core.service.game.game"
+          - "@ghostst_core.service.rating.rating"
+          - "@ghostst_core.service.statistic.calculator"
+
+  # Statistic calculator
+  ghostst_core.service.statistic.calculator:
+      class: GhostSt\CoreBundle\Service\Statistic\StatisticCalculator
+      arguments:
+        - "@ghostst_core.service.game.game_result_resolver"
+        - "@ghostst_core.service.role.player_role"

@@ -12,6 +12,7 @@ namespace GhostSt\CoreBundle\Repository\Game;
 
 use GhostSt\CoreBundle\Document\Game;
 use GhostSt\CoreBundle\Repository\AbstractRepository;
+use GhostSt\CoreBundle\Filter\DateFilterInterface;
 
 /**
  * Game repository
@@ -21,12 +22,29 @@ class GameRepository extends AbstractRepository implements GameRepositoryInterfa
     /**
      * Gets list of games
      *
+     * @param DateFilterInterface $filter
+     *
      * @return array
      */
-    public function getList(): array
+    public function getList(DateFilterInterface $filter): array
     {
-        return $this->getDocumentManager()
+        $games = [];
+
+        $qb = $this->getDocumentManager()
             ->getRepository(Game::class)
-            ->findAll();
+            ->createQueryBuilder();
+
+        $qb
+            ->field('date')->gte($filter->getFrom())
+            ->field('date')->lt($filter->getTo());
+
+        $query = $qb->getQuery();
+
+        foreach ($query->execute() as $game)
+        {
+            $games[] = $game;
+        }
+
+        return $games;
     }
 }

@@ -11,6 +11,7 @@ declare(strict_types = 1);
 namespace GhostSt\CoreBundle\Service\Statistic;
 
 use GhostSt\CoreBundle\View\RatingContainer;
+use GhostSt\CoreBundle\Filter\DateFilterInterface;
 
 /**
  * General players statistic interface
@@ -20,7 +21,9 @@ interface GeneralPlayersStatisticInterface
     /**
      * Calculates statistic
      *
+     * @param DateFilterInterface $dateFilter
+     *
      * @return array|RatingContainer[]
      */
-    public function calculateStatistic(): array;
+    public function calculateStatistic(DateFilterInterface $dateFilter): array;
 }

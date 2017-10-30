@@ -14,7 +14,9 @@ namespace GhostSt\CoreBundle\Service\Statistic;
 use GhostSt\CoreBundle\Service\Game\GameServiceInterface;
 use GhostSt\CoreBundle\Service\Rating\RatingServiceInterface;
 use GhostSt\CoreBundle\View\RatingContainer;
+use GhostSt\CoreBundle\Filter\DateFilterInterface;
 
+// TODO: covers by unit
 /**
  * General players statistic
  */
@@ -61,12 +63,14 @@ class GeneralPlayersStatistic implements GeneralPlayersStatisticInterface
     /**
      * Calculates statistic
      *
+     * @param DateFilterInterface $dateFilter
+     *
      * @return array|RatingContainer[]
      */
-    public function calculateStatistic(): array
+    public function calculateStatistic(DateFilterInterface $dateFilter): array
     {
         $ratingContainers = [];
-        $games            = $this->gameService->getList();
+        $games            = $this->gameService->getList($dateFilter);
 
         foreach ($games as $game) {
             $ratings = $this->ratingService->getGameRatings($game);
@@ -77,10 +81,11 @@ class GeneralPlayersStatistic implements GeneralPlayersStatisticInterface
 
                 if (null === $ratingContainer) {
                     $ratingContainer = new RatingContainer($player->getUser());
-                    $ratingContainer->addGame($game->getId());
 
                     $ratingContainers[$player->getUser()->getId()] = $ratingContainer;
                 }
+
+                $ratingContainer->addGame($game->getId());
 
                 $this->statisticCalculator->updateWinCounter($game, $player, $ratingContainer);
 

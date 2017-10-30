@@ -12,6 +12,7 @@ namespace GhostSt\CoreBundle\Service\Game;
 
 use GhostSt\CoreBundle\Document\GameInterface;
 use GhostSt\CoreBundle\Repository\Game\GameRepositoryInterface;
+use GhostSt\CoreBundle\Filter\DateFilterInterface;
 
 /**
  * Game service
@@ -38,10 +39,12 @@ class GameService implements GameServiceInterface
     /**
      * Gets list of games
      *
+     * @param DateFilterInterface $filter
+     *
      * @return GameInterface[]
      */
-    public function getList(): array
+    public function getList(DateFilterInterface $filter): array
     {
-        return $this->gameRepository->getList();
+        return $this->gameRepository->getList($filter);
     }
 }

@@ -55,7 +55,7 @@ class GamePlayer implements GamePlayerInterface
      *     allowZero=true
      * )
      */
-    protected $position;
+    protected $position = 0;
 
     /**
      * Sets user
@@ -76,7 +76,7 @@ class GamePlayer implements GamePlayerInterface
      *
      * @return User $user
      */
-    public function getUser(): User
+    public function getUser():? User
     {
         return $this->user;
     }
@@ -100,7 +100,7 @@ class GamePlayer implements GamePlayerInterface
      *
      * @return PlayerRoleInterface $role
      */
-    public function getRole(): PlayerRoleInterface
+    public function getRole():? PlayerRoleInterface
     {
         return $this->role;
     }

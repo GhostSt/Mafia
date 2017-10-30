@@ -1,0 +1,19 @@
+{% extends 'GhostStCoreBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ 'views.front.statistic.rating.title'|trans }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ 'views.front.statistic.rating.title'|trans }}
+            </div>
+
+            <div class="panel-body statistic-rating">
+                {% include 'GhostStCoreBundle:Front/Statistic:rating.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -10,6 +10,9 @@
     width: 100%;
 }
 
+body {
+    background: #FDFBFF;
+}
 div.alert-container {
     position: relative;
     display: inline-block;
@@ -133,4 +136,51 @@ div.page-title > div.panel-button-group {
 .sonata-ba-content div.button-remove span.glyphicon {
     font-size: 14px;
     cursor: pointer;
+}
+
+div.container {
+    background: #FDFBFF;
+}
+
+div.menu {
+    background: #000;
+}
+
+div.menu div.main-menu-navbar {
+    background: #000;
+}
+div.menu ul li a {
+    color: #FFF;
+}
+div.menu ul li.active a {
+    color: #CCCCCC;
+    font-weight: bold;
+}
+
+div.menu ul li a:hover {
+    background: #FDFBFF;
+    color: #000;
+}
+
+body > div.content {
+    margin-top: 25px;
+}
+
+body > div.content div.statistic-rating table {
+    border-top: #000 solid 1px;
+}
+
+body > div.content div.statistic-rating table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+body > div.content div.statistic-rating table td {
+    border: #000 solid 1px;
+}
+body > div.content div.statistic-rating table thead td {
+    font-weight: bold;
+}
+body > div.content div.statistic-rating table tbody tr:nth-child(even) td {
+    background: #E1E1E1;
 }

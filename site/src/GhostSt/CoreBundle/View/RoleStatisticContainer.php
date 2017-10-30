@@ -28,7 +28,7 @@ class RoleStatisticContainer
     /**
      * @var int
      */
-    private $lost = 0;
+    private $loses = 0;
 
     /**
      * @var float
@@ -53,12 +53,13 @@ class RoleStatisticContainer
     /**
      * @return int
      */
-    public function getWin(): int
+    public function getWins(): int
     {
         return $this->win;
     }
 
     /**
+     *
      */
     public function increaseWin(): void
     {
@@ -68,16 +69,16 @@ class RoleStatisticContainer
     /**
      * @return int
      */
-    public function getLost(): int
+    public function getLoses(): int
     {
-        return $this->lost;
+        return $this->loses;
     }
 
     /**
      */
-    public function increaseLost(): void
+    public function increaseLose(): void
     {
-        $this->lost++;
+        $this->loses++;
     }
 
     /**

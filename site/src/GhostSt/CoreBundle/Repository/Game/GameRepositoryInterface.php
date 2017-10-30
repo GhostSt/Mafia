@@ -10,6 +10,8 @@ declare(strict_types = 1);
 
 namespace GhostSt\CoreBundle\Repository\Game;
 
+use GhostSt\CoreBundle\Filter\DateFilterInterface;
+
 /**
  * Game repository interface
  */
@@ -18,7 +20,9 @@ interface GameRepositoryInterface
     /**
      * Gets list of games
      *
+     * @param DateFilterInterface $filter
+     *
      * @return array
      */
-    public function getList(): array;
+    public function getList(DateFilterInterface $filter): array;
 }

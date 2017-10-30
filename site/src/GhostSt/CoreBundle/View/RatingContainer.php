@@ -67,6 +67,13 @@ class RatingContainer
     private $score = 0.0;
 
     /**
+     * Рейтинг
+     *
+     * @var float
+     */
+    private $rating = 0.0;
+
+    /**
      * Constructor
      *
      * @param User $user
@@ -121,6 +128,8 @@ class RatingContainer
         }
 
         $this->games[] = $game;
+
+        $this->calculateRating();
     }
 
     /**
@@ -209,15 +218,31 @@ class RatingContainer
     public function increaseScore(float $score): void
     {
         $this->score += $score;
+
+        $this->calculateRating();
     }
 
     /**
      * Calculates player rating
      *
+     * @return void
+     */
+    public function calculateRating(): void
+    {
+        if ($this->getGamesQuantity() === 0) {
+            return;
+        }
+
+        $this->rating = $this->score / $this->getGamesQuantity();
+    }
+
+    /**
+     * Gets rating
+     *
      * @return float
      */
-    public function calculateRating(): float
+    public function getRating(): float
     {
-        return $this->score / $this->getGamesQuantity();
+        return $this->rating;
     }
 }

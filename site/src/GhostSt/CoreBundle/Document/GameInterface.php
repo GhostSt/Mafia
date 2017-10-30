@@ -13,7 +13,7 @@ use GhostSt\CoreBundle\Document\Game\PlayerRoleInterface;
  */
 interface GameInterface
 {
-    const WIN_SCORE_BONUS = 1;
+    const WIN_SCORE_BONUS = 2;
 
     const WIN_CIVILIAN    = true;
 

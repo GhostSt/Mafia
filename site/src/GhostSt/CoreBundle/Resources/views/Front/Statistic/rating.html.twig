@@ -1,0 +1,108 @@
+<table class="table">
+    <thead>
+    <tr>
+        <td rowspan="2">
+            <label>№</label>
+        </td>
+        <td rowspan="2">
+            <label>{{ 'views.front.statistic.rating.username'|trans }}</label>
+        </td>
+        <td colspan="3">
+            <label>{{ 'views.front.statistic.rating.civilian'|trans }}</label>
+        </td>
+        <td colspan="3">
+            <label>{{ 'views.front.statistic.rating.mafia'|trans }}</label>
+        </td>
+        <td colspan="3">
+            <label>{{ 'views.front.statistic.rating.total'|trans }}</label>
+        </td>
+        <td rowspan="2">
+            <label>{{ 'views.front.statistic.rating.bonus'|trans }}</label>
+        </td>
+        <td rowspan="2">
+            <label>{{ 'views.front.statistic.rating.score'|trans }}</label>
+        </td>
+        <td rowspan="2">
+            <label>{{ 'views.front.statistic.rating.rating'|trans }}</label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>{{ 'views.front.statistic.rating.games'|trans }}</label>
+        </td>
+        <td>
+            <label>{{ 'views.front.statistic.rating.wins'|trans }}</label>
+        </td>
+        <td>
+            <label>{{ 'views.front.statistic.rating.loses'|trans }}</label>
+        </td>
+        <td>
+            <label>{{ 'views.front.statistic.rating.games'|trans }}</label>
+        </td>
+        <td>
+            <label>{{ 'views.front.statistic.rating.wins'|trans }}</label>
+        </td>
+        <td>
+            <label>{{ 'views.front.statistic.rating.loses'|trans }}</label>
+        </td>
+        <td rowspan="2">
+            <label>{{ 'views.front.statistic.rating.games'|trans }}</label>
+        </td>
+        <td>
+            <label>{{ 'views.front.statistic.rating.wins'|trans }}</label>
+        </td>
+        <td rowspan="2">
+            <label>{{ 'views.front.statistic.rating.loses'|trans }}</label>
+        </td>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for key, player in statistic %}
+        <tr>
+            <td style="text-align: left">
+                <label>{{ key+1 }}</label>
+            </td>
+            <td style="text-align: left">
+                <label>{{ player.user.username }}</label>
+            </td>
+            <td>
+                <label>{{ player.civilian.games }}</label>
+            </td>
+            <td>
+                <label>{{ player.civilian.wins }}</label>
+            </td>
+            <td>
+                <label>{{ player.civilian.loses }}</label>
+            </td>
+            <td>
+                <label>{{ player.mafia.games }}</label>
+            </td>
+            <td>
+                <label>{{ player.mafia.wins }}</label>
+            </td>
+            <td>
+                <label>{{ player.mafia.loses }}</label>
+            </td>
+            <td>
+                <label>{{ player.gamesQuantity }}</label>
+            </td>
+            <td>
+                <label>{{ player.wins }}</label>
+            </td>
+            <td>
+                <label>{{ player.loses }}</label>
+            </td>
+            <td>
+                <label>{{ player.bonus }}</label>
+            </td>
+            <td>
+                <label>{{ player.score }}</label>
+            </td>
+            <td>
+                <label>{{ player.rating }}</label>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

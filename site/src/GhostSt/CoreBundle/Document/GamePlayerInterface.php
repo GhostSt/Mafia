@@ -16,14 +16,14 @@ interface GamePlayerInterface
      *
      * @return User $user
      */
-    public function getUser(): User;
+    public function getUser():? User;
 
     /**
      * Gets role
      *
      * @return PlayerRoleInterface $role
      */
-    public function getRole(): PlayerRoleInterface;
+    public function getRole():? PlayerRoleInterface;
 
     /**
      * Gets position

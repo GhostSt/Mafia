@@ -86,10 +86,6 @@ class RatingService implements RatingServiceInterface
      */
     private function removeRating(GameInterface $game): void
     {
-        $ratings = $this->ratingRepository->getList($game->getId());
-
-        foreach ($ratings as $rating) {
-            $this->ratingRepository->remove($rating);
-        }
+        $this->ratingRepository->removeRatingsByGameId($game->getId());
     }
 }
