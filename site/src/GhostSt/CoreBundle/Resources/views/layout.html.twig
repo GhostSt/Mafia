@@ -13,8 +13,13 @@
     {% block stylesheets %}
         {% stylesheets
         '@GhostStCoreBundle/Resources/public/css/bootstrap.min.css'
-        '@GhostStCoreBundle/Resources/public/css/stylesheet.css'
         output="css/compiled/layout.css" %}
+        <link href="{{ asset_url }}" rel="stylesheet" screen="media"/>
+        {% endstylesheets %}
+
+        {% stylesheets
+        '@GhostStCoreBundle/Resources/public/css/stylesheet.css'
+        output="css/compiled/stylesheet.css" %}
         <link href="{{ asset_url }}" rel="stylesheet" screen="media"/>
         {% endstylesheets %}
     {% endblock %}
