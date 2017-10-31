@@ -22,6 +22,8 @@ services:
 
   mongodb:
     image: ghostst/mafia-mongodb
+    expose:
+      - 27017
     volumes:
       - mafia-mongodb:/data/db
 

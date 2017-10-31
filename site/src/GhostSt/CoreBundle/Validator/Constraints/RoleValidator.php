@@ -1,25 +1,44 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Validator\Constraints;
 
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\Translation\DataCollectorTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
+/**
+ * Role validator
+ */
 class RoleValidator extends ConstraintValidator
 {
     /**
-     * @var DataCollectorTranslator
+     * Translator
+     *
+     * @var TranslatorInterface
      */
     protected $translator;
 
-    public function __construct(DataCollectorTranslator $translator)
+    /**
+     * Constructor
+     *
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
-    public function validate($value, Constraint $constraint)
+    /**
+     * Validates value
+     *
+     * @param mixed      $value
+     * @param Constraint $constraint
+     *
+     * @return void
+     */
+    public function validate($value, Constraint $constraint): void
     {
         if (null === $value) {
             $this->context

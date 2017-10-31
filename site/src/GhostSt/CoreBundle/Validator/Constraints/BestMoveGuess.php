@@ -6,17 +6,26 @@
  * Time: 15:03
  */
 
+declare(strict_types = 1);
+
 namespace GhostSt\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
+ * Best move constraint
+ *
  * @Annotation
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
 class BestMoveGuess extends Constraint
 {
-    public function validatedBy()
+    /**
+     * Returns the name of the class that validates this constraint.
+     *
+     * @return string
+     */
+    public function validatedBy(): string
     {
         return BestMoveGuessValidator::class;
     }
